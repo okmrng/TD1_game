@@ -33,7 +33,7 @@ void Player::Update(char* keys) {
 
 		if (keys[DIK_A] || keys[DIK_LEFT] && (keys[DIK_W] || keys[DIK_UP] || keys[DIK_S] || keys[DIK_DOWN])) {
 			player_.speed.X = 5.6f;
-			player_.speed.Y = 5.6f;
+			player_.speed.Y = 5.5f;
 		}
 		else if (keys[DIK_D] || keys[DIK_RIGHT] && (keys[DIK_W] || keys[DIK_UP] || keys[DIK_S] || keys[DIK_DOWN])) {
 			player_.speed.X = 5.6f;
