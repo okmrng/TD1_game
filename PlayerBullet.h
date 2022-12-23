@@ -14,6 +14,6 @@ public:
 public:
 	//ƒƒ“ƒo•Ï”
 	//’e\‘¢‘Ì
-	Bullet bullet_a;
+	Bullet bullet_;
 };
 
