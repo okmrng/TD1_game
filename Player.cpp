@@ -3,12 +3,17 @@
 
 //‰Šú‰»
 void Player::Initialize() {
+	//Ž©‹@
 	player_.pos.X = 640.0f;
 	player_.pos.Y = 660.0f;
 	player_.speed.X = 8.0f;
 	player_.speed.Y = 8.0f;
 	player_.radius = 20.0f;
 	player_.isAlive = true;
+	player_.HP = 3;
+	color = BLUE;
+	collisionCount = 0;
+	onCollision = false;
 
 	//’e
 	bullet_ = new PlayerBullet();
@@ -43,6 +48,23 @@ void Player::Update(char* keys) {
 		else {
 			player_.speed.X = 8.0f;
 			player_.speed.Y = 8.0f;
+		}
+
+		//–³“GŽžŠÔ‚ðŒ¸‚ç‚·
+		if (onCollision == true) {
+			if (collisionCount > 0) {
+				--collisionCount;
+				color = RED;
+				if (collisionCount <= 0) {
+					collisionCount = 0;
+					onCollision = false;
+				}
+			}
+		}
+
+		//–³“GŽžŠÔˆÈŠO‚Í’Êí‚ÌF‚É‚·‚é
+		if (onCollision == false) {
+			color = BLUE;
 		}
 
 		//ˆÚ“®”ÍˆÍ
@@ -83,11 +105,23 @@ void Player::Update(char* keys) {
 	}
 }
 
+//“–‚½‚è”»’è
+void Player::OnCollision() {
+	//HPŒ¸‚ç‚·
+	if (collisionCount == 0) {
+		player_.HP -= 1;
+		collisionCount = 180;
+		onCollision = true;
+	}
+}
+
 //•`‰æˆ—
 void Player::Draw() {
 	if (player_.isAlive == true) {
-		Novice::DrawEllipse(player_.pos.X, player_.pos.Y, player_.radius, player_.radius, 0.0f, BLUE, kFillModeSolid);
+		Novice::DrawEllipse(player_.pos.X, player_.pos.Y, player_.radius, player_.radius, 0.0f, color, kFillModeSolid);
 	}
 
 	bullet_->Draw();
+
+	Novice::ScreenPrintf(0, 20, "%d", collisionCount);
 }

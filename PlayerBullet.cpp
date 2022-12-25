@@ -22,7 +22,7 @@ void PlayerBullet::Update() {
 
 			//画面外に行ったらフラグをfalseにする
 			if (bullet_.pos[i].Y <= -10) {
-				bullet_.isShot[i] = 0;
+				bullet_.isShot[i] = false;
 			}
 		}
 	}

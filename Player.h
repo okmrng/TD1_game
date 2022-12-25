@@ -12,6 +12,9 @@ public:
 	//更新処理
 	void Update(char* keys);
 
+	//当たり判定
+	void OnCollision();
+
 	//描画処理
 	void Draw();
 
@@ -20,13 +23,23 @@ public:
 	float GetterPosY() { return player_.pos.Y; }
 	float GetterRadius() { return player_.radius; }
 	bool GetterisAlive() { return player_.isAlive; }
+	int GetterHP() { return player_.HP; }
+
+	//メンバ変数
+	//弾
+	PlayerBullet* bullet_;
 
 private:
-	//メンバ変数
 	//自機構造体
 	Chara player_;
 
-	//弾
-	PlayerBullet* bullet_;
+	//自機の色
+	unsigned int color;
+
+	//無敵時間
+	int collisionCount;
+
+	//当たり判定が働いたときに立つフラグ
+	bool onCollision;
 };
 
