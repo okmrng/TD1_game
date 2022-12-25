@@ -1,6 +1,7 @@
 ﻿#include <Novice.h>
 #include "Player.h"
 #include "PlayerBullet.h"
+#include "Enemy.h"
 
 const char kWindowTitle[] = "GC1A_06_オクムラ_ナギ_タイトル";
 
@@ -21,6 +22,10 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	Player* player = new Player;
 	player->Initialize();
 
+	//敵
+	Enemy* enemy = new Enemy;
+	enemy->Initialize();
+
 	//画像読み込み
 	int frame = Novice::LoadTexture("./Resources/Images/frame.png");
 
@@ -40,6 +45,9 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		//自機
 		player->Update(keys);
 
+		//敵
+		enemy->Update();
+
 		///
 		/// ↑更新処理ここまで
 		///
@@ -50,6 +58,9 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 		//フレーム
 		Novice::DrawSprite(0.0f, 0.0f, frame, 1.0f, 1.0f, 0.0f, WHITE);
+
+		//敵
+		enemy->Draw();
 
 		//自機
 		player->Draw();

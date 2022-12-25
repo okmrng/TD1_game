@@ -46,6 +46,9 @@
     <ClCompile Include="PlayerBullet.cpp">
       <Filter>ソース</Filter>
     </ClCompile>
+    <ClCompile Include="Enemy.cpp">
+      <Filter>ソース</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="C:\KamataEngine\DirectXGame\audio\Audio.h">
@@ -133,6 +136,9 @@
       <Filter>ヘッダー</Filter>
     </ClInclude>
     <ClInclude Include="PlayerBullet.h">
+      <Filter>ヘッダー</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy.h">
       <Filter>ヘッダー</Filter>
     </ClInclude>
   </ItemGroup>

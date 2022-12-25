@@ -18,6 +18,7 @@ public:
 	//ƒQƒbƒ^[ŠÖ”
 	float GetterPosX() { return player_.pos.X; }
 	float GetterPosY() { return player_.pos.Y; }
+	float GetterRadius() { return player_.radius; }
 	bool GetterisAlive() { return player_.isAlive; }
 
 private:

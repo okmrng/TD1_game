@@ -2,9 +2,9 @@
 #include <Novice.h>
 
 //‰Šú‰»
-void PlayerBullet::Initailize() {
+void PlayerBullet::Initialize() {
 	for (int i = 0; i < 15; i++) {
-		bullet_.isShot[i] = 0;
+		bullet_.isShot[i] = false;
 	}
 	bullet_.radius = 8.0f;
 	bullet_.speed.X = 10.0f;
@@ -16,7 +16,7 @@ void PlayerBullet::Initailize() {
 //XVˆ—
 void PlayerBullet::Update() {
 	for (int i = 0; i < 15; i++) {
-		if (bullet_.isShot[i] == 1) {
+		if (bullet_.isShot[i] == true) {
 			//ˆÚ“®
 			bullet_.pos[i].Y -= bullet_.speed.Y;
 
@@ -31,7 +31,7 @@ void PlayerBullet::Update() {
 //•`‰æˆ—
 void PlayerBullet::Draw() {
 	for (int i = 0; i < 15; i++) {
-		if (bullet_.isShot[i] == 1) {
+		if (bullet_.isShot[i] == true) {
 			Novice::DrawEllipse(bullet_.pos[i].X, bullet_.pos[i].Y, bullet_.radius, bullet_.radius, 0.0f, RED, kFillModeSolid);
 		}
 	}

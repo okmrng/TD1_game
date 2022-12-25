@@ -15,12 +15,20 @@ typedef struct Chara {
 	bool isAlive;
 };
 
+typedef struct Zako {
+	Vector2 pos;
+	Vector2 speed;
+	float radius;
+	int HP;
+	bool isAlive;
+};
+
 //’e
 typedef struct Bullet {
 	Vector2 pos[15];
 	Vector2 speed;
 	float radius;
 	int attack;
-	int isShot[15];
+	bool isShot[15];
 	int coolTime;
 };

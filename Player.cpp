@@ -10,8 +10,9 @@ void Player::Initialize() {
 	player_.radius = 20.0f;
 	player_.isAlive = true;
 
+	//’e
 	bullet_ = new PlayerBullet();
-	bullet_->Initailize();
+	bullet_->Initialize();
 }
 
 //XVˆ—
@@ -67,8 +68,8 @@ void Player::Update(char* keys) {
 		if (keys[DIK_SPACE]) {
 			if (bullet_->bullet_.coolTime == 5) {
 				for (int i = 0; i < 15; i++) {
-					if (bullet_->bullet_.isShot[i] == 0) {
-						bullet_->bullet_.isShot[i] = 1;
+					if (bullet_->bullet_.isShot[i] == false) {
+						bullet_->bullet_.isShot[i] = true;
 						bullet_->bullet_.pos[i].X = player_.pos.X;
 						bullet_->bullet_.pos[i].Y = player_.pos.Y;
 
@@ -85,7 +86,7 @@ void Player::Update(char* keys) {
 //•`‰æˆ—
 void Player::Draw() {
 	if (player_.isAlive == true) {
-		Novice::DrawEllipse(player_.pos.X, player_.pos.Y, player_.radius, player_.radius, 0.0f, WHITE, kFillModeSolid);
+		Novice::DrawEllipse(player_.pos.X, player_.pos.Y, player_.radius, player_.radius, 0.0f, BLUE, kFillModeSolid);
 	}
 
 	bullet_->Draw();
