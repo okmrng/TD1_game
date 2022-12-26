@@ -25,7 +25,7 @@ void Enemy::Update() {
 //“–‚½‚è”»’è
 void Enemy::OnCollision(int playerBulletAttack) {
 	if (enemy_.isAlive == true) {
-		enemy_.isAlive = false;
+		enemy_.HP -= playerBulletAttack;
 	}
 }
 

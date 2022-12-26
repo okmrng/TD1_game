@@ -1,6 +1,5 @@
 ﻿#include <Novice.h>
 #include "Player.h"
-#include "PlayerBullet.h"
 #include "Enemy.h"
 #define _USE_MATH_DEFINES
 #include <math.h>
@@ -24,23 +23,15 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	Player* player = new Player();
 	player->Initialize();
 
-	//自機の弾
-	PlayerBullet* playerBullet = new PlayerBullet();
-	playerBullet->Initialize();
-
-	int a = 0;
-
-	float b = 0.0f;
-
-	//敵
-	Enemy* enemy = new Enemy();
-	enemy->Initialize();
-
 	//当たり判定
 	float playerBullet_enemyX = 0.0f;
 	float playerBullet_enemyY = 0.0f;
 	float playerBullet_enemyDis = 0.0f;
 
+
+	//敵
+	Enemy* enemy = new Enemy();
+	enemy->Initialize();
 
 	//画像読み込み
 	int frame = Novice::LoadTexture("./Resources/Images/frame.png");
@@ -66,26 +57,31 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 		//当たり判定
 		//自機と何もしない敵との当たり判定
-		float player_enemyX = player->GetterPosX() - enemy->enemy_.pos.X;
-		float player_enemyY = player->GetterPosY() - enemy->enemy_.pos.Y;
-		float player_enemyDis = sqrtf(player_enemyX * player_enemyX + player_enemyY * player_enemyY);
+			float player_enemyX = player->GetterPosX() - enemy->enemy_.pos.X;
+			float player_enemyY = player->GetterPosY() - enemy->enemy_.pos.Y;
+			float player_enemyDis = sqrtf(player_enemyX * player_enemyX + player_enemyY * player_enemyY);
 
-		if (player_enemyDis < player->GetterRadius() + enemy->enemy_.radius) {
-			player->OnCollision();
-		}
+			if (enemy->enemy_.isAlive == true) {
+				if (player_enemyDis < player->GetterRadius() + enemy->enemy_.radius) {
+					player->OnCollision();
+				}
+			}
 
 		//自機の弾と何もしない敵との当たり判定
-		/*for (int i = 0; i < 15; i++) {
-			playerBullet_enemyX = playerBullet->bullet_.pos[i].X - enemy->enemy_.pos.X;
-			playerBullet_enemyY = playerBullet->bullet_.pos[i].Y - enemy->enemy_.pos.Y;
+		for (int i = 0; i < 15; i++) {
+			playerBullet_enemyX = player->bullet_->bullet_.pos[i].X - enemy->enemy_.pos.X;
+			playerBullet_enemyY = player->bullet_->bullet_.pos[i].Y - enemy->enemy_.pos.Y;
 			playerBullet_enemyDis = sqrtf(playerBullet_enemyX * playerBullet_enemyX + playerBullet_enemyY * playerBullet_enemyY);
-		}
 
-		if (playerBullet_enemyDis < playerBullet->bullet_.radius + enemy->enemy_.radius) {
-			enemy->OnCollision(playerBullet->bullet_.attack);
-			a = 1;
-			b = 2.0f;
-		}*/
+			if (enemy->enemy_.isAlive == true) {
+				if (playerBullet_enemyDis < player->bullet_->bullet_.radius[i] + enemy->enemy_.radius) {
+					if (player->bullet_->bullet_.isShot[i] == true) {
+						enemy->OnCollision(player->bullet_->bullet_.attack);
+					}
+					player->bullet_->bullet_.isShot[i] = false;
+				}
+			}
+		}
 
 		///
 		/// ↑更新処理ここまで
@@ -103,9 +99,6 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 		//自機
 		player->Draw();
-
-		Novice::ScreenPrintf(0, 0, "aaa:%d", a);
-		Novice::ScreenPrintf(0, 80, "bbb:%0.0f", b);
 
 		///
 		/// ↑描画処理ここまで

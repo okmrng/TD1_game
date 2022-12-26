@@ -27,7 +27,7 @@ typedef struct Zako {
 typedef struct Bullet {
 	Vector2 pos[15];
 	Vector2 speed;
-	float radius;
+	float radius[15];
 	int attack;
 	bool isShot[15];
 	int coolTime;
