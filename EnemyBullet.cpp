@@ -43,5 +43,7 @@ void EnemyBullet::OnCollition() {
 
 //ï`âÊèàóù
 void EnemyBullet::Draw() {
-	Novice::DrawEllipse(enemyBullet_.pos.X, enemyBullet_.pos.Y, enemyBullet_.radius, enemyBullet_.radius, 0.0f, RED, kFillModeSolid);
+	if (enemyBullet_.isShot == true) {
+		Novice::DrawEllipse(enemyBullet_.pos.X, enemyBullet_.pos.Y, enemyBullet_.radius, enemyBullet_.radius, 0.0f, RED, kFillModeSolid);
+	}
 }
