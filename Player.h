@@ -24,6 +24,7 @@ public:
 	float GetterRadius() { return player_.radius; }
 	bool GetterisAlive() { return player_.isAlive; }
 	int GetterHP() { return player_.HP; }
+	bool GetterOnCollision() { return onCollision; }
 
 	//ƒƒ“ƒo•Ï”
 	//’e

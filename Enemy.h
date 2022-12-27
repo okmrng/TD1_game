@@ -1,5 +1,6 @@
 #pragma once
 #include "Struct.h"
+#include "EnemyBullet.h"
 
 class Enemy
 {
@@ -18,6 +19,9 @@ public:
 	//ˆÚ“®‚·‚é“G
 	void MoveEnemyOnCollision(int playerBulletAttack);
 
+	//’e‚ğŒ‚‚Â“G
+	void BulletEnemyOnCollision(int playerBulletAttack);
+
 	//•`‰æˆ—
 	void Draw();
 
@@ -28,5 +32,11 @@ public:
 
 	//ˆÚ“®‚·‚é“G
 	Zako moveEnemy_;
+
+	//’e‚ğŒ‚‚Â“G
+	Zako bulletEnemy_;
+
+	//’e
+	EnemyBullet* enemyBullet_;
 };
 

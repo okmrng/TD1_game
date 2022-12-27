@@ -32,3 +32,10 @@ typedef struct Bullet {
 	bool isShot[15];
 	int coolTime;
 };
+
+typedef struct EBullet {
+	Vector2 pos;
+	Vector2 speed;
+	float radius;
+	bool isShot;
+};
