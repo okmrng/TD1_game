@@ -12,7 +12,11 @@ public:
 	void Update();
 
 	//“–‚½‚è”»’è
-	void OnCollision(int playerBulletAttack);
+	//‰½‚à‚µ‚È‚¢“G
+	void EnemyOnCollision(int playerBulletAttack);
+
+	//ˆÚ“®‚·‚é“G
+	void MoveEnemyOnCollision(int playerBulletAttack);
 
 	//•`‰æˆ—
 	void Draw();
@@ -21,5 +25,8 @@ public:
 	//“G\‘¢‘Ì
 	//‰½‚à‚µ‚È‚¢“G
 	Zako enemy_;
+
+	//ˆÚ“®‚·‚é“G
+	Zako moveEnemy_;
 };
 
