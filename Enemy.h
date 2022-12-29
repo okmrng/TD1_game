@@ -19,8 +19,11 @@ public:
 	//ˆÚ“®‚·‚é“G
 	void MoveEnemyOnCollision(int playerBulletAttack);
 
-	//’e‚ğŒ‚‚Â“G
+	//’P”­’e‚ğŒ‚‚Â“G
 	void BulletEnemyOnCollision(int playerBulletAttack);
+
+	//•¡”’e‚ğŒ‚‚Â“G
+	void BulletsEnemyOnCollision(int playerBulletAttack);
 
 	//•`‰æˆ—
 	void Draw();
@@ -33,8 +36,11 @@ public:
 	//ˆÚ“®‚·‚é“G
 	Zako moveEnemy_;
 
-	//’e‚ğŒ‚‚Â“G
+	//’P”­’e‚ğŒ‚‚Â“G
 	Zako bulletEnemy_;
+
+	//•¡”’e‚ğŒ‚‚Â“G
+	Zako bulletsEnemy_;
 
 	//’e
 	EnemyBullet* enemyBullet_;

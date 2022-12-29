@@ -11,9 +11,9 @@ void Player::Initialize() {
 	player_.radius = 20.0f;
 	player_.isAlive = true;
 	player_.HP = 3;
-	color = BLUE;
-	collisionCount = 0;
-	onCollision = false;
+	color_ = BLUE;
+	collisionCount_ = 0;
+	onCollision_ = false;
 
 	//’e
 	bullet_ = new PlayerBullet();
@@ -51,20 +51,20 @@ void Player::Update(char* keys) {
 		}
 
 		//–³“GŽžŠÔ‚ðŒ¸‚ç‚·
-		if (onCollision == true) {
-			if (collisionCount > 0) {
-				--collisionCount;
-				color = RED;
-				if (collisionCount <= 0) {
-					collisionCount = 0;
-					onCollision = false;
+		if (onCollision_ == true) {
+			if (collisionCount_ > 0) {
+				--collisionCount_;
+				color_ = RED;
+				if (collisionCount_ <= 0) {
+					collisionCount_ = 0;
+					onCollision_ = false;
 				}
 			}
 		}
 
 		//–³“GŽžŠÔˆÈŠO‚Í’Êí‚ÌF‚É‚·‚é
-		if (onCollision == false) {
-			color = BLUE;
+		if (onCollision_ == false) {
+			color_ = BLUE;
 		}
 
 		//ˆÚ“®”ÍˆÍ
@@ -108,20 +108,20 @@ void Player::Update(char* keys) {
 //“–‚½‚è”»’è
 void Player::OnCollision() {
 	//HPŒ¸‚ç‚·
-	if (collisionCount == 0) {
+	if (collisionCount_ == 0) {
 		player_.HP -= 1;
-		collisionCount = 180;
-		onCollision = true;
+		collisionCount_ = 180;
+		onCollision_ = true;
 	}
 }
 
 //•`‰æˆ—
 void Player::Draw() {
 	if (player_.isAlive == true) {
-		Novice::DrawEllipse(player_.pos.X, player_.pos.Y, player_.radius, player_.radius, 0.0f, color, kFillModeSolid);
+		Novice::DrawEllipse(player_.pos.X, player_.pos.Y, player_.radius, player_.radius, 0.0f, color_, kFillModeSolid);
 	}
 
 	bullet_->Draw();
 
-	Novice::ScreenPrintf(0, 20, "%d", collisionCount);
+	Novice::ScreenPrintf(0, 20, "%d", collisionCount_);
 }

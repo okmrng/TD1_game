@@ -18,10 +18,16 @@ public:
 	void Draw();
 
 	//メンバ変数
-	//弾構造体
+	//単発弾構造体
 	EBullet enemyBullet_;
 
 	//クールタイム
-	int coolTime;
+	int coolTime_;
+
+	//複数弾構造体
+	EBullets enemyBullets_;
+
+	//クールタイム
+	int sCoolTime_;
 };
 

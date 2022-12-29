@@ -43,6 +43,15 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	float playerBullet_bulletEnemyY = 0.0f;
 	float playerBullet_bulletEnemyDis = 0.0f;
 
+	//複数弾を撃つ敵
+	float playerBullet_bulletsEnemyX = 0.0f;
+	float playerBullet_bulletsEnemyY = 0.0f;
+	float playerBullet_bulletsEnemyDis = 0.0f;
+
+	float enemyBullets_playerX = 0.0f;
+	float enemyBullets_playerY = 0.0f;
+	float enemyBullets_playerDis = 0.0f;
+
 	//画像読み込み
 	int frame = Novice::LoadTexture("./Resources/Images/frame.png");
 
@@ -161,6 +170,50 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 					enemy->enemyBullet_->OnCollition();
 				}
 				player->OnCollision();
+			}
+		}
+
+		//複数弾を撃つ敵
+		//自機との当たり判定
+		float player_bulletsEnemyX = player->GetterPosX() - enemy->bulletsEnemy_.pos.X;
+		float player_bulletsEnemyY = player->GetterPosY() - enemy->bulletsEnemy_.pos.Y;
+		float player_bulletsEnemyDis = sqrtf(player_bulletsEnemyX * player_bulletsEnemyX + player_bulletsEnemyY * player_bulletsEnemyY);
+
+		if (enemy->bulletsEnemy_.isAlive == true) {
+			if (player_bulletsEnemyDis < player->GetterRadius() + enemy->bulletsEnemy_.radius) {
+				player->OnCollision();
+			}
+		}
+
+		//自機の弾との当たり判定
+		for (int i = 0; i < 15; i++) {
+			playerBullet_bulletsEnemyX = player->bullet_->bullet_.pos[i].X - enemy->bulletsEnemy_.pos.X;
+			playerBullet_bulletsEnemyY = player->bullet_->bullet_.pos[i].Y - enemy->bulletsEnemy_.pos.Y;
+			playerBullet_bulletsEnemyDis = sqrtf(playerBullet_bulletsEnemyX * playerBullet_bulletsEnemyX + playerBullet_bulletsEnemyY * playerBullet_bulletsEnemyY);
+
+			if (enemy->bulletsEnemy_.isAlive == true) {
+				if (playerBullet_bulletsEnemyDis < player->bullet_->bullet_.radius[i] + enemy->bulletsEnemy_.radius) {
+					if (player->bullet_->bullet_.isShot[i] == true) {
+						enemy->BulletsEnemyOnCollision(player->bullet_->bullet_.attack);
+					}
+					player->bullet_->bullet_.isShot[i] = false;
+				}
+			}
+		}
+
+		//敵の弾と自機の当たり判定
+		for (int i = 0; i < 10; i++) {
+			enemyBullets_playerX = enemy->enemyBullet_->enemyBullets_.pos[i].X - player->GetterPosX();
+			enemyBullets_playerY = enemy->enemyBullet_->enemyBullets_.pos[i].Y - player->GetterPosY();
+			enemyBullets_playerDis = sqrtf(enemyBullets_playerX * enemyBullets_playerX + enemyBullets_playerY * enemyBullets_playerY);
+
+			if (enemy->bulletsEnemy_.isAlive == true) {
+				if (enemyBullets_playerDis < player->GetterRadius() + enemy->enemyBullet_->enemyBullets_.radius[i]) {
+					if (player->GetterOnCollision() == false) {
+						enemy->enemyBullet_->enemyBullets_.isShot[i] = false;
+					}
+					player->OnCollision();
+				}
 			}
 		}
 
