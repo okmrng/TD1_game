@@ -52,6 +52,17 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	float enemyBullets_playerY = 0.0f;
 	float enemyBullets_playerDis = 0.0f;
 
+	//シーン
+	enum scene {
+		TITLE,
+		TUTORIAL,
+		STAGE1,
+		GAMEOVER,
+		CLEAR
+	};
+
+	int scene = TITLE;
+
 	//画像読み込み
 	int frame = Novice::LoadTexture("./Resources/Images/frame.png");
 
@@ -67,6 +78,13 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		///
 		/// ↓更新処理ここから
 		///
+
+		//タイトル画面
+		if (scene == TITLE) {
+			if ((keys[DIK_SPACE] && preKeys[DIK_SPACE] == 0) || (keys[DIK_RETURN] && preKeys[DIK_RETURN] == 0)) {
+				scene = TUTORIAL;
+			}
+		}
 
 		//自機
 		player->Update(keys);
@@ -231,8 +249,10 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		//フレーム
 		Novice::DrawSprite(0.0f, 0.0f, frame, 1.0f, 1.0f, 0.0f, WHITE);
 
-		//自機
-		player->Draw();
+		if (scene == TUTORIAL) {
+			//自機
+			player->Draw();
+		}
 
 		///
 		/// ↑描画処理ここまで
