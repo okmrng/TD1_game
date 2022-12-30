@@ -6,7 +6,7 @@ class EnemyBullet
 public:
 	//ƒƒ“ƒoŠÖ”
 	//‰Šú‰»
-	void Intialize();
+	void Initialize();
 
 	//XVˆ—
 	void Update();

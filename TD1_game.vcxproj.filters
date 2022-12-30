@@ -135,9 +135,6 @@
     <ClInclude Include="Player.h">
       <Filter>ヘッダー</Filter>
     </ClInclude>
-    <ClInclude Include="Struct.h">
-      <Filter>ヘッダー</Filter>
-    </ClInclude>
     <ClInclude Include="PlayerBullet.h">
       <Filter>ヘッダー</Filter>
     </ClInclude>
@@ -145,6 +142,9 @@
       <Filter>ヘッダー</Filter>
     </ClInclude>
     <ClInclude Include="EnemyBullet.h">
+      <Filter>ヘッダー</Filter>
+    </ClInclude>
+    <ClInclude Include="Struct.h">
       <Filter>ヘッダー</Filter>
     </ClInclude>
   </ItemGroup>

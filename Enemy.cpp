@@ -30,18 +30,18 @@ void Enemy::Initialize() {
 	bulletEnemy_.speed.X = 0.0f;
 	bulletEnemy_.speed.Y = 0.0f;*/
 
-	//•¡”’e‚ðŒ‚‚Â“G
-	bulletsEnemy_.HP = 100;
-	bulletsEnemy_.isAlive = true;
-	bulletsEnemy_.pos.X = 640.0f;
-	bulletsEnemy_.pos.Y = 100.0f;
-	bulletsEnemy_.radius = 20.0f;
-	bulletsEnemy_.speed.X = 0.0f;
-	bulletsEnemy_.speed.Y = 0.0f;
+	////•¡”’e‚ðŒ‚‚Â“G
+	//bulletsEnemy_.HP = 100;
+	//bulletsEnemy_.isAlive = true;
+	//bulletsEnemy_.pos.X = 640.0f;
+	//bulletsEnemy_.pos.Y = 100.0f;
+	//bulletsEnemy_.radius = 20.0f;
+	//bulletsEnemy_.speed.X = 0.0f;
+	//bulletsEnemy_.speed.Y = 0.0f;
 
 	//’e
 	enemyBullet_ = new EnemyBullet();
-	enemyBullet_->Intialize();
+	enemyBullet_->Initialize();
 }
 
 //XVˆ—
@@ -88,34 +88,34 @@ void Enemy::Update() {
 	//}
 
 	//•¡”’e‚ðŒ‚‚Â“G
-	if (bulletsEnemy_.isAlive == true) {
-		enemyBullet_->sCoolTime_++;
-		if (enemyBullet_->sCoolTime_ > 30) {
-			enemyBullet_->sCoolTime_ = 0;
-		}
-		
-		//’e‚ÌˆÊ’u‚ð‡‚í‚¹‚é
-		if (enemyBullet_->sCoolTime_ == 30) {
-			for (int i = 0; i < 10; i++) {
-				if (enemyBullet_->enemyBullets_.isShot[i] == false) {
-					enemyBullet_->enemyBullets_.isShot[i] = true;
-					enemyBullet_->enemyBullets_.pos[i].X = bulletsEnemy_.pos.X;
-					enemyBullet_->enemyBullets_.pos[i].Y = bulletsEnemy_.pos.Y;
+	//if (bulletsEnemy_.isAlive == true) {
+	//	enemyBullet_->sCoolTime_++;
+	//	if (enemyBullet_->sCoolTime_ > 30) {
+	//		enemyBullet_->sCoolTime_ = 0;
+	//	}
+	//	
+	//	//’e‚ÌˆÊ’u‚ð‡‚í‚¹‚é
+	//	if (enemyBullet_->sCoolTime_ == 30) {
+	//		for (int i = 0; i < 10; i++) {
+	//			if (enemyBullet_->enemyBullets_.isShot[i] == false) {
+	//				enemyBullet_->enemyBullets_.isShot[i] = true;
+	//				enemyBullet_->enemyBullets_.pos[i].X = bulletsEnemy_.pos.X;
+	//				enemyBullet_->enemyBullets_.pos[i].Y = bulletsEnemy_.pos.Y;
 
-					break;
-				}
-			}
-		}
-		enemyBullet_->Update();
+	//				break;
+	//			}
+	//		}
+	//	}
+	//	enemyBullet_->Update();
 
-		//HP‚ª0ˆÈ‰º‚É‚È‚Á‚½‚çŽ€‚Ê
-		if (bulletsEnemy_.HP <= 0) {
-			bulletsEnemy_.isAlive = false;
-			for (int i = 0; i < 10; i++) {
-				enemyBullet_->enemyBullets_.isShot[i] = false;
-			}
-		}
-	}
+	//	//HP‚ª0ˆÈ‰º‚É‚È‚Á‚½‚çŽ€‚Ê
+	//	if (bulletsEnemy_.HP <= 0) {
+	//		bulletsEnemy_.isAlive = false;
+	//		for (int i = 0; i < 10; i++) {
+	//			enemyBullet_->enemyBullets_.isShot[i] = false;
+	//		}
+	//	}
+	//}
 }
 
 //“–‚½‚è”»’è
@@ -141,10 +141,10 @@ void Enemy::BulletEnemyOnCollision(int playerBulletAttack) {
 }
 
 //•¡”’e‚ðŒ‚‚Â“G
-void Enemy::BulletsEnemyOnCollision(int playerBulletAttack) {
+void Enemy::BulletsEnemyOnCollision(int playerBulletAttack) {/*
 	if (bulletsEnemy_.isAlive == true) {
 		bulletsEnemy_.HP -= playerBulletAttack;
-	}
+	}*/
 }
 
 //•`‰æˆ—
@@ -165,9 +165,9 @@ void Enemy::Draw() {
 	}*/
 
 	//•¡”’e‚ðŒ‚‚Â“G
-	if (bulletsEnemy_.isAlive == true) {
+	/*if (bulletsEnemy_.isAlive == true) {
 		Novice::DrawEllipse(bulletsEnemy_.pos.X, bulletsEnemy_.pos.Y, bulletsEnemy_.radius, bulletsEnemy_.radius, 0.0f, WHITE, kFillModeSolid);
-	}
+	}*/
 
 	//’e
 	enemyBullet_->Draw();
