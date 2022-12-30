@@ -1,6 +1,7 @@
 ﻿#include <Novice.h>
 #include "Player.h"
 #include "Enemy.h"
+#include "Option.h"
 #define _USE_MATH_DEFINES
 #include <math.h>
 
@@ -26,6 +27,10 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	//敵
 	Enemy* enemy = new Enemy();
 	enemy->Initialize();
+
+	//オプション
+	Option* option = new Option();
+	option->Initialize();
 
 	//当たり判定
 	//何もしない敵
@@ -55,6 +60,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	//シーン
 	enum scene {
 		TITLE,
+		OPTION,
 		TUTORIAL,
 		STAGE1,
 		GAMEOVER,
@@ -65,6 +71,10 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 	//画像読み込み
 	int frame = Novice::LoadTexture("./Resources/Images/frame.png");
+	int wasd = Novice::LoadTexture("./Resources/Images/wasd.png");
+	int wasdYellow = Novice::LoadTexture("./Resources/Images/wasd_yellow.png");
+	int direction = Novice::LoadTexture("./Resources/Images/direction.png");
+	int directionYellow = Novice::LoadTexture("./Resources/Images/direction_yellow.png");
 
 	// ウィンドウの×ボタンが押されるまでループ
 	while (Novice::ProcessMessage() == 0) {
@@ -82,8 +92,13 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		//タイトル画面
 		if (scene == TITLE) {
 			if ((keys[DIK_SPACE] && preKeys[DIK_SPACE] == 0) || (keys[DIK_RETURN] && preKeys[DIK_RETURN] == 0)) {
-				scene = TUTORIAL;
+				scene = OPTION;
 			}
+		}
+
+		//設定画面
+		if (scene == OPTION) {
+			option->Update(keys, preKeys);
 		}
 
 		//自機
@@ -243,13 +258,18 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		/// ↓描画処理ここから
 		///
 
+		//オプション
+		if (scene == OPTION) {
+			option->Draw(wasd, wasdYellow, direction, directionYellow);
+		}
+
 		//敵
 		enemy->Draw();
 
-		//フレーム
-		Novice::DrawSprite(0.0f, 0.0f, frame, 1.0f, 1.0f, 0.0f, WHITE);
-
 		if (scene == TUTORIAL) {
+			//フレーム
+			Novice::DrawSprite(0.0f, 0.0f, frame, 1.0f, 1.0f, 0.0f, WHITE);
+
 			//自機
 			player->Draw();
 		}
