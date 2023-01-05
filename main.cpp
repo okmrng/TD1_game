@@ -2,6 +2,7 @@
 #include "Player.h"
 #include "Enemy.h"
 #include "Option.h"
+#include "Fade.h"
 #define _USE_MATH_DEFINES
 #include <math.h>
 
@@ -31,6 +32,10 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	//オプション
 	Option* option = new Option();
 	option->Initialize();
+
+	//フェード
+	Fade* fade = new Fade();
+	fade->Initialize();
 
 	//当たり判定
 	//何もしない敵
@@ -91,7 +96,14 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 		//タイトル画面
 		if (scene == TITLE) {
+			//フェードインフラグをtrueにする
 			if ((keys[DIK_SPACE] && preKeys[DIK_SPACE] == 0) || (keys[DIK_RETURN] && preKeys[DIK_RETURN] == 0)) {
+				fade->SetOnFade(true);
+			}
+
+			//フェードイン
+			fade->Update();
+			if (fade->GetterNext() == true) {
 				scene = OPTION;
 			}
 		}
@@ -257,6 +269,12 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		///
 		/// ↓描画処理ここから
 		///
+
+		//タイトル
+		if (scene == TITLE) {
+			//フェード
+			fade->Draw();
+		}
 
 		//オプション
 		if (scene == OPTION) {

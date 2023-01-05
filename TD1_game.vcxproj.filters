@@ -55,6 +55,9 @@
     <ClCompile Include="Option.cpp">
       <Filter>ソース</Filter>
     </ClCompile>
+    <ClCompile Include="Fade.cpp">
+      <Filter>ソース</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="C:\KamataEngine\DirectXGame\audio\Audio.h">
@@ -151,6 +154,9 @@
       <Filter>ヘッダー</Filter>
     </ClInclude>
     <ClInclude Include="Option.h">
+      <Filter>ヘッダー</Filter>
+    </ClInclude>
+    <ClInclude Include="Fade.h">
       <Filter>ヘッダー</Filter>
     </ClInclude>
   </ItemGroup>

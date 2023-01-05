@@ -42,6 +42,10 @@ void Option::Update(char* keys, char* preKeys) {
 
 //•`‰æˆ—
 void Option::Draw(int wasd, int wasdYellow, int direction, int directionYellow) {
+	//”wŒi
+	Novice::DrawBox(0, 0, 1280, 720, 0.0f, BLACK, kFillModeSolid);
+
+	//‘I‘ğˆ
 	if (WASDStile_ == false) {
 		Novice::DrawSprite(100, 100, wasd, 1.0f, 1.0f, 0.0f, WHITE);
 	}
