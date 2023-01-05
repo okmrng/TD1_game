@@ -22,7 +22,7 @@ void Option::Initialize() {
 void Option::Update(char* keys, char* preKeys) {
 	//フェードイン
 	if (fade_ <= 0x000000FF) {
-		fade_ += 0x00000002;
+		fade_ += 0x00000004;
 	}
 
 	if (fade_ >= 0x000000FF) {

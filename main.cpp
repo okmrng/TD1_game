@@ -72,8 +72,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		CLEAR
 	};
 
-	//int scene = TITLE;
-	int scene = OPTION;
+	int scene = TITLE;
+	//int scene = OPTION;
 
 	//画像読み込み
 	int frame = Novice::LoadTexture("./Resources/Images/frame.png");
