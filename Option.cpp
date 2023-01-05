@@ -11,6 +11,7 @@ void Option::Initialize() {
 
 //更新処理
 void Option::Update(char* keys, char* preKeys) {
+
 	//操作選択
 	if (choiceCount_ <= 5) {
 		choiceCount_++;
@@ -21,7 +22,7 @@ void Option::Update(char* keys, char* preKeys) {
 	if (choice_ == true) {
 		//WASD操作
 		if (WASDStile_ == false) {
-			if (keys[DIK_LEFT] && preKeys[DIK_LEFT] == 0) {
+			if ((keys[DIK_LEFT] && preKeys[DIK_LEFT] == 0) || (keys[DIK_A] && preKeys[DIK_A] == 0)) {
 				choiceCount_ = 0;
 				WASDStile_ = true;
 				directionStile_ = false;
@@ -30,7 +31,7 @@ void Option::Update(char* keys, char* preKeys) {
 
 		//方向キー操作
 		if (directionStile_ == false) {
-			if (keys[DIK_RIGHT] && preKeys[DIK_RIGHT] == 0) {
+			if ((keys[DIK_RIGHT] && preKeys[DIK_RIGHT] == 0) || (keys[DIK_D] && preKeys[DIK_D] == 0)) {
 				choiceCount_ = 0;
 				directionStile_ = true;
 				WASDStile_ = false;

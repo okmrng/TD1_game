@@ -102,7 +102,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		}
 
 		//自機
-		player->Update(keys);
+		player->Update(keys, option->GetterWASDStaile(), option->GetterdirectionStaile());
 
 		//敵
 		enemy->Update();
@@ -273,7 +273,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 			//自機
 			player->Draw();
 		}
-
+		
 		///
 		/// ↑描画処理ここまで
 		///

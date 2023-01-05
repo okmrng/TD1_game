@@ -10,7 +10,7 @@ public:
 	void Initialize();
 
 	//XVˆ—
-	void Update(char* keys);
+	void Update(char* keys, bool WASDStile_, bool directionStile_);
 
 	//“–‚½‚è”»’è
 	void OnCollision();

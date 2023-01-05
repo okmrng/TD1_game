@@ -21,33 +21,65 @@ void Player::Initialize() {
 }
 
 //更新処理
-void Player::Update(char* keys) {
+void Player::Update(char* keys, bool WASDStile_, bool directionStile_) {
 	if (player_.isAlive == true) {
 		//移動
-		if (keys[DIK_UP] || keys[DIK_W]) {
-			player_.pos.Y -= player_.speed.Y;
-		}
-		if (keys[DIK_DOWN] || keys[DIK_S]) {
-			player_.pos.Y += player_.speed.Y;
-		}
-		if (keys[DIK_LEFT] || keys[DIK_A]) {
-			player_.pos.X -= player_.speed.X;
-		}
-		if (keys[DIK_RIGHT] || keys[DIK_D]) {
-			player_.pos.X += player_.speed.X;
+		//WASD
+		if (WASDStile_ == true) {
+			if (keys[DIK_W]) {
+				player_.pos.Y -= player_.speed.Y;
+			}
+			if (keys[DIK_S]) {
+				player_.pos.Y += player_.speed.Y;
+			}
+			if (keys[DIK_A]) {
+				player_.pos.X -= player_.speed.X;
+			}
+			if (keys[DIK_D]) {
+				player_.pos.X += player_.speed.X;
+			}
+
+			if (keys[DIK_A] && (keys[DIK_W] || keys[DIK_S])) {
+				player_.speed.X = 5.6f;
+				player_.speed.Y = 5.6f;
+			}
+			else if (keys[DIK_D] && (keys[DIK_W] || keys[DIK_S])) {
+				player_.speed.X = 5.6f;
+				player_.speed.Y = 5.6f;
+			}
+			else {
+				player_.speed.X = 8.0f;
+				player_.speed.Y = 8.0f;
+			}
 		}
 
-		if (keys[DIK_A] || keys[DIK_LEFT] && (keys[DIK_W] || keys[DIK_UP] || keys[DIK_S] || keys[DIK_DOWN])) {
-			player_.speed.X = 5.6f;
-			player_.speed.Y = 5.6f;
-		}
-		else if (keys[DIK_D] || keys[DIK_RIGHT] && (keys[DIK_W] || keys[DIK_UP] || keys[DIK_S] || keys[DIK_DOWN])) {
-			player_.speed.X = 5.6f;
-			player_.speed.Y = 5.6f;
-		}
-		else {
-			player_.speed.X = 8.0f;
-			player_.speed.Y = 8.0f;
+		//方向キー
+		if (directionStile_ == true) {
+			if (keys[DIK_UP]) {
+				player_.pos.Y -= player_.speed.Y;
+			}
+			if (keys[DIK_DOWN]) {
+				player_.pos.Y += player_.speed.Y;
+			}
+			if (keys[DIK_LEFT]) {
+				player_.pos.X -= player_.speed.X;
+			}
+			if (keys[DIK_RIGHT]) {
+				player_.pos.X += player_.speed.X;
+			}
+
+			if (keys[DIK_LEFT] && (keys[DIK_UP] || keys[DIK_DOWN])) {
+				player_.speed.X = 5.6f;
+				player_.speed.Y = 5.6f;
+			}
+			else if (keys[DIK_RIGHT] && (keys[DIK_UP] || keys[DIK_DOWN])) {
+				player_.speed.X = 5.6f;
+				player_.speed.Y = 5.6f;
+			}
+			else {
+				player_.speed.X = 8.0f;
+				player_.speed.Y = 8.0f;
+			}
 		}
 
 		//無敵時間を減らす
