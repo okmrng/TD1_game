@@ -47,7 +47,9 @@ private:
 	//表示フラグ
 	bool OnDisplay_;
 
-	//シーン遷移フラグ
+	//シーン遷移
 	bool next_;
+	int nextCount_;
+	bool nextCountStart_;
 };
 

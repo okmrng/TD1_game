@@ -3,6 +3,7 @@
 #include "Enemy.h"
 #include "Option.h"
 #include "Fade.h"
+#include "Tutorial.h"
 #define _USE_MATH_DEFINES
 #include <math.h>
 
@@ -36,6 +37,10 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	//フェード
 	Fade* fade = new Fade();
 	fade->Initialize();
+
+	//チュートリアル
+	Tutorial* tutorial = new Tutorial();
+	tutorial->Initialize();
 
 	//当たり判定
 	//何もしない敵
@@ -72,15 +77,17 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		CLEAR
 	};
 
-	int scene = TITLE;
-	//int scene = OPTION;
+	//int scene = TITLE;
+	int scene = OPTION;
 
 	//画像読み込み
 	int frame = Novice::LoadTexture("./Resources/Images/frame.png");
+	int frameSide = Novice::LoadTexture("./Resources/Images/frame_side.png");
 	int wasd = Novice::LoadTexture("./Resources/Images/wasd.png");
 	int wasdYellow = Novice::LoadTexture("./Resources/Images/wasd_yellow.png");
 	int direction = Novice::LoadTexture("./Resources/Images/direction.png");
 	int directionYellow = Novice::LoadTexture("./Resources/Images/direction_yellow.png");
+	int tutorialPlate = Novice::LoadTexture("./Resources/Images/plate_tutorial.png");
 
 	// ウィンドウの×ボタンが押されるまでループ
 	while (Novice::ProcessMessage() == 0) {
@@ -119,8 +126,13 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 			}
 		}
 
-		//自機
-		player->Update(keys, option->GetterWASDStaile(), option->GetterDirectionStaile());
+		//チュートリアル
+		if (scene == TUTORIAL) {
+			tutorial->Update();
+
+			//自機
+			player->Update(keys, option->GetterWASDStaile(), option->GetterDirectionStaile());
+		}
 
 		//敵
 		enemy->Update();
@@ -290,12 +302,12 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		//敵
 		enemy->Draw();
 
+		//チュートリアル
 		if (scene == TUTORIAL) {
-			//フレーム
-			Novice::DrawSprite(0.0f, 0.0f, frame, 1.0f, 1.0f, 0.0f, WHITE);
+			tutorial->Draw(frameSide, tutorialPlate);
 
 			//自機
-			player->Draw();
+			//player->Draw();
 		}
 		
 		///

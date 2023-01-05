@@ -16,6 +16,8 @@ void Option::Initialize() {
 	OnOperation_ = false;
 	OnDisplay_ = true;
 	next_ = false;
+	nextCount_ = 0;
+	nextCountStart_ = false;
 }
 
 //更新処理
@@ -85,6 +87,16 @@ void Option::Update(char* keys, char* preKeys) {
 				if (fade2_ <= 0x00000000) {
 					fade2_ = 0x00000000;
 					OffReturn_ = false;
+					nextCountStart_ = true;
+				}
+			}
+
+			//シーン遷移
+			if (nextCountStart_ == true) {
+				if (nextCount_ <= 30) {
+					nextCount_++;
+				}
+				if (nextCount_ >= 30) {
 					next_ = true;
 				}
 			}
