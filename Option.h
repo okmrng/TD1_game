@@ -14,7 +14,8 @@ public:
 
 	//ゲッター関数
 	bool GetterWASDStaile() { return WASDStile_; }
-	bool GetterdirectionStaile() { return directionStile_; }
+	bool GetterDirectionStaile() { return directionStile_; }
+	bool GetterNext() { return next_; }
 
 private:
 	//メンバ変数
@@ -27,5 +28,26 @@ private:
 	//カウンター
 	int choiceCount_;
 	bool choice_;
+
+	//色
+	unsigned int white_;
+	unsigned int whiteBg_;
+
+	//フェード
+	unsigned int fade_;
+	unsigned int fade2_;
+
+	//Enterフラグ
+	bool OnReturn_;
+	bool OffReturn_;
+
+	//操作フラグ
+	bool OnOperation_;
+
+	//表示フラグ
+	bool OnDisplay_;
+
+	//シーン遷移フラグ
+	bool next_;
 };
 

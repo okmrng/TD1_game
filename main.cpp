@@ -72,7 +72,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		CLEAR
 	};
 
-	int scene = TITLE;
+	//int scene = TITLE;
+	int scene = OPTION;
 
 	//画像読み込み
 	int frame = Novice::LoadTexture("./Resources/Images/frame.png");
@@ -111,10 +112,15 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		//設定画面
 		if (scene == OPTION) {
 			option->Update(keys, preKeys);
+
+			//フェードアウト
+			if (option->GetterNext() == true) {
+				scene = TUTORIAL;
+			}
 		}
 
 		//自機
-		player->Update(keys, option->GetterWASDStaile(), option->GetterdirectionStaile());
+		player->Update(keys, option->GetterWASDStaile(), option->GetterDirectionStaile());
 
 		//敵
 		enemy->Update();

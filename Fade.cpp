@@ -15,7 +15,7 @@ void Fade::Update() {
 	//フェードイン
 	if (onFade_ == true) {
 		if (fade_ <= 0x000000FF) {
-			fade_ += 0x00000008;
+			fade_ += 0x00000004;
 		}
 
 		if (fade_ >= 0x000000FF) {
