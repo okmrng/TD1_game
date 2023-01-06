@@ -1,5 +1,4 @@
 #pragma once
-#include "Player.h"
 
 class Admission
 {
@@ -11,8 +10,11 @@ public:
 	//更新処理
 	void Update();
 
+	//ゲッター関数
+	bool GetterPlayStart() { return playStart_; }
+
 	//描画処理
-	void Draw(int frameSide, int Plate, int tutorialSkip);
+	void Draw(int frameSide, int Plate);
 
 private:
 	//メンバ変数
@@ -57,11 +59,9 @@ private:
 	//カウント
 	int plateEaseStartCount_;
 
-	//スキップフラグ
-	bool skipDirection_;
-	bool next_;
-
-	//自機
-	Player* player_;
+	//プレイ開始
+	int playStartCount_;
+	bool playStart_;
+	bool playStartCountStart_;
 };
 

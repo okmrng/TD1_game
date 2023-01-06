@@ -1,5 +1,4 @@
 #include "Admission.h"
-#include "Player.h"
 #include <Novice.h>
 #define _USE_MATH_DEFINES
 #include <math.h>
@@ -34,12 +33,9 @@ void Admission::Initialize() {
 	playerY1_ = 740.0f;
 	playerY2_ = 660.0f;
 	plateEaseStartCount_ = 0;
-	skipDirection_ = false;
-	next_ = false;
-
-	//自機
-	player_ = new Player();
-	player_->Initialize();
+	playStartCount_ = 0;
+	playStart_ = false;
+	playStartCountStart_ = false;
 }
 
 //更新処理
@@ -115,14 +111,24 @@ void Admission::Update() {
 		plateX4_ = (1.0f - easedT_) * plateX5_ + easedT_ * plateX6_;
 
 		if (plateX4_ >= 1280.0f) {
-			skipDirection_ = true;
 			onPlateEase2_ = false;
+			playStartCountStart_ = true;
+		}
+	}
+
+	//プレイ開始
+	if (playStartCountStart_ == true) {
+		if (playStartCount_ <= 30) {
+			playStartCount_++;
+		}
+		if (playStartCount_ >= 30) {
+			playStart_ = true;
 		}
 	}
 }
 
 //描画処理
-void Admission::Draw(int frameSide, int Plate, int tutorialSkip) {
+void Admission::Draw(int frameSide, int Plate) {
 	Novice::DrawBox(0, 0, 1280, 720, 0.0f, BLACK, kFillModeSolid);
 
 	//自機

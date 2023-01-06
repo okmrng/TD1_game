@@ -3,7 +3,7 @@
 #include "Enemy.h"
 #include "Option.h"
 #include "Fade.h"
-#include "Admission.h"
+#include "Tutorial.h"
 #define _USE_MATH_DEFINES
 #include <math.h>
 
@@ -39,8 +39,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	fade->Initialize();
 
 	//チュートリアル
-	Admission* admission = new Admission();
-	admission->Initialize();
+	Tutorial* tutorial = new Tutorial();
+	tutorial->Initialize();
 
 	//当たり判定
 	//何もしない敵
@@ -72,6 +72,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		TITLE,
 		OPTION,
 		TUTORIAL,
+		MAP,
 		STAGE1,
 		GAMEOVER,
 		CLEAR
@@ -88,7 +89,11 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	int direction = Novice::LoadTexture("./Resources/Images/direction.png");
 	int directionYellow = Novice::LoadTexture("./Resources/Images/direction_yellow.png");
 	int tutorialPlate = Novice::LoadTexture("./Resources/Images/plate_tutorial.png");
-	int tutorialSkip = Novice::LoadTexture("./Resources/Images/tutorial_skip.png");
+	int tutorialText1 = Novice::LoadTexture("./Resources/Images/tutorial_text1.png");
+	int tutorialText2 = Novice::LoadTexture("./Resources/Images/tutorial_text2.png");
+	int tutorialText3Direction = Novice::LoadTexture("./Resources/Images/tutorial_text3_direction.png");
+	int tutorialText3WASD = Novice::LoadTexture("./Resources/Images/tutorial_text3_wasd.png");
+	int tutorialText4 = Novice::LoadTexture("./Resources/Images/tutorial_text4.png");
 
 	// ウィンドウの×ボタンが押されるまでループ
 	while (Novice::ProcessMessage() == 0) {
@@ -129,10 +134,14 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 		//チュートリアル
 		if (scene == TUTORIAL) {
-			admission->Update();
+			tutorial->Update(keys, preKeys);
+
+			if (tutorial->next_ == true) {
+				scene = MAP;
+			}
 
 			//自機
-			player->Update(keys, option->GetterWASDStaile(), option->GetterDirectionStaile());
+			//player->Update(keys, option->GetterWASDStaile(), option->GetterDirectionStaile());
 		}
 
 		//敵
@@ -305,7 +314,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 		//チュートリアル
 		if (scene == TUTORIAL) {
-			admission->Draw(frameSide, tutorialPlate, tutorialSkip);
+			tutorial->Draw(frameSide, tutorialPlate, option->GetterWASDStaile(), option->GetterDirectionStaile(), tutorialText1, tutorialText2,
+				tutorialText3Direction, tutorialText3WASD, tutorialText4);
 
 			//自機
 			//player->Draw();
@@ -319,9 +329,9 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		Novice::EndFrame();
 
 		// ESCキーが押されたらループを抜ける
-		if (preKeys[DIK_ESCAPE] == 0 && keys[DIK_ESCAPE] != 0) {
+		/*if (preKeys[DIK_ESCAPE] == 0 && keys[DIK_ESCAPE] != 0) {
 			break;
-		}
+		}*/
 	}
 
 	// ライブラリの終了
