@@ -21,6 +21,7 @@ typedef struct Zako {
 	float radius[1];
 	int HP[1];
 	bool isAlive[1];
+	unsigned int color[1];
 };
 
 //’e

@@ -105,15 +105,17 @@ void Tutorial::Update(char* keys, char* preKeys, bool WASDStile_, bool direction
 			}
 		}
 		if (text_ == 6) {
-			/*if (pushCount_ <= 5) {
-				pushCount_++;
+			if (enemy_->moveEnemy_.pos[0].X >= 640.0f) {
+				text_ = 7;
 			}
-			if (pushCount_ >= 7) {
-				if (keys[DIK_RETURN] && preKeys[DIK_RETURN] == 0) {
-					text_ = 5;
-					pushCount_ = 0;
-				}
-			}*/
+		}
+		if (text_ == 7) {
+			if (enemy_->moveEnemy_.isAlive[0] == false) {
+				text_ = 8;
+			}
+		}
+		if (text_ == 8) {
+
 		}
 
 		//ƒV[ƒ“‘JˆÚ
@@ -131,10 +133,10 @@ void Tutorial::Update(char* keys, char* preKeys, bool WASDStile_, bool direction
 		//	onPlayerMove_ = true;
 		//}
 
-		////Ž©‹@’e”­ŽËƒtƒ‰ƒO
-		//if (text_ >= 4) {
-		//	onPlayerShot_ = true;
-		//}
+		//Ž©‹@’e”­ŽËƒtƒ‰ƒO
+		if (text_ >= 7) {
+			onPlayerShot_ = true;
+		}
 	}
 
 	//Ž©‹@
@@ -142,12 +144,32 @@ void Tutorial::Update(char* keys, char* preKeys, bool WASDStile_, bool direction
 
 	//“G
 	enemy_->Update(scene, text_);
+
+	//Ž©‹@‚Ì’e‚Æ‚Ì“–‚½‚è”»’è
+	for (int i = 0; i < 15; i++) {
+		playerBullet_moveEnemyX_ = player_->bullet_->bullet_.pos[i].X - enemy_->moveEnemy_.pos[0].X;
+		playerBullet_moveEnemyY_ = player_->bullet_->bullet_.pos[i].Y - enemy_->moveEnemy_.pos[0].Y;
+		playerBullet_moveEnemyDis_ = sqrtf(playerBullet_moveEnemyX_ * playerBullet_moveEnemyX_ + playerBullet_moveEnemyY_ * playerBullet_moveEnemyY_);
+
+		if (enemy_->moveEnemy_.isAlive[0] == true) {
+			if (playerBullet_moveEnemyDis_ < 20.0f) {
+				if (player_->bullet_->bullet_.isShot[i] == true) {
+					//enemy->MoveEnemyOnCollision(player->bullet_->bullet_.attack);
+					if (enemy_->moveEnemy_.isAlive[0] == true) {
+						enemy_->moveEnemy_.HP[0] -= player_->bullet_->bullet_.attack;
+						enemy_->moveEnemy_.color[0] = RED;
+					}
+				}
+				player_->bullet_->bullet_.isShot[i] = false;
+			}
+		}
+	}
 }
 
 //•`‰æˆ—
 void Tutorial::Draw(int frameSide, int Plate, bool WASDStile_, bool directionStile_, int tutorialText1, int tutorialText2,
-	int tutorialText3Direction, int tutorialText3WASD, int tutorialText4, int tutorialText5, int textbox, int scene,
-	int tutorialBg) {
+	int tutorialText3Direction, int tutorialText3WASD, int tutorialText4, int tutorialText5, int tutorialText7, int textbox,
+	int scene, int tutorialBg) {
 	//”wŒi
 	Novice::DrawSprite(325, 0, tutorialBg, 1.0f, 1.0f, 0.0f, WHITE);
 
@@ -189,5 +211,12 @@ void Tutorial::Draw(int frameSide, int Plate, bool WASDStile_, bool directionSti
 		if (text_ == 6) {
 			Novice::DrawSprite(textX_, textY_, textbox, 1.0f, 1.0f, 0.0f, WHITE);
 		}
+		if (text_ == 7) {
+			Novice::DrawSprite(textX_, textY_, tutorialText7, 1.0f, 1.0f, 0.0f, WHITE);
+		}
+		if (text_ == 8) {
+			Novice::DrawSprite(textX_, textY_, textbox, 1.0f, 1.0f, 0.0f, WHITE);
+		}
 	}
+	Novice::ScreenPrintf(0, 80, "HP:%d", enemy_->moveEnemy_.HP[0]);
 }

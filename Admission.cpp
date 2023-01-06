@@ -18,10 +18,10 @@ void Admission::Initialize() {
 	plateX1_ = -1280.0f;
 	plateX2_ = 320.0f;
 	plateX3_ = 320.0f;
-	plateX4_ = 332.0f;
-	plateX5_ = 332.0f;
+	plateX4_ = 350.0f;
+	plateX5_ = 350.0f;
 	plateX6_ = 1280.0f;
-	plateSpeedX_ = 0.2f;
+	plateSpeedX_ = 0.5f;
 	t1_ = 0.0f;
 	t2_ = 0.0f;
 	t3_ = 0.0f;
@@ -95,7 +95,7 @@ void Admission::Update() {
 	if (onSlowly_ == true) {
 		plateX3_ += plateSpeedX_;
 
-		if (plateX3_ >= 332.0f) {
+		if (plateX3_ >= 350.0f) {
 			onSlowly_ = false;
 			onPlateEase2_ = true;
 		}

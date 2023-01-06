@@ -13,22 +13,23 @@ void Enemy::Initialize() {
 	enemy_.speed.Y = 0.0f;*/
 
 	//ˆÚ“®‚·‚é“G
-	moveEnemy_.HP[0] = 100;
+	moveEnemy_.HP[0] = 20;
 	moveEnemy_.isAlive[0] = true;
 	moveEnemy_.pos[0].X = -30.0f;
 	moveEnemy_.pos[0].Y = 358.0f;
 	moveEnemy_.radius[0] = 20.0f;
 	moveEnemy_.speed[0].X = 5.0f;
 	moveEnemy_.speed[0].Y = 3.0f;
+	moveEnemy_.color[0] = BLACK;
 
 	//’P”­’e‚ðŒ‚‚Â“G
-	/*bulletEnemy_.HP = 100;
-	bulletEnemy_.isAlive = true;
-	bulletEnemy_.pos.X = 640.0f;
-	bulletEnemy_.pos.Y = 100.0f;
-	bulletEnemy_.radius = 20.0f;
-	bulletEnemy_.speed.X = 0.0f;
-	bulletEnemy_.speed.Y = 0.0f;*/
+	bulletEnemy_.HP[0] = 100;
+	bulletEnemy_.isAlive[0] = true;
+	bulletEnemy_.pos[0].X = 640.0f;
+	bulletEnemy_.pos[0].Y = 100.0f;
+	bulletEnemy_.radius[0] = 20.0f;
+	bulletEnemy_.speed[0].X = 0.0f;
+	bulletEnemy_.speed[0].Y = 0.0f;
 
 	////•¡”’e‚ðŒ‚‚Â“G
 	//bulletsEnemy_.HP = 100;
@@ -48,7 +49,7 @@ void Enemy::Initialize() {
 void Enemy::Update(int scene, int text_) {
 	//ƒ`ƒ…[ƒgƒŠƒAƒ‹
 	if (scene == 2) {
-		if (text_ == 6) {
+		if (text_ >= 6) {
 			if (moveEnemy_.isAlive[0] == true) {
 				//ˆÚ“®
 				moveEnemy_.pos[0].X += moveEnemy_.speed[0].X;
@@ -64,6 +65,22 @@ void Enemy::Update(int scene, int text_) {
 				}
 			}
 		}
+		if (text_ >= 8) {
+			//’P”­’e‚ðŒ‚‚Â“G
+			if (bulletEnemy_.isAlive[0] == true) {
+				//’e‚ÌˆÊ’u‚ð‡‚í‚¹‚é
+				if (enemyBullet_->enemyBullet_.isShot == false) {
+					enemyBullet_->enemyBullet_.pos.X = bulletEnemy_.pos[0].X;
+					enemyBullet_->enemyBullet_.pos.Y = bulletEnemy_.pos[0].Y;
+				}
+				enemyBullet_->Update();
+
+				//HP‚ª0ˆÈ‰º‚É‚È‚Á‚½‚çŽ€‚Ê
+				if (bulletEnemy_.HP[0] <= 0) {
+					bulletEnemy_.isAlive[0] = false;
+				}
+			}
+		}
 	}
 
 	//‰½‚à‚µ‚È‚¢“G
@@ -73,21 +90,6 @@ void Enemy::Update(int scene, int text_) {
 			enemy_.isAlive = false;
 		}
 	}*/
-
-	//’P”­’e‚ðŒ‚‚Â“G
-	//if (bulletEnemy_.isAlive == true) {
-	//	//’e‚ÌˆÊ’u‚ð‡‚í‚¹‚é
-	//	if (enemyBullet_->enemyBullet_.isShot == false) {
-	//		enemyBullet_->enemyBullet_.pos.X = bulletEnemy_.pos.X;
-	//		enemyBullet_->enemyBullet_.pos.Y = bulletEnemy_.pos.Y;
-	//	}
-	//	enemyBullet_->Update();
-
-	//	//HP‚ª0ˆÈ‰º‚É‚È‚Á‚½‚çŽ€‚Ê
-	//	if (bulletEnemy_.HP <= 0) {
-	//		bulletEnemy_.isAlive = false;
-	//	}
-	//}
 
 	//•¡”’e‚ðŒ‚‚Â“G
 	//if (bulletsEnemy_.isAlive == true) {
@@ -160,7 +162,7 @@ void Enemy::Draw(int scene) {
 	if (scene == 2) {
 		for (int i = 0; i < 1; i++) {
 			if (moveEnemy_.isAlive[0] == true) {
-				Novice::DrawEllipse(moveEnemy_.pos[0].X, moveEnemy_.pos[0].Y, moveEnemy_.radius[0], moveEnemy_.radius[0], 0.0f, BLACK, kFillModeSolid);
+				Novice::DrawEllipse(moveEnemy_.pos[0].X, moveEnemy_.pos[0].Y, moveEnemy_.radius[0], moveEnemy_.radius[0], 0.0f, moveEnemy_.color[0], kFillModeSolid);
 			}
 		}
 	}
@@ -180,6 +182,6 @@ void Enemy::Draw(int scene) {
 
 	/*Novice::ScreenPrintf(0, 40, "%0.0f", moveEnemy_.pos.X);
 	Novice::ScreenPrintf(0, 60, "%0.0f", moveEnemy_.pos.Y);*/
-	Novice::ScreenPrintf(0, 80, "HP:%d", bulletsEnemy_.HP);
+	//Novice::ScreenPrintf(0, 80, "HP:%d", bulletsEnemy_.HP);
 	Novice::ScreenPrintf(0, 100, "time:%d", enemyBullet_->sCoolTime_);
 }

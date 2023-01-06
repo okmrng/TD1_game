@@ -82,6 +82,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	int scene = OPTION;
 
 	//画像読み込み
+	int title = Novice::LoadTexture("./Resources/Images/title.png");
 	int frame = Novice::LoadTexture("./Resources/Images/frame.png");
 	int frameSide = Novice::LoadTexture("./Resources/Images/frame_side.png");
 	int wasd = Novice::LoadTexture("./Resources/Images/wasd.png");
@@ -95,6 +96,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	int tutorialText3WASD = Novice::LoadTexture("./Resources/Images/tutorial_text3_wasd.png");
 	int tutorialText4 = Novice::LoadTexture("./Resources/Images/tutorial_text4.png");
 	int tutorialText5 = Novice::LoadTexture("./Resources/Images/tutorial_text5.png");
+	int tutorialText7 = Novice::LoadTexture("./Resources/Images/tutorial_text7.png");
 	int tutorialTextbox = Novice::LoadTexture("./Resources/Images/tutorial_textbox.png");
 	int tutorialBg = Novice::LoadTexture("./Resources/Images/bg_tutorial.png");
 
@@ -143,8 +145,24 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 				scene = MAP;
 			}
 
-			//自機
-			//player->Update(keys, option->GetterWASDStaile(), option->GetterDirectionStaile());
+			//自機の弾との当たり判定
+			//for (int i = 0; i < 15; i++) {
+			//	playerBullet_moveEnemyX_ = player->bullet_->bullet_.pos[i].X - enemy->moveEnemy_.pos[0].X;
+			//	playerBullet_moveEnemyY_ = player->bullet_->bullet_.pos[i].Y - enemy->moveEnemy_.pos[0].Y;
+			//	playerBullet_moveEnemyDis_ = sqrtf(playerBullet_moveEnemyX * playerBullet_moveEnemyX + playerBullet_moveEnemyY * playerBullet_moveEnemyY);
+
+			//	if (enemy->moveEnemy_.isAlive[0] == true) {
+			//		if (playerBullet_moveEnemyDis < player->bullet_->bullet_.radius[i] + enemy->moveEnemy_.radius[0]) {
+			//			if (player->bullet_->bullet_.isShot[i] == true) {
+			//				//enemy->MoveEnemyOnCollision(player->bullet_->bullet_.attack);
+			//				if (enemy->moveEnemy_.isAlive[0] == true) {
+			//					enemy->moveEnemy_.HP[0] -= player->bullet_->bullet_.attack;
+			//				}
+			//			}
+			//			player->bullet_->bullet_.isShot[i] = false;
+			//		}
+			//	}
+			//}
 		}
 
 		//敵
@@ -303,6 +321,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 		//タイトル
 		if (scene == TITLE) {
+			Novice::DrawSprite(0, 0, title, 1.0f, 1.0f, 0.0f, WHITE);
 			//フェード
 			fade->Draw();
 		}
@@ -318,7 +337,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		//チュートリアル
 		if (scene == TUTORIAL) {
 			tutorial->Draw(frameSide, tutorialPlate, option->GetterWASDStaile(), option->GetterDirectionStaile(), tutorialText1, tutorialText2,
-				tutorialText3Direction, tutorialText3WASD, tutorialText4, tutorialText5, tutorialTextbox, scene, tutorialBg);
+				tutorialText3Direction, tutorialText3WASD, tutorialText4, tutorialText5, tutorialText7, tutorialTextbox, scene, tutorialBg);
 
 			//自機
 			//player->Draw();

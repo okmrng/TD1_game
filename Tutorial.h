@@ -15,8 +15,8 @@ public:
 
 	//描画処理
 	void Draw(int frameSide, int Plate, bool WASDStile_, bool directionStile_, int tutorialText1, int tutorialText2,
-		int tutorialText3Direction, int tutorialText3WASD, int tutorialText4, int tutorialText5, int textBox, int scene,
-		int tutorialBg);
+		int tutorialText3Direction, int tutorialText3WASD, int tutorialText4, int tutorialText5, int textBox, int tutorialText7,
+		int scene, int tutorialBg);
 
 	//メンバ変数
 	//ステージ入場演出
@@ -47,5 +47,11 @@ public:
 
 	//自機弾発射フラグ
 	bool onPlayerShot_;
+
+	//当たり判定
+	float playerBullet_moveEnemyX_;
+	float playerBullet_moveEnemyY_;
+	float playerBullet_moveEnemyDis_;
+
 };
 
