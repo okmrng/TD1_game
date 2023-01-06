@@ -3,7 +3,7 @@
 #include "Enemy.h"
 #include "Option.h"
 #include "Fade.h"
-#include "Tutorial.h"
+#include "Admission.h"
 #define _USE_MATH_DEFINES
 #include <math.h>
 
@@ -39,8 +39,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	fade->Initialize();
 
 	//チュートリアル
-	Tutorial* tutorial = new Tutorial();
-	tutorial->Initialize();
+	Admission* admission = new Admission();
+	admission->Initialize();
 
 	//当たり判定
 	//何もしない敵
@@ -88,6 +88,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	int direction = Novice::LoadTexture("./Resources/Images/direction.png");
 	int directionYellow = Novice::LoadTexture("./Resources/Images/direction_yellow.png");
 	int tutorialPlate = Novice::LoadTexture("./Resources/Images/plate_tutorial.png");
+	int tutorialSkip = Novice::LoadTexture("./Resources/Images/tutorial_skip.png");
 
 	// ウィンドウの×ボタンが押されるまでループ
 	while (Novice::ProcessMessage() == 0) {
@@ -128,7 +129,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 		//チュートリアル
 		if (scene == TUTORIAL) {
-			tutorial->Update();
+			admission->Update();
 
 			//自機
 			player->Update(keys, option->GetterWASDStaile(), option->GetterDirectionStaile());
@@ -304,7 +305,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 		//チュートリアル
 		if (scene == TUTORIAL) {
-			tutorial->Draw(frameSide, tutorialPlate);
+			admission->Draw(frameSide, tutorialPlate, tutorialSkip);
 
 			//自機
 			//player->Draw();

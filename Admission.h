@@ -1,7 +1,7 @@
 #pragma once
 #include "Player.h"
 
-class Tutorial
+class Admission
 {
 public:
 	//メンバ関数
@@ -12,7 +12,7 @@ public:
 	void Update();
 
 	//描画処理
-	void Draw(int frameSide, int tutorialPlate);
+	void Draw(int frameSide, int Plate, int tutorialSkip);
 
 	//メンバ変数
 	//フレーム位置 
@@ -29,15 +29,36 @@ public:
 	//プレート位置
 	float plateX_;
 	float plateY_;
+	float plateX1_;
+	float plateX2_;
+	float plateX3_;
+	float plateX4_;
+	float plateX5_;
+	float plateX6_;
+
+	//プレート速度
+	float plateSpeedX_;
 
 	//イージング
-	float t_;
+	float t1_;
+	float t2_;
+	float t3_;
 	bool onEase_;
+	bool onPlateEase1_;
+	bool onPlateEase2_;
+	bool onSlowly_;
 
 	//自機位置
 	float playerY_;
 	float playerY1_;
 	float playerY2_;
+
+	//カウント
+	int plateEaseStartCount_;
+
+	//スキップフラグ
+	bool skipDirection_;
+	bool next_;
 
 	//自機
 	Player* player_;

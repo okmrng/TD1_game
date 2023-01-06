@@ -58,7 +58,7 @@
     <ClCompile Include="Fade.cpp">
       <Filter>ソース</Filter>
     </ClCompile>
-    <ClCompile Include="Tutorial.cpp">
+    <ClCompile Include="Admission.cpp">
       <Filter>ソース</Filter>
     </ClCompile>
   </ItemGroup>
@@ -162,7 +162,7 @@
     <ClInclude Include="Fade.h">
       <Filter>ヘッダー</Filter>
     </ClInclude>
-    <ClInclude Include="Tutorial.h">
+    <ClInclude Include="Admission.h">
       <Filter>ヘッダー</Filter>
     </ClInclude>
   </ItemGroup>
