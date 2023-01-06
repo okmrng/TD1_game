@@ -14,6 +14,7 @@ public:
 	//描画処理
 	void Draw(int frameSide, int Plate, int tutorialSkip);
 
+private:
 	//メンバ変数
 	//フレーム位置 
 	float frameRightX_;
