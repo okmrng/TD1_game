@@ -9,6 +9,10 @@ void Tutorial::Initialize() {
 	admission_ = new Admission();
 	admission_->Initialize();
 
+	//自機
+	player_ = new Player();
+	player_->Initialize();
+
 	//テキストフラグ
 	text_ = 1;
 	textDisplay_ = false;
@@ -22,10 +26,16 @@ void Tutorial::Initialize() {
 
 	//シーン遷移
 	next_ = false;
+
+	//自機移動フラグ
+	onPlayerMove_ = false;
+
+	//自機弾発射フラグ
+	onPlayerShot_ = false;
 }
 
 //更新処理
-void Tutorial::Update(char* keys, char* preKeys) {
+void Tutorial::Update(char* keys, char* preKeys, bool WASDStile_, bool directionStile_) {
 	//ステージ入場演出
 	admission_->Update();
 
@@ -84,11 +94,25 @@ void Tutorial::Update(char* keys, char* preKeys) {
 		if (text_ >= 1) {
 			//次のシーンへ
 			if (keys[DIK_ESCAPE] && preKeys[DIK_ESCAPE] == 0) {
+				onPlayerMove_ = true;
+				onPlayerShot_ = true;
 				next_ = true;
-				pushCount_ = 0;
 			}
 		}
+
+		//自機移動フラグ
+		if (text_ >= 3) {
+			onPlayerMove_ = true;
+		}
+
+		//自機弾発射フラグ
+		if (text_ >= 4) {
+			onPlayerShot_ = true;
+		}
 	}
+
+	//自機
+	player_->Update(keys, WASDStile_, directionStile_, onPlayerMove_, onPlayerShot_);
 }
 
 //描画処理
@@ -96,6 +120,11 @@ void Tutorial::Draw(int frameSide, int Plate, bool WASDStile_, bool directionSti
 	int tutorialText3Direction, int tutorialText3WASD, int tutorialText4) {
 	//ステージ入場演出
 	admission_->Draw(frameSide, Plate);
+
+	//自機
+	if (admission_->GetterPlayStart() == true) {
+		player_->Draw();
+	}
 
 	//テキスト
 	if (textDisplay_ == true) {

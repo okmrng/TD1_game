@@ -134,7 +134,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 		//チュートリアル
 		if (scene == TUTORIAL) {
-			tutorial->Update(keys, preKeys);
+			tutorial->Update(keys, preKeys, option->GetterWASDStaile(), option->GetterDirectionStaile());
 
 			if (tutorial->next_ == true) {
 				scene = MAP;

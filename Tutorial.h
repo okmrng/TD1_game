@@ -1,5 +1,6 @@
 #pragma once
 #include "Admission.h"
+#include "Player.h"
 
 class Tutorial
 {
@@ -9,7 +10,7 @@ public:
 	void Initialize();
 
 	//更新処理
-	void Update(char* keys, char* preKeys);
+	void Update(char* keys, char* preKeys, bool WASDStile_, bool directionStile_);
 
 	//描画処理
 	void Draw(int frameSide, int Plate, bool WASDStile_, bool directionStile_, int tutorialText1, int tutorialText2,
@@ -18,6 +19,9 @@ public:
 	//メンバ変数
 	//ステージ入場演出
 	Admission* admission_;
+
+	//自機
+	Player* player_;
 
 	//テキストフラグ
 	int text_;
@@ -32,5 +36,11 @@ public:
 
 	//シーン遷移
 	bool next_;
+
+	//自機移動フラグ
+	bool onPlayerMove_;
+
+	//自機弾発射フラグ
+	bool onPlayerShot_;
 };
 

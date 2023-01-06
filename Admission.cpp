@@ -132,7 +132,9 @@ void Admission::Draw(int frameSide, int Plate) {
 	Novice::DrawBox(0, 0, 1280, 720, 0.0f, BLACK, kFillModeSolid);
 
 	//自機
-	Novice::DrawEllipse(640, playerY_, 20, 20, 0.0f, BLUE, kFillModeSolid);
+	if (playStart_ == false) {
+		Novice::DrawEllipse(640, playerY_, 20, 20, 0.0f, BLUE, kFillModeSolid);
+	}
 
 	//右フレーム
 	Novice::DrawSprite(frameRightX_, frameRightY_, frameSide, 1.0f, 1.0f, 0.0f, WHITE);
