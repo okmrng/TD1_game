@@ -10,7 +10,7 @@ public:
 	void Initialize();
 
 	//更新処理
-	void Update();
+	void Update(int scene, int text_);
 
 	//当たり判定
 	//何もしない敵
@@ -26,7 +26,7 @@ public:
 	void BulletsEnemyOnCollision(int playerBulletAttack);
 
 	//描画処理
-	void Draw();
+	void Draw(int scene);
 
 	//メンバ変数
 	//敵構造体

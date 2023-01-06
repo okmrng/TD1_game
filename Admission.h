@@ -63,5 +63,12 @@ private:
 	int playStartCount_;
 	bool playStart_;
 	bool playStartCountStart_;
+
+	//色
+	unsigned int color_;
+	unsigned int fade_;
+
+	//フェードアウトフラグ
+	bool onFade_;
 };
 

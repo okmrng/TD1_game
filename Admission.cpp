@@ -36,6 +36,9 @@ void Admission::Initialize() {
 	playStartCount_ = 0;
 	playStart_ = false;
 	playStartCountStart_ = false;
+	color_ = 0x00000000;
+	fade_ = 0x000000FF;
+	onFade_ = false;
 }
 
 //更新処理
@@ -112,7 +115,31 @@ void Admission::Update() {
 
 		if (plateX4_ >= 1280.0f) {
 			onPlateEase2_ = false;
+			onFade_ = true;
+			//playStartCountStart_ = true;
+		}
+	}
+
+	//フェードアウト
+	if (onFade_ == true) {
+		/*if (fade_ >= 0x00000000) {
+			fade_ -= 0x00000004;
+		}
+		if (fade_ <= 0x00000000) {
+			fade_ = 0x00000000;
 			playStartCountStart_ = true;
+			onFade_ = false;
+		}*/
+		if (fade_ >= 0x00000003) {
+			fade_ -= 0x00000006;
+		}
+		if (fade_ <= 0x00000003) {
+			fade_ -= 0x00000001;
+		}
+		if (fade_ <= 0x00000000) {
+			fade_ = 0x00000000;
+			playStartCountStart_ = true;
+			onFade_ = false;
 		}
 	}
 
@@ -129,7 +156,10 @@ void Admission::Update() {
 
 //描画処理
 void Admission::Draw(int frameSide, int Plate) {
-	Novice::DrawBox(0, 0, 1280, 720, 0.0f, BLACK, kFillModeSolid);
+	//背景
+	if (playStartCountStart_ == false) {
+		Novice::DrawBox(0, 0, 1280, 720, 0.0f, color_ + fade_, kFillModeSolid);
+	}
 
 	//自機
 	if (playStart_ == false) {

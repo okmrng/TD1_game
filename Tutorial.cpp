@@ -13,6 +13,10 @@ void Tutorial::Initialize() {
 	player_ = new Player();
 	player_->Initialize();
 
+	//敵
+	enemy_ = new Enemy();
+	enemy_->Initialize();
+
 	//テキストフラグ
 	text_ = 1;
 	textDisplay_ = false;
@@ -35,7 +39,7 @@ void Tutorial::Initialize() {
 }
 
 //更新処理
-void Tutorial::Update(char* keys, char* preKeys, bool WASDStile_, bool directionStile_) {
+void Tutorial::Update(char* keys, char* preKeys, bool WASDStile_, bool directionStile_, int scene) {
 	//ステージ入場演出
 	admission_->Update();
 
@@ -89,6 +93,28 @@ void Tutorial::Update(char* keys, char* preKeys, bool WASDStile_, bool direction
 				}
 			}
 		}
+		if (text_ == 5) {
+			if (pushCount_ <= 5) {
+				pushCount_++;
+			}
+			if (pushCount_ >= 5) {
+				if (keys[DIK_RETURN] && preKeys[DIK_RETURN] == 0) {
+					text_ = 6;
+					pushCount_ = 0;
+				}
+			}
+		}
+		if (text_ == 6) {
+			/*if (pushCount_ <= 5) {
+				pushCount_++;
+			}
+			if (pushCount_ >= 7) {
+				if (keys[DIK_RETURN] && preKeys[DIK_RETURN] == 0) {
+					text_ = 5;
+					pushCount_ = 0;
+				}
+			}*/
+		}
 
 		//シーン遷移
 		if (text_ >= 1) {
@@ -101,23 +127,33 @@ void Tutorial::Update(char* keys, char* preKeys, bool WASDStile_, bool direction
 		}
 
 		//自機移動フラグ
-		if (text_ >= 3) {
-			onPlayerMove_ = true;
-		}
+		//if (text_ >= 3) {
+		//	onPlayerMove_ = true;
+		//}
 
-		//自機弾発射フラグ
-		if (text_ >= 4) {
-			onPlayerShot_ = true;
-		}
+		////自機弾発射フラグ
+		//if (text_ >= 4) {
+		//	onPlayerShot_ = true;
+		//}
 	}
 
 	//自機
 	player_->Update(keys, WASDStile_, directionStile_, onPlayerMove_, onPlayerShot_);
+
+	//敵
+	enemy_->Update(scene, text_);
 }
 
 //描画処理
 void Tutorial::Draw(int frameSide, int Plate, bool WASDStile_, bool directionStile_, int tutorialText1, int tutorialText2,
-	int tutorialText3Direction, int tutorialText3WASD, int tutorialText4) {
+	int tutorialText3Direction, int tutorialText3WASD, int tutorialText4, int tutorialText5, int textbox, int scene,
+	int tutorialBg) {
+	//背景
+	Novice::DrawSprite(325, 0, tutorialBg, 1.0f, 1.0f, 0.0f, WHITE);
+
+	//敵
+	enemy_->Draw(scene);
+
 	//ステージ入場演出
 	admission_->Draw(frameSide, Plate);
 
@@ -146,6 +182,12 @@ void Tutorial::Draw(int frameSide, int Plate, bool WASDStile_, bool directionSti
 		}
 		if (text_ == 4) {
 			Novice::DrawSprite(textX_, textY_, tutorialText4, 1.0f, 1.0f, 0.0f, WHITE);
+		}
+		if (text_ == 5) {
+			Novice::DrawSprite(textX_, textY_, tutorialText5, 1.0f, 1.0f, 0.0f, WHITE);
+		}
+		if (text_ == 6) {
+			Novice::DrawSprite(textX_, textY_, textbox, 1.0f, 1.0f, 0.0f, WHITE);
 		}
 	}
 }

@@ -94,6 +94,9 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	int tutorialText3Direction = Novice::LoadTexture("./Resources/Images/tutorial_text3_direction.png");
 	int tutorialText3WASD = Novice::LoadTexture("./Resources/Images/tutorial_text3_wasd.png");
 	int tutorialText4 = Novice::LoadTexture("./Resources/Images/tutorial_text4.png");
+	int tutorialText5 = Novice::LoadTexture("./Resources/Images/tutorial_text5.png");
+	int tutorialTextbox = Novice::LoadTexture("./Resources/Images/tutorial_textbox.png");
+	int tutorialBg = Novice::LoadTexture("./Resources/Images/bg_tutorial.png");
 
 	// ウィンドウの×ボタンが押されるまでループ
 	while (Novice::ProcessMessage() == 0) {
@@ -134,7 +137,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 		//チュートリアル
 		if (scene == TUTORIAL) {
-			tutorial->Update(keys, preKeys, option->GetterWASDStaile(), option->GetterDirectionStaile());
+			tutorial->Update(keys, preKeys, option->GetterWASDStaile(), option->GetterDirectionStaile(), scene);
 
 			if (tutorial->next_ == true) {
 				scene = MAP;
@@ -145,150 +148,150 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		}
 
 		//敵
-		enemy->Update();
+		//enemy->Update(scene);
 
 		//当たり判定
 		//何もしない敵
 		//自機との当たり判定
-		float player_enemyX = player->GetterPosX() - enemy->enemy_.pos.X;
-		float player_enemyY = player->GetterPosY() - enemy->enemy_.pos.Y;
-		float player_enemyDis = sqrtf(player_enemyX * player_enemyX + player_enemyY * player_enemyY);
+		//float player_enemyX = player->GetterPosX() - enemy->enemy_.pos.X;
+		//float player_enemyY = player->GetterPosY() - enemy->enemy_.pos.Y;
+		//float player_enemyDis = sqrtf(player_enemyX * player_enemyX + player_enemyY * player_enemyY);
 
-		if (enemy->enemy_.isAlive == true) {
-			if (player_enemyDis < player->GetterRadius() + enemy->enemy_.radius) {
-				player->OnCollision();
-			}
-		}
+		//if (enemy->enemy_.isAlive == true) {
+		//	if (player_enemyDis < player->GetterRadius() + enemy->enemy_.radius) {
+		//		player->OnCollision();
+		//	}
+		//}
 
-		//自機の弾との当たり判定
-		for (int i = 0; i < 15; i++) {
-			playerBullet_enemyX = player->bullet_->bullet_.pos[i].X - enemy->enemy_.pos.X;
-			playerBullet_enemyY = player->bullet_->bullet_.pos[i].Y - enemy->enemy_.pos.Y;
-			playerBullet_enemyDis = sqrtf(playerBullet_enemyX * playerBullet_enemyX + playerBullet_enemyY * playerBullet_enemyY);
+		////自機の弾との当たり判定
+		//for (int i = 0; i < 15; i++) {
+		//	playerBullet_enemyX = player->bullet_->bullet_.pos[i].X - enemy->enemy_.pos.X;
+		//	playerBullet_enemyY = player->bullet_->bullet_.pos[i].Y - enemy->enemy_.pos.Y;
+		//	playerBullet_enemyDis = sqrtf(playerBullet_enemyX * playerBullet_enemyX + playerBullet_enemyY * playerBullet_enemyY);
 
-			if (enemy->enemy_.isAlive == true) {
-				if (playerBullet_enemyDis < player->bullet_->bullet_.radius[i] + enemy->enemy_.radius) {
-					if (player->bullet_->bullet_.isShot[i] == true) {
-						enemy->EnemyOnCollision(player->bullet_->bullet_.attack);
-					}
-					player->bullet_->bullet_.isShot[i] = false;
-				}
-			}
-		}
+		//	if (enemy->enemy_.isAlive == true) {
+		//		if (playerBullet_enemyDis < player->bullet_->bullet_.radius[i] + enemy->enemy_.radius) {
+		//			if (player->bullet_->bullet_.isShot[i] == true) {
+		//				enemy->EnemyOnCollision(player->bullet_->bullet_.attack);
+		//			}
+		//			player->bullet_->bullet_.isShot[i] = false;
+		//		}
+		//	}
+		//}
 
-		//移動する敵
-		//自機との当たり判定
-		float player_moveEnemyX = player->GetterPosX() - enemy->moveEnemy_.pos.X;
-		float player_moveEnemyY = player->GetterPosY() - enemy->moveEnemy_.pos.Y;
-		float player_moveEnemyDis = sqrtf(player_moveEnemyX * player_moveEnemyX + player_moveEnemyY * player_moveEnemyY);
+		////移動する敵
+		////自機との当たり判定
+		//float player_moveEnemyX = player->GetterPosX() - enemy->moveEnemy_.pos.X;
+		//float player_moveEnemyY = player->GetterPosY() - enemy->moveEnemy_.pos.Y;
+		//float player_moveEnemyDis = sqrtf(player_moveEnemyX * player_moveEnemyX + player_moveEnemyY * player_moveEnemyY);
 
-		if (enemy->moveEnemy_.isAlive == true) {
-			if (player_moveEnemyDis < player->GetterRadius() + enemy->moveEnemy_.radius) {
-				player->OnCollision();
-			}
-		}
+		//if (enemy->moveEnemy_.isAlive == true) {
+		//	if (player_moveEnemyDis < player->GetterRadius() + enemy->moveEnemy_.radius) {
+		//		player->OnCollision();
+		//	}
+		//}
 
-		//自機の弾との当たり判定
-		for (int i = 0; i < 15; i++) {
-			playerBullet_moveEnemyX = player->bullet_->bullet_.pos[i].X - enemy->moveEnemy_.pos.X;
-			playerBullet_moveEnemyY = player->bullet_->bullet_.pos[i].Y - enemy->moveEnemy_.pos.Y;
-			playerBullet_moveEnemyDis = sqrtf(playerBullet_moveEnemyX * playerBullet_moveEnemyX + playerBullet_moveEnemyY * playerBullet_moveEnemyY);
+		////自機の弾との当たり判定
+		//for (int i = 0; i < 15; i++) {
+		//	playerBullet_moveEnemyX = player->bullet_->bullet_.pos[i].X - enemy->moveEnemy_.pos.X;
+		//	playerBullet_moveEnemyY = player->bullet_->bullet_.pos[i].Y - enemy->moveEnemy_.pos.Y;
+		//	playerBullet_moveEnemyDis = sqrtf(playerBullet_moveEnemyX * playerBullet_moveEnemyX + playerBullet_moveEnemyY * playerBullet_moveEnemyY);
 
-			if (enemy->moveEnemy_.isAlive == true) {
-				if (playerBullet_moveEnemyDis < player->bullet_->bullet_.radius[i] + enemy->moveEnemy_.radius) {
-					if (player->bullet_->bullet_.isShot[i] == true) {
-						enemy->MoveEnemyOnCollision(player->bullet_->bullet_.attack);
-					}
-					player->bullet_->bullet_.isShot[i] = false;
-				}
-			}
-		}
+		//	if (enemy->moveEnemy_.isAlive == true) {
+		//		if (playerBullet_moveEnemyDis < player->bullet_->bullet_.radius[i] + enemy->moveEnemy_.radius) {
+		//			if (player->bullet_->bullet_.isShot[i] == true) {
+		//				enemy->MoveEnemyOnCollision(player->bullet_->bullet_.attack);
+		//			}
+		//			player->bullet_->bullet_.isShot[i] = false;
+		//		}
+		//	}
+		//}
 
-		//弾を撃つ敵
-		//自機との当たり判定
-		float player_bulletEnemyX = player->GetterPosX() - enemy->bulletEnemy_.pos.X;
-		float player_bulletEnemyY = player->GetterPosY() - enemy->bulletEnemy_.pos.Y;
-		float player_bulletEnemyDis = sqrtf(player_bulletEnemyX * player_bulletEnemyX + player_bulletEnemyY * player_bulletEnemyY);
+		////弾を撃つ敵
+		////自機との当たり判定
+		//float player_bulletEnemyX = player->GetterPosX() - enemy->bulletEnemy_.pos.X;
+		//float player_bulletEnemyY = player->GetterPosY() - enemy->bulletEnemy_.pos.Y;
+		//float player_bulletEnemyDis = sqrtf(player_bulletEnemyX * player_bulletEnemyX + player_bulletEnemyY * player_bulletEnemyY);
 
-		if (enemy->bulletEnemy_.isAlive == true) {
-			if (player_bulletEnemyDis < player->GetterRadius() + enemy->bulletEnemy_.radius) {
-				player->OnCollision();
-			}
-		}
+		//if (enemy->bulletEnemy_.isAlive == true) {
+		//	if (player_bulletEnemyDis < player->GetterRadius() + enemy->bulletEnemy_.radius) {
+		//		player->OnCollision();
+		//	}
+		//}
 
-		//自機の弾との当たり判定
-		for (int i = 0; i < 15; i++) {
-			playerBullet_bulletEnemyX = player->bullet_->bullet_.pos[i].X - enemy->bulletEnemy_.pos.X;
-			playerBullet_bulletEnemyY = player->bullet_->bullet_.pos[i].Y - enemy->bulletEnemy_.pos.Y;
-			playerBullet_bulletEnemyDis = sqrtf(playerBullet_bulletEnemyX * playerBullet_bulletEnemyX + playerBullet_bulletEnemyY * playerBullet_bulletEnemyY);
+		////自機の弾との当たり判定
+		//for (int i = 0; i < 15; i++) {
+		//	playerBullet_bulletEnemyX = player->bullet_->bullet_.pos[i].X - enemy->bulletEnemy_.pos.X;
+		//	playerBullet_bulletEnemyY = player->bullet_->bullet_.pos[i].Y - enemy->bulletEnemy_.pos.Y;
+		//	playerBullet_bulletEnemyDis = sqrtf(playerBullet_bulletEnemyX * playerBullet_bulletEnemyX + playerBullet_bulletEnemyY * playerBullet_bulletEnemyY);
 
-			if (enemy->bulletEnemy_.isAlive == true) {
-				if (playerBullet_bulletEnemyDis < player->bullet_->bullet_.radius[i] + enemy->bulletEnemy_.radius) {
-					if (player->bullet_->bullet_.isShot[i] == true) {
-						enemy->BulletEnemyOnCollision(player->bullet_->bullet_.attack);
-					}
-					player->bullet_->bullet_.isShot[i] = false;
-				}
-			}
-		}
+		//	if (enemy->bulletEnemy_.isAlive == true) {
+		//		if (playerBullet_bulletEnemyDis < player->bullet_->bullet_.radius[i] + enemy->bulletEnemy_.radius) {
+		//			if (player->bullet_->bullet_.isShot[i] == true) {
+		//				enemy->BulletEnemyOnCollision(player->bullet_->bullet_.attack);
+		//			}
+		//			player->bullet_->bullet_.isShot[i] = false;
+		//		}
+		//	}
+		//}
 
-		//敵の弾と自機の当たり判定
-		float enemyBullet_playerX = enemy->enemyBullet_->enemyBullet_.pos.X - player->GetterPosX();
-		float enemyBullet_playerY = enemy->enemyBullet_->enemyBullet_.pos.Y - player->GetterPosY();
-		float enemyBullet_playerDis = sqrtf(enemyBullet_playerX * enemyBullet_playerX + enemyBullet_playerY * enemyBullet_playerY);
+		////敵の弾と自機の当たり判定
+		//float enemyBullet_playerX = enemy->enemyBullet_->enemyBullet_.pos.X - player->GetterPosX();
+		//float enemyBullet_playerY = enemy->enemyBullet_->enemyBullet_.pos.Y - player->GetterPosY();
+		//float enemyBullet_playerDis = sqrtf(enemyBullet_playerX * enemyBullet_playerX + enemyBullet_playerY * enemyBullet_playerY);
 
-		if (enemy->bulletEnemy_.isAlive == true) {
-			if (enemyBullet_playerDis < player->GetterRadius() + enemy->enemyBullet_->enemyBullet_.radius) {
-				if (player->GetterOnCollision() == false) {
-					enemy->enemyBullet_->OnCollition();
-				}
-				player->OnCollision();
-			}
-		}
+		//if (enemy->bulletEnemy_.isAlive == true) {
+		//	if (enemyBullet_playerDis < player->GetterRadius() + enemy->enemyBullet_->enemyBullet_.radius) {
+		//		if (player->GetterOnCollision() == false) {
+		//			enemy->enemyBullet_->OnCollition();
+		//		}
+		//		player->OnCollision();
+		//	}
+		//}
 
-		//複数弾を撃つ敵
-		//自機との当たり判定
-		float player_bulletsEnemyX = player->GetterPosX() - enemy->bulletsEnemy_.pos.X;
-		float player_bulletsEnemyY = player->GetterPosY() - enemy->bulletsEnemy_.pos.Y;
-		float player_bulletsEnemyDis = sqrtf(player_bulletsEnemyX * player_bulletsEnemyX + player_bulletsEnemyY * player_bulletsEnemyY);
+		////複数弾を撃つ敵
+		////自機との当たり判定
+		//float player_bulletsEnemyX = player->GetterPosX() - enemy->bulletsEnemy_.pos.X;
+		//float player_bulletsEnemyY = player->GetterPosY() - enemy->bulletsEnemy_.pos.Y;
+		//float player_bulletsEnemyDis = sqrtf(player_bulletsEnemyX * player_bulletsEnemyX + player_bulletsEnemyY * player_bulletsEnemyY);
 
-		if (enemy->bulletsEnemy_.isAlive == true) {
-			if (player_bulletsEnemyDis < player->GetterRadius() + enemy->bulletsEnemy_.radius) {
-				player->OnCollision();
-			}
-		}
+		//if (enemy->bulletsEnemy_.isAlive == true) {
+		//	if (player_bulletsEnemyDis < player->GetterRadius() + enemy->bulletsEnemy_.radius) {
+		//		player->OnCollision();
+		//	}
+		//}
 
-		//自機の弾との当たり判定
-		for (int i = 0; i < 15; i++) {
-			playerBullet_bulletsEnemyX = player->bullet_->bullet_.pos[i].X - enemy->bulletsEnemy_.pos.X;
-			playerBullet_bulletsEnemyY = player->bullet_->bullet_.pos[i].Y - enemy->bulletsEnemy_.pos.Y;
-			playerBullet_bulletsEnemyDis = sqrtf(playerBullet_bulletsEnemyX * playerBullet_bulletsEnemyX + playerBullet_bulletsEnemyY * playerBullet_bulletsEnemyY);
+		////自機の弾との当たり判定
+		//for (int i = 0; i < 15; i++) {
+		//	playerBullet_bulletsEnemyX = player->bullet_->bullet_.pos[i].X - enemy->bulletsEnemy_.pos.X;
+		//	playerBullet_bulletsEnemyY = player->bullet_->bullet_.pos[i].Y - enemy->bulletsEnemy_.pos.Y;
+		//	playerBullet_bulletsEnemyDis = sqrtf(playerBullet_bulletsEnemyX * playerBullet_bulletsEnemyX + playerBullet_bulletsEnemyY * playerBullet_bulletsEnemyY);
 
-			if (enemy->bulletsEnemy_.isAlive == true) {
-				if (playerBullet_bulletsEnemyDis < player->bullet_->bullet_.radius[i] + enemy->bulletsEnemy_.radius) {
-					if (player->bullet_->bullet_.isShot[i] == true) {
-						enemy->BulletsEnemyOnCollision(player->bullet_->bullet_.attack);
-					}
-					player->bullet_->bullet_.isShot[i] = false;
-				}
-			}
-		}
+		//	if (enemy->bulletsEnemy_.isAlive == true) {
+		//		if (playerBullet_bulletsEnemyDis < player->bullet_->bullet_.radius[i] + enemy->bulletsEnemy_.radius) {
+		//			if (player->bullet_->bullet_.isShot[i] == true) {
+		//				enemy->BulletsEnemyOnCollision(player->bullet_->bullet_.attack);
+		//			}
+		//			player->bullet_->bullet_.isShot[i] = false;
+		//		}
+		//	}
+		//}
 
-		//敵の弾と自機の当たり判定
-		for (int i = 0; i < 10; i++) {
-			enemyBullets_playerX = enemy->enemyBullet_->enemyBullets_.pos[i].X - player->GetterPosX();
-			enemyBullets_playerY = enemy->enemyBullet_->enemyBullets_.pos[i].Y - player->GetterPosY();
-			enemyBullets_playerDis = sqrtf(enemyBullets_playerX * enemyBullets_playerX + enemyBullets_playerY * enemyBullets_playerY);
+		////敵の弾と自機の当たり判定
+		//for (int i = 0; i < 10; i++) {
+		//	enemyBullets_playerX = enemy->enemyBullet_->enemyBullets_.pos[i].X - player->GetterPosX();
+		//	enemyBullets_playerY = enemy->enemyBullet_->enemyBullets_.pos[i].Y - player->GetterPosY();
+		//	enemyBullets_playerDis = sqrtf(enemyBullets_playerX * enemyBullets_playerX + enemyBullets_playerY * enemyBullets_playerY);
 
-			if (enemy->bulletsEnemy_.isAlive == true) {
-				if (enemyBullets_playerDis < player->GetterRadius() + enemy->enemyBullet_->enemyBullets_.radius[i]) {
-					if (player->GetterOnCollision() == false) {
-						enemy->enemyBullet_->enemyBullets_.isShot[i] = false;
-					}
-					player->OnCollision();
-				}
-			}
-		}
+		//	if (enemy->bulletsEnemy_.isAlive == true) {
+		//		if (enemyBullets_playerDis < player->GetterRadius() + enemy->enemyBullet_->enemyBullets_.radius[i]) {
+		//			if (player->GetterOnCollision() == false) {
+		//				enemy->enemyBullet_->enemyBullets_.isShot[i] = false;
+		//			}
+		//			player->OnCollision();
+		//		}
+		//	}
+		//}
 
 		///
 		/// ↑更新処理ここまで
@@ -310,12 +313,12 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		}
 
 		//敵
-		enemy->Draw();
+		//enemy->Draw();
 
 		//チュートリアル
 		if (scene == TUTORIAL) {
 			tutorial->Draw(frameSide, tutorialPlate, option->GetterWASDStaile(), option->GetterDirectionStaile(), tutorialText1, tutorialText2,
-				tutorialText3Direction, tutorialText3WASD, tutorialText4);
+				tutorialText3Direction, tutorialText3WASD, tutorialText4, tutorialText5, tutorialTextbox, scene, tutorialBg);
 
 			//自機
 			//player->Draw();
