@@ -15,8 +15,8 @@ public:
 
 	//描画処理
 	void Draw(int frameSide, int Plate, bool WASDStile_, bool directionStile_, int tutorialText1, int tutorialText2,
-		int tutorialText3Direction, int tutorialText3WASD, int tutorialText4, int tutorialText5, int textBox, int tutorialText7,
-		int scene, int tutorialBg);
+		int tutorialText3Direction, int tutorialText3WASD, int tutorialText4, int tutorialText5, int tutorialText7, int textBox,
+		int tutorialText9, int tutorialText10Direction, int tutorialText10WASD, int scene, int tutorialBg);
 
 	//メンバ変数
 	//ステージ入場演出
@@ -27,6 +27,15 @@ public:
 
 	//敵
 	Enemy* enemy_;
+
+	//弾
+	int shotTime_;
+	bool isEnemyShot_[5];
+	bool isEnemyMove_[5];
+	float enemyBulletX_[5];
+	float enemyBulletY_[5];
+	float enemyBulletR_[5];
+	float enmeyBulletSpeed_;
 
 	//テキストフラグ
 	int text_;
@@ -47,6 +56,9 @@ public:
 
 	//自機弾発射フラグ
 	bool onPlayerShot_;
+
+	//ボムフラグ
+	bool onBomb_;
 
 	//当たり判定
 	float playerBullet_moveEnemyX_;

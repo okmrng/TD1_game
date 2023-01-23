@@ -78,8 +78,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		CLEAR
 	};
 
-	//int scene = TITLE;
-	int scene = OPTION;
+	int scene = TITLE;
+	//int scene = TUTORIAL;
 
 	//画像読み込み
 	int title = Novice::LoadTexture("./Resources/Images/title.png");
@@ -97,6 +97,9 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	int tutorialText4 = Novice::LoadTexture("./Resources/Images/tutorial_text4.png");
 	int tutorialText5 = Novice::LoadTexture("./Resources/Images/tutorial_text5.png");
 	int tutorialText7 = Novice::LoadTexture("./Resources/Images/tutorial_text7.png");
+	int tutorialText9 = Novice::LoadTexture("./Resources/Images/tutorial_text9.png");
+	int tutorialText10Direction = Novice::LoadTexture("./Resources/Images/tutorial_text10_direction.png");
+	int tutorialText10WASD = Novice::LoadTexture("./Resources/Images/tutorial_text10_wasd.png");
 	int tutorialTextbox = Novice::LoadTexture("./Resources/Images/tutorial_textbox.png");
 	int tutorialBg = Novice::LoadTexture("./Resources/Images/bg_tutorial.png");
 
@@ -337,7 +340,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		//チュートリアル
 		if (scene == TUTORIAL) {
 			tutorial->Draw(frameSide, tutorialPlate, option->GetterWASDStaile(), option->GetterDirectionStaile(), tutorialText1, tutorialText2,
-				tutorialText3Direction, tutorialText3WASD, tutorialText4, tutorialText5, tutorialText7, tutorialTextbox, scene, tutorialBg);
+				tutorialText3Direction, tutorialText3WASD, tutorialText4, tutorialText5, tutorialText7, tutorialTextbox, 
+				tutorialText9, tutorialText10Direction, tutorialText10WASD, scene, tutorialBg);
 
 			//自機
 			//player->Draw();

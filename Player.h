@@ -10,7 +10,7 @@ public:
 	void Initialize();
 
 	//更新処理
-	void Update(char* keys, bool WASDStile_, bool directionStile_, bool onPlayerMove_, bool onPlayerShot_);
+	void Update(char* keys, char* preKeys, bool WASDStile_, bool directionStile_, bool onPlayerMove_, bool onPlayerShot_, bool onBomb_);
 
 	//当たり判定
 	void OnCollision();
@@ -25,6 +25,10 @@ public:
 	bool GetterisAlive() { return player_.isAlive; }
 	int GetterHP() { return player_.HP; }
 	bool GetterOnCollision() { return onCollision_; }
+	bool GetterShotBomb() { return shotBomb_; }
+
+	//セッター関数
+	void SetterBombs(int bombs);
 
 	//メンバ変数
 	//弾
@@ -42,5 +46,24 @@ private:
 
 	//当たり判定が働いたときに立つフラグ
 	bool onCollision_;
+
+	//ボム個数
+	int bombs_;
+
+	int bombPushCount_;
+
+	//ボム発動フラグ
+	bool shotBomb_;
+
+	//ボムfalseタイム
+	//int offBombCount_;
+
+	//ボム色
+	unsigned int bombColor_;
+	unsigned int bombFade_;
+
+	//ボムフェードスタート
+	bool onBombFade_;
+	bool offBombFade_;
 };
 

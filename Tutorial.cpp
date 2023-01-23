@@ -13,9 +13,26 @@ void Tutorial::Initialize() {
 	player_ = new Player();
 	player_->Initialize();
 
+	player_->SetterBombs(1);
+
 	//敵
 	enemy_ = new Enemy();
 	enemy_->Initialize();
+
+	//弾
+	shotTime_ = 0;
+	for (int i = 0; i < 5; i++) {
+		isEnemyShot_[i] = false;
+		isEnemyMove_[i] = true;
+		enemyBulletY_[i] = -8.0f;
+		enemyBulletR_[i] = 15.0f;
+		enmeyBulletSpeed_ = 10.0f;
+	}
+	enemyBulletX_[0] = 560.0f;
+	enemyBulletX_[1] = 600.0f;
+	enemyBulletX_[2] = 640.0f;
+	enemyBulletX_[3] = 680.0f;
+	enemyBulletX_[4] = 720.0f;
 
 	//テキストフラグ
 	text_ = 1;
@@ -36,6 +53,9 @@ void Tutorial::Initialize() {
 
 	//自機弾発射フラグ
 	onPlayerShot_ = false;
+
+	//ボムフラグ
+	onBomb_ = false;
 }
 
 //更新処理
@@ -115,6 +135,51 @@ void Tutorial::Update(char* keys, char* preKeys, bool WASDStile_, bool direction
 			}
 		}
 		if (text_ == 8) {
+			if (shotTime_ <= 45) {
+				shotTime_++;
+			}
+			for (int i = 0; i < 5; i++) {
+				if (shotTime_ >= 45) {
+					isEnemyShot_[i] = true;
+				}
+
+				if (isEnemyShot_[i] == true) {
+					if (isEnemyMove_[i] == true) {
+						enemyBulletY_[i] += enmeyBulletSpeed_;
+
+						if (enemyBulletY_[i] >= 600.0f) {
+							isEnemyMove_[i] = false;
+						}
+					}
+				}
+
+				if (isEnemyMove_[i] == false) {
+					text_ = 9;
+				}
+			}
+		}
+
+		if (text_ == 9) {
+			if (pushCount_ <= 5) {
+				pushCount_++;
+			}
+			if (pushCount_ >= 5) {
+				if (keys[DIK_RETURN] && preKeys[DIK_RETURN] == 0) {
+					text_ = 10;
+					pushCount_ = 0;
+				}
+			}
+		}
+
+		if (text_ == 10) {
+			for (int i = 0; i < 5; i++) {
+				if (isEnemyShot_[i] == false) {
+					text_ = 11;
+				}
+			}
+		}
+
+		if (text_ == 11) {
 
 		}
 
@@ -137,10 +202,23 @@ void Tutorial::Update(char* keys, char* preKeys, bool WASDStile_, bool direction
 		if (text_ >= 7) {
 			onPlayerShot_ = true;
 		}
+
+		if (text_ >= 10) {
+			onBomb_ = true;
+		}
 	}
 
 	//自機
-	player_->Update(keys, WASDStile_, directionStile_, onPlayerMove_, onPlayerShot_);
+	player_->Update(keys, preKeys, WASDStile_, directionStile_, onPlayerMove_, onPlayerShot_, onBomb_);
+
+	//ボム
+	if (player_->GetterShotBomb() == true) {
+		for (int i = 0; i < 5; i++) {
+			if (isEnemyShot_[i] == true) {
+				isEnemyShot_[i] = false;
+			}
+		}
+	}
 
 	//敵
 	enemy_->Update(scene, text_);
@@ -169,12 +247,19 @@ void Tutorial::Update(char* keys, char* preKeys, bool WASDStile_, bool direction
 //描画処理
 void Tutorial::Draw(int frameSide, int Plate, bool WASDStile_, bool directionStile_, int tutorialText1, int tutorialText2,
 	int tutorialText3Direction, int tutorialText3WASD, int tutorialText4, int tutorialText5, int tutorialText7, int textbox,
-	int scene, int tutorialBg) {
+	int tutorialText9, int tutorialText10Direction, int tutorialText10WASD, int scene, int tutorialBg) {
 	//背景
 	Novice::DrawSprite(325, 0, tutorialBg, 1.0f, 1.0f, 0.0f, WHITE);
 
 	//敵
 	enemy_->Draw(scene);
+
+	//弾
+	for (int i = 0; i < 5; i++) {
+		if (isEnemyShot_[i] == true) {
+			Novice::DrawEllipse(enemyBulletX_[i], enemyBulletY_[i], enemyBulletR_[i], enemyBulletR_[i], 0.0f, RED, kFillModeSolid);
+		}
+	}
 
 	//ステージ入場演出
 	admission_->Draw(frameSide, Plate);
@@ -196,10 +281,16 @@ void Tutorial::Draw(int frameSide, int Plate, bool WASDStile_, bool directionSti
 			if (text_ == 3) {
 				Novice::DrawSprite(textX_, textY_, tutorialText3Direction, 1.0f, 1.0f, 0.0f, WHITE);
 			}
+			if (text_ == 10) {
+				Novice::DrawSprite(textX_, textY_, tutorialText10Direction, 1.0f, 1.0f, 0.0f, WHITE);
+			}
 		}
 		if (WASDStile_ == true) {
 			if (text_ == 3) {
 				Novice::DrawSprite(textX_, textY_, tutorialText3WASD, 1.0f, 1.0f, 0.0f, WHITE);
+			}
+			if (text_ == 10) {
+				Novice::DrawSprite(textX_, textY_, tutorialText10WASD, 1.0f, 1.0f, 0.0f, WHITE);
 			}
 		}
 		if (text_ == 4) {
@@ -216,6 +307,9 @@ void Tutorial::Draw(int frameSide, int Plate, bool WASDStile_, bool directionSti
 		}
 		if (text_ == 8) {
 			Novice::DrawSprite(textX_, textY_, textbox, 1.0f, 1.0f, 0.0f, WHITE);
+		}
+		if (text_ == 9) {
+			Novice::DrawSprite(textX_, textY_, tutorialText9, 1.0f, 1.0f, 0.0f, WHITE);
 		}
 	}
 	Novice::ScreenPrintf(0, 80, "HP:%d", enemy_->moveEnemy_.HP[0]);
