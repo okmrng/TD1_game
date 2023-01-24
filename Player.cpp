@@ -15,6 +15,10 @@ void Player::Initialize() {
 	collisionCount_ = 0;
 	onCollision_ = false;
 
+	//ボム
+	bombParticle_ = new BombParticle();
+	bombParticle_->Initialize();
+
 	//ボム個数
 	bombs_ = 0;
 
@@ -24,7 +28,7 @@ void Player::Initialize() {
 	shotBomb_ = false;
 
 	//ボムfalseフラグ
-	//offBombCount_ = 0;
+	offBombCount_ = 0;
 
 	//ボム色
 	bombColor_ = 0xafeeee00;
@@ -32,7 +36,9 @@ void Player::Initialize() {
 
 	//ボムフェードスタート
 	onBombFade_ = false;
-	offBombFade_ = false;
+
+	//ボム弾
+	onBombShot_ = false;
 
 	//弾
 	bullet_ = new PlayerBullet();
@@ -138,58 +144,69 @@ void Player::Update(char* keys, char* preKeys, bool WASDStile_, bool directionSt
 				}
 			}
 
-			//ボム
-			if (onBomb_ == true) {
-				if (bombPushCount_ <= 5) {
-					bombPushCount_++;
-				}
-				//ボム発動
-				if (bombs_ > 0) {
-					if (shotBomb_ == false) {
-						if (bombPushCount_ >= 5) {
-							//WASD
-							if (WASDStile_ == true) {
-								if (keys[DIK_M] && preKeys[DIK_M] == 0) {
-									onBombFade_ = true;
-									shotBomb_ = true;
-									bombs_ -= 1;
-								}
-							}
+			bullet_->Update();
+		}
 
-							//方向キー
-							if (directionStile_ == true) {
-								if (keys[DIK_Z] && preKeys[DIK_Z] == 0) {
-									onBombFade_ = true;
-									shotBomb_ = true;
-									bombs_ -= 1;
-								}
-							}
-						}
-					}
-
-					/*if (shotBomb_ == true) {
-						offBombCount_++;
-
-						if (offBombCount_ >= 5) {
-							shotBomb_ = false;
-						}
-					}*/
-				}
-
-				if (onBombFade_ == true) {
-					if (bombFade_ <= 0x000000FF) {
-						bombFade_ += 0x00000040;
-					}
-					if (bombFade_ >= 0x000000FF) {
-						offBombFade_ = true;
-						onBombFade_ = false;
-						shotBomb_ = false;
-					}
-				}
-				else { bombFade_ = 0x00000000; }
+		//ボム
+		if (onBomb_ == true) {
+			if (bombPushCount_ <= 5) {
+				bombPushCount_++;
 			}
 
-			bullet_->Update();
+			//ボム発動
+			if (bombs_ > 0) {
+				if (shotBomb_ == false) {
+					if (bombPushCount_ >= 5) {
+						//WASD
+						if (WASDStile_ == true) {
+							if (keys[DIK_M] && preKeys[DIK_M] == 0) {
+								onBombFade_ = true;
+								shotBomb_ = true;
+								bombs_ -= 1;
+							}
+						}
+
+						//方向キー
+						if (directionStile_ == true) {
+							if (keys[DIK_Z] && preKeys[DIK_Z] == 0) {
+								onBombFade_ = true;
+								shotBomb_ = true;
+								bombs_ -= 1;
+							}
+						}
+					}
+
+					//offBombCount_ = 0; 
+					bombParticle_->collisionY_ = 690.0f;
+					bombParticle_->emitterY_ = 600.0f;
+					bombParticle_->t_ = 0.0f;
+				}
+			}
+
+			if (onBombFade_ == true) {
+				if (bombFade_ <= 0x000000FF) {
+					bombFade_ += 0x00000040;
+				}
+				if (bombFade_ >= 0x000000FF) {
+					onBombShot_ = true;
+					onBombFade_ = false;
+				}
+			}
+			else { bombFade_ = 0x00000000; }
+
+			if (onBombShot_ == true) {
+				bombParticle_->Update();
+
+				if (bombParticle_->emitterY_ <= -900.0f) {
+					onBombShot_ = false;
+					shotBomb_ = false;
+				}
+			}
+			else {
+				/*bombParticle_->collisionY_ = 690.0f;
+				bombParticle_->emitterY_ = 600.0f;
+				bombParticle_->t_ = 0.0f;*/
+			}
 		}
 
 		//無敵時間を減らす
@@ -236,6 +253,8 @@ void Player::Draw() {
 
 	bullet_->Draw();
 
-	Novice::ScreenPrintf(0, 20, "%0x", bombFade_);
+	bombParticle_->Draw();
+
+	Novice::ScreenPrintf(0, 20, "%d", offBombCount_);
 	Novice::ScreenPrintf(0, 40, "%d", bombs_);
 }

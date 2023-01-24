@@ -2,6 +2,9 @@
 #include "Struct.h"
 #include "EnemyBullet.h"
 
+/// <summary>
+/// “G
+/// </summary>
 class Enemy
 {
 public:

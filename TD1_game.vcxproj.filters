@@ -64,6 +64,9 @@
     <ClCompile Include="Tutorial.cpp">
       <Filter>ソース</Filter>
     </ClCompile>
+    <ClCompile Include="BombParticle.cpp">
+      <Filter>ソース</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="C:\KamataEngine\DirectXGame\audio\Audio.h">
@@ -169,6 +172,9 @@
       <Filter>ヘッダー</Filter>
     </ClInclude>
     <ClInclude Include="Tutorial.h">
+      <Filter>ヘッダー</Filter>
+    </ClInclude>
+    <ClInclude Include="BombParticle.h">
       <Filter>ヘッダー</Filter>
     </ClInclude>
   </ItemGroup>

@@ -3,6 +3,9 @@
 #include "Player.h"
 #include "Enemy.h"
 
+/// <summary>
+/// チュートリアル
+/// </summary>
 class Tutorial
 {
 public:

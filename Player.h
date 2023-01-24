@@ -1,21 +1,41 @@
 #pragma once
 #include "Struct.h"
 #include "PlayerBullet.h"
+#include "BombParticle.h"
 
+/// <summary>
+/// 自機
+/// </summary>
 class Player
 {
 public:
 	//メンバ関数
-	//初期化
+	
+	/// <summary>
+	/// 初期化
+	/// </summary>
 	void Initialize();
 
-	//更新処理
+	/// <summary>
+	/// 更新処理
+	/// </summary>
+	/// <param name="keys"></param>
+	/// <param name="preKeys"></param>
+	/// <param name="WASDStile_"></param>
+	/// <param name="directionStile_"></param>
+	/// <param name="onPlayerMove_"></param>
+	/// <param name="onPlayerShot_"></param>
+	/// <param name="onBomb_"></param>
 	void Update(char* keys, char* preKeys, bool WASDStile_, bool directionStile_, bool onPlayerMove_, bool onPlayerShot_, bool onBomb_);
 
-	//当たり判定
+	/// <summary>
+	/// 当たり判定
+	/// </summary>
 	void OnCollision();
 
-	//描画処理
+	/// <summary>
+	/// 描画処理
+	/// </summary>
 	void Draw();
 
 	//ゲッター関数
@@ -33,6 +53,9 @@ public:
 	//メンバ変数
 	//弾
 	PlayerBullet* bullet_;
+
+	//ボム
+	BombParticle* bombParticle_;
 
 private:
 	//自機構造体
@@ -55,15 +78,16 @@ private:
 	//ボム発動フラグ
 	bool shotBomb_;
 
-	//ボムfalseタイム
-	//int offBombCount_;
-
 	//ボム色
 	unsigned int bombColor_;
 	unsigned int bombFade_;
 
 	//ボムフェードスタート
 	bool onBombFade_;
-	bool offBombFade_;
+
+	//ボム弾
+	bool onBombShot_;
+
+	bool offBombCount_;
 };
 

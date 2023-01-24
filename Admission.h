@@ -1,5 +1,8 @@
 #pragma once
 
+/// <summary>
+/// ステージ入場演出
+/// </summary>
 class Admission
 {
 public:
