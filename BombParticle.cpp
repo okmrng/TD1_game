@@ -133,8 +133,9 @@ void BombParticle::Update() {
 }
 
 //ï`âÊèàóù
-void BombParticle::Draw() {
-	Novice::DrawBox(emitterX_, emitterY_, emitterW_, emitterH_, 0.0f, BLACK, kFillModeWireFrame);
+void BombParticle::Draw(int bombBullet) {
+	//Novice::DrawBox(emitterX_, emitterY_, emitterW_, emitterH_, 0.0f, BLACK, kFillModeWireFrame);
+	Novice::DrawSprite(collisionX_ - 60.0f, collisionY_ - 60.0f, bombBullet, 1, 1, 0.0f, WHITE);
 
 	for (int i = 0; i < particleMax_; i++) {
 		if (isActive_2[i] == true) {
@@ -149,7 +150,8 @@ void BombParticle::Draw() {
 		}
 	}
 
-	Novice::DrawEllipse(collisionX_, collisionY_, collisionR_, collisionR_, 0.0f, BLACK, kFillModeWireFrame);
+	//Novice::DrawEllipse(collisionX_, collisionY_, collisionR_, collisionR_, 0.0f, BLACK, kFillModeWireFrame);
+	//Novice::SetBlendMode(BlendMode::kBlendModeAdd);
 	//Novice::SetBlendMode(BlendMode::kBlendModeNone);
 
 	Novice::ScreenPrintf(0, 500, "%d", emitterY_);

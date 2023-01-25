@@ -36,7 +36,7 @@ public:
 	/// <summary>
 	/// •`‰æˆ—
 	/// </summary>
-	void Draw();
+	void Draw(int bombBullet);
 
 	//ƒQƒbƒ^[ŠÖ”
 	float GetterPosX() { return player_.pos.X; }

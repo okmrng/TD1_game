@@ -19,6 +19,10 @@ void Tutorial::Initialize() {
 	enemy_ = new Enemy();
 	enemy_->Initialize();
 
+	//ƒNƒŠƒA‰‰o
+	clear_ = new Clear();
+	clear_-> Initialize();
+
 	//’e
 	shotTime_ = 0;
 	for (int i = 0; i < 5; i++) {
@@ -174,13 +178,58 @@ void Tutorial::Update(char* keys, char* preKeys, bool WASDStile_, bool direction
 		if (text_ == 10) {
 			for (int i = 0; i < 5; i++) {
 				if (isEnemyShot_[i] == false) {
-					text_ = 11;
+					if (player_->GetterShotBomb() == false) {
+						text_ = 11;
+					}					
 				}
 			}
 		}
 
 		if (text_ == 11) {
+			if (pushCount_ <= 5) {
+				pushCount_++;
+			}
+			if (pushCount_ >= 5) {
+				if (keys[DIK_RETURN] && preKeys[DIK_RETURN] == 0) {
+					text_ = 12;
+					pushCount_ = 0;
+				}
+			}
+		}
 
+		if (text_ == 12) {
+			if (pushCount_ <= 5) {
+				pushCount_++;
+			}
+			if (pushCount_ >= 5) {
+				if (keys[DIK_RETURN] && preKeys[DIK_RETURN] == 0) {
+					text_ = 13;
+					pushCount_ = 0;
+				}
+			}
+		}
+
+		if (text_ == 13) {
+			if (pushCount_ <= 5) {
+				pushCount_++;
+			}
+			if (pushCount_ >= 5) {
+				if (keys[DIK_RETURN] && preKeys[DIK_RETURN] == 0) {
+					text_ = 14;
+					pushCount_ = 0;
+				}
+			}
+		}
+
+		if (text_ == 14) {
+			if (pushCount_ <= 5) {
+				pushCount_++;
+			}
+			if (pushCount_ >= 5) {
+				if (keys[DIK_RETURN] && preKeys[DIK_RETURN] == 0) {
+					next_ = true;
+				}
+			}
 		}
 
 		//ƒV[ƒ“‘JˆÚ
@@ -189,6 +238,7 @@ void Tutorial::Update(char* keys, char* preKeys, bool WASDStile_, bool direction
 			if (keys[DIK_ESCAPE] && preKeys[DIK_ESCAPE] == 0) {
 				onPlayerMove_ = true;
 				onPlayerShot_ = true;
+				onBomb_ = true;
 				next_ = true;
 			}
 		}
@@ -247,7 +297,8 @@ void Tutorial::Update(char* keys, char* preKeys, bool WASDStile_, bool direction
 //•`‰æˆ—
 void Tutorial::Draw(int frameSide, int Plate, bool WASDStile_, bool directionStile_, int tutorialText1, int tutorialText2,
 	int tutorialText3Direction, int tutorialText3WASD, int tutorialText4, int tutorialText5, int tutorialText7, int textbox,
-	int tutorialText9, int tutorialText10Direction, int tutorialText10WASD, int scene, int tutorialBg) {
+	int tutorialText9, int tutorialText10Direction, int tutorialText10WASD, int tutorialText11, int tutorialText12,
+	int tutorialText13, int tutorialText14, int scene, int tutorialBg,int bombBullet) {
 	//”wŒi
 	Novice::DrawSprite(325, 0, tutorialBg, 1.0f, 1.0f, 0.0f, WHITE);
 
@@ -266,7 +317,7 @@ void Tutorial::Draw(int frameSide, int Plate, bool WASDStile_, bool directionSti
 
 	//Ž©‹@
 	if (admission_->GetterPlayStart() == true) {
-		player_->Draw();
+		player_->Draw(bombBullet);
 	}
 
 	//ƒeƒLƒXƒg
@@ -310,6 +361,18 @@ void Tutorial::Draw(int frameSide, int Plate, bool WASDStile_, bool directionSti
 		}
 		if (text_ == 9) {
 			Novice::DrawSprite(textX_, textY_, tutorialText9, 1.0f, 1.0f, 0.0f, WHITE);
+		}
+		if (text_ == 11) {
+			Novice::DrawSprite(textX_, textY_, tutorialText11, 1.0f, 1.0f, 0.0f, WHITE);
+		}
+		if (text_ == 12) {
+			Novice::DrawSprite(textX_, textY_, tutorialText12, 1.0f, 1.0f, 0.0f, WHITE);
+		}
+		if (text_ == 13) {
+			Novice::DrawSprite(textX_, textY_, tutorialText13, 1.0f, 1.0f, 0.0f, WHITE);
+		}
+		if (text_ == 14) {
+			Novice::DrawSprite(textX_, textY_, tutorialText14, 1.0f, 1.0f, 0.0f, WHITE);
 		}
 	}
 	Novice::ScreenPrintf(0, 80, "HP:%d", enemy_->moveEnemy_.HP[0]);

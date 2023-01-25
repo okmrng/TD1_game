@@ -90,6 +90,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	int direction = Novice::LoadTexture("./Resources/Images/direction.png");
 	int directionYellow = Novice::LoadTexture("./Resources/Images/direction_yellow.png");
 	int tutorialPlate = Novice::LoadTexture("./Resources/Images/plate_tutorial.png");
+	int clearPlate = Novice::LoadTexture("./Resources/Images/plate_clear.png");
 	int tutorialText1 = Novice::LoadTexture("./Resources/Images/tutorial_text1.png");
 	int tutorialText2 = Novice::LoadTexture("./Resources/Images/tutorial_text2.png");
 	int tutorialText3Direction = Novice::LoadTexture("./Resources/Images/tutorial_text3_direction.png");
@@ -100,8 +101,13 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	int tutorialText9 = Novice::LoadTexture("./Resources/Images/tutorial_text9.png");
 	int tutorialText10Direction = Novice::LoadTexture("./Resources/Images/tutorial_text10_direction.png");
 	int tutorialText10WASD = Novice::LoadTexture("./Resources/Images/tutorial_text10_wasd.png");
+	int tutorialText11 = Novice::LoadTexture("./Resources/Images/tutorial_text11.png");
+	int tutorialText12 = Novice::LoadTexture("./Resources/Images/tutorial_text12.png");
+	int tutorialText13 = Novice::LoadTexture("./Resources/Images/tutorial_text13.png");
+	int tutorialText14 = Novice::LoadTexture("./Resources/Images/tutorial_text14.png");
 	int tutorialTextbox = Novice::LoadTexture("./Resources/Images/tutorial_textbox.png");
 	int tutorialBg = Novice::LoadTexture("./Resources/Images/bg_tutorial.png");
+	int bombBullet = Novice::LoadTexture("./Resources/Images/bombBullet.png");
 
 	// ウィンドウの×ボタンが押されるまでループ
 	while (Novice::ProcessMessage() == 0) {
@@ -340,8 +346,9 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		//チュートリアル
 		if (scene == TUTORIAL) {
 			tutorial->Draw(frameSide, tutorialPlate, option->GetterWASDStaile(), option->GetterDirectionStaile(), tutorialText1, tutorialText2,
-				tutorialText3Direction, tutorialText3WASD, tutorialText4, tutorialText5, tutorialText7, tutorialTextbox, 
-				tutorialText9, tutorialText10Direction, tutorialText10WASD, scene, tutorialBg);
+				tutorialText3Direction, tutorialText3WASD, tutorialText4, tutorialText5, tutorialText7, tutorialTextbox,
+				tutorialText9, tutorialText10Direction, tutorialText10WASD, tutorialText11, tutorialText12, tutorialText13,
+				tutorialText14, scene, tutorialBg, bombBullet);
 
 			//自機
 			//player->Draw();

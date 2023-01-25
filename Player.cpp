@@ -202,11 +202,6 @@ void Player::Update(char* keys, char* preKeys, bool WASDStile_, bool directionSt
 					shotBomb_ = false;
 				}
 			}
-			else {
-				/*bombParticle_->collisionY_ = 690.0f;
-				bombParticle_->emitterY_ = 600.0f;
-				bombParticle_->t_ = 0.0f;*/
-			}
 		}
 
 		//–³“GŽžŠÔ‚ðŒ¸‚ç‚·
@@ -244,7 +239,7 @@ void Player::OnCollision() {
 }
 
 //•`‰æˆ—
-void Player::Draw() {
+void Player::Draw(int bombBullet) {
 	if (player_.isAlive == true) {
 		Novice::DrawEllipse(player_.pos.X, player_.pos.Y, player_.radius, player_.radius, 0.0f, color_, kFillModeSolid);
 	}
@@ -253,7 +248,9 @@ void Player::Draw() {
 
 	bullet_->Draw();
 
-	bombParticle_->Draw();
+	if (shotBomb_ == true) {
+		bombParticle_->Draw(bombBullet);
+	}
 
 	Novice::ScreenPrintf(0, 20, "%d", offBombCount_);
 	Novice::ScreenPrintf(0, 40, "%d", bombs_);
