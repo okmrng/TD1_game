@@ -50,7 +50,7 @@ public:
 	void Draw(int frameSide, int Plate, bool WASDStile_, bool directionStile_, int tutorialText1, int tutorialText2,
 		int tutorialText3Direction, int tutorialText3WASD, int tutorialText4, int tutorialText5, int tutorialText7, int textBox,
 		int tutorialText9, int tutorialText10Direction, int tutorialText10WASD, int tutorialText11, int tutorialText12, 
-		int tutorialText13, int tutorialText14, int scene, int tutorialBg,int bombBullet);
+		int tutorialText13, int tutorialText14, int scene, int tutorialBg,int bombBullet, int clearPlate);
 
 	//メンバ変数
 	//ステージ入場演出
@@ -64,6 +64,7 @@ public:
 
 	//クリア演出
 	Clear* clear_;
+	bool isClear_;
 
 	//弾
 	int shotTime_;

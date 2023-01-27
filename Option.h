@@ -17,6 +17,9 @@ public:
 	bool GetterDirectionStaile() { return directionStile_; }
 	bool GetterNext() { return next_; }
 
+	//セッター関数
+	void SetterNext(bool next);
+
 private:
 	//メンバ変数
 	//WASD操作

@@ -4,6 +4,7 @@
 #include "Option.h"
 #include "Fade.h"
 #include "Tutorial.h"
+#include "Clear.h"
 #define _USE_MATH_DEFINES
 #include <math.h>
 
@@ -41,6 +42,10 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	//チュートリアル
 	Tutorial* tutorial = new Tutorial();
 	tutorial->Initialize();
+
+	//クリア演出
+	Clear* clear = new Clear();
+	clear->Initialize();
 
 	//当たり判定
 	//何もしない敵
@@ -153,25 +158,6 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 			if (tutorial->next_ == true) {
 				scene = MAP;
 			}
-
-			//自機の弾との当たり判定
-			//for (int i = 0; i < 15; i++) {
-			//	playerBullet_moveEnemyX_ = player->bullet_->bullet_.pos[i].X - enemy->moveEnemy_.pos[0].X;
-			//	playerBullet_moveEnemyY_ = player->bullet_->bullet_.pos[i].Y - enemy->moveEnemy_.pos[0].Y;
-			//	playerBullet_moveEnemyDis_ = sqrtf(playerBullet_moveEnemyX * playerBullet_moveEnemyX + playerBullet_moveEnemyY * playerBullet_moveEnemyY);
-
-			//	if (enemy->moveEnemy_.isAlive[0] == true) {
-			//		if (playerBullet_moveEnemyDis < player->bullet_->bullet_.radius[i] + enemy->moveEnemy_.radius[0]) {
-			//			if (player->bullet_->bullet_.isShot[i] == true) {
-			//				//enemy->MoveEnemyOnCollision(player->bullet_->bullet_.attack);
-			//				if (enemy->moveEnemy_.isAlive[0] == true) {
-			//					enemy->moveEnemy_.HP[0] -= player->bullet_->bullet_.attack;
-			//				}
-			//			}
-			//			player->bullet_->bullet_.isShot[i] = false;
-			//		}
-			//	}
-			//}
 		}
 
 		//敵
@@ -348,11 +334,15 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 			tutorial->Draw(frameSide, tutorialPlate, option->GetterWASDStaile(), option->GetterDirectionStaile(), tutorialText1, tutorialText2,
 				tutorialText3Direction, tutorialText3WASD, tutorialText4, tutorialText5, tutorialText7, tutorialTextbox,
 				tutorialText9, tutorialText10Direction, tutorialText10WASD, tutorialText11, tutorialText12, tutorialText13,
-				tutorialText14, scene, tutorialBg, bombBullet);
+				tutorialText14, scene, tutorialBg, bombBullet, clearPlate);
 
 			//自機
 			//player->Draw();
 		}
+
+		if (scene == MAP) {
+			Novice::ScreenPrintf(0, 0, "MAP");
+		}else{ Novice::ScreenPrintf(0, 0, "ooooooooucpin"); }
 		
 		///
 		/// ↑描画処理ここまで

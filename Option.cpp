@@ -104,6 +104,11 @@ void Option::Update(char* keys, char* preKeys) {
 	}
 }
 
+//セッター関数
+void Option::SetterNext(bool next) {
+	next_ = next;
+}
+
 //描画処理
 void Option::Draw(int wasd, int wasdYellow, int direction, int directionYellow) {
 	//背景

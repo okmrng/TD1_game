@@ -22,6 +22,7 @@ void Tutorial::Initialize() {
 	//クリア演出
 	clear_ = new Clear();
 	clear_-> Initialize();
+	isClear_ = false;
 
 	//弾
 	shotTime_ = 0;
@@ -227,7 +228,8 @@ void Tutorial::Update(char* keys, char* preKeys, bool WASDStile_, bool direction
 			}
 			if (pushCount_ >= 5) {
 				if (keys[DIK_RETURN] && preKeys[DIK_RETURN] == 0) {
-					next_ = true;
+					text_ = 15;
+					isClear_ = true;
 				}
 			}
 		}
@@ -239,14 +241,23 @@ void Tutorial::Update(char* keys, char* preKeys, bool WASDStile_, bool direction
 				onPlayerMove_ = true;
 				onPlayerShot_ = true;
 				onBomb_ = true;
-				next_ = true;
+				isClear_ = true;
 			}
 		}
 
+		//クリア演出
+		if (isClear_ == true) {
+			clear_->Update();
+		}
+
+		if (clear_->GetterNext() == true) {
+			next_ = true;
+		}
+
 		//自機移動フラグ
-		//if (text_ >= 3) {
-		//	onPlayerMove_ = true;
-		//}
+		if (text_ >= 15) {
+			onPlayerMove_ = true;
+		}
 
 		//自機弾発射フラグ
 		if (text_ >= 7) {
@@ -282,7 +293,6 @@ void Tutorial::Update(char* keys, char* preKeys, bool WASDStile_, bool direction
 		if (enemy_->moveEnemy_.isAlive[0] == true) {
 			if (playerBullet_moveEnemyDis_ < 20.0f) {
 				if (player_->bullet_->bullet_.isShot[i] == true) {
-					//enemy->MoveEnemyOnCollision(player->bullet_->bullet_.attack);
 					if (enemy_->moveEnemy_.isAlive[0] == true) {
 						enemy_->moveEnemy_.HP[0] -= player_->bullet_->bullet_.attack;
 						enemy_->moveEnemy_.color[0] = RED;
@@ -298,7 +308,7 @@ void Tutorial::Update(char* keys, char* preKeys, bool WASDStile_, bool direction
 void Tutorial::Draw(int frameSide, int Plate, bool WASDStile_, bool directionStile_, int tutorialText1, int tutorialText2,
 	int tutorialText3Direction, int tutorialText3WASD, int tutorialText4, int tutorialText5, int tutorialText7, int textbox,
 	int tutorialText9, int tutorialText10Direction, int tutorialText10WASD, int tutorialText11, int tutorialText12,
-	int tutorialText13, int tutorialText14, int scene, int tutorialBg,int bombBullet) {
+	int tutorialText13, int tutorialText14, int scene, int tutorialBg,int bombBullet, int clearPlate) {
 	//背景
 	Novice::DrawSprite(325, 0, tutorialBg, 1.0f, 1.0f, 0.0f, WHITE);
 
@@ -375,5 +385,13 @@ void Tutorial::Draw(int frameSide, int Plate, bool WASDStile_, bool directionSti
 			Novice::DrawSprite(textX_, textY_, tutorialText14, 1.0f, 1.0f, 0.0f, WHITE);
 		}
 	}
-	Novice::ScreenPrintf(0, 80, "HP:%d", enemy_->moveEnemy_.HP[0]);
+
+	//クリア演出
+	clear_->Draw(clearPlate);
+	if (next_ == false) {
+		Novice::ScreenPrintf(0, 80, "false");
+	}
+	if (next_ == true) {
+		Novice::ScreenPrintf(0, 80, "true");
+	}
 }
