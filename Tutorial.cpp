@@ -52,6 +52,8 @@ void Tutorial::Initialize() {
 
 	//シーン遷移
 	next_ = false;
+	nextTime_ = 0;
+	pushEsc_ = false;
 
 	//自機移動フラグ
 	onPlayerMove_ = false;
@@ -61,6 +63,15 @@ void Tutorial::Initialize() {
 
 	//ボムフラグ
 	onBomb_ = false;
+
+	//幕
+	iCTime_ = 0;
+	inCurtain_ = false;
+	curtainX_ = 0.0f;
+	curtainY_ = -1280.0f;
+	curtainY1_ = -1280.0f;
+	curtainY2_ = 0.0f;
+	curtainT_ = 0.0f;
 }
 
 //更新処理
@@ -241,8 +252,42 @@ void Tutorial::Update(char* keys, char* preKeys, bool WASDStile_, bool direction
 				onPlayerMove_ = true;
 				onPlayerShot_ = true;
 				onBomb_ = true;
-				isClear_ = true;
+				pushEsc_ = true;
 			}
+		}
+
+		//幕
+	    //幕が下がるまでのカウント
+		if (pushEsc_ == true) {
+			if (iCTime_ <= 30) {
+				iCTime_++;
+			}
+			if (iCTime_ >= 30) {
+				inCurtain_ = true;
+			}
+		}
+
+		if (inCurtain_ == true) {
+			if (curtainT_ < 1.0f) {
+				curtainT_ += 1.0f / 30.0f;
+			}
+			if (curtainT_ >= 1.0f) {
+				curtainT_ = 1.0f;
+			}
+
+			float curtainEasedT_ = sqrt(1.0f - pow(curtainT_ - 1.0f, 2.0f));
+
+			curtainY_ = (1.0f - curtainEasedT_) * curtainY1_ + curtainEasedT_ * curtainY2_;
+		}
+
+		//シーン遷移
+		if (curtainY_ >= curtainY2_) {
+			if (nextTime_ < 30) {
+				nextTime_++;
+			}
+		}
+		if (nextTime_ == 30) {
+			next_ = true;
 		}
 
 		//クリア演出
@@ -270,35 +315,37 @@ void Tutorial::Update(char* keys, char* preKeys, bool WASDStile_, bool direction
 	}
 
 	//自機
-	player_->Update(keys, preKeys, WASDStile_, directionStile_, onPlayerMove_, onPlayerShot_, onBomb_);
+	if (isClear_ != true) {
+		player_->Update(keys, preKeys, WASDStile_, directionStile_, onPlayerMove_, onPlayerShot_, onBomb_);
+
+		//敵
+		enemy_->Update(scene, text_);
+
+		//自機の弾との当たり判定
+		for (int i = 0; i < 15; i++) {
+			playerBullet_moveEnemyX_ = player_->bullet_->bullet_.pos[i].X - enemy_->moveEnemy_.pos[0].X;
+			playerBullet_moveEnemyY_ = player_->bullet_->bullet_.pos[i].Y - enemy_->moveEnemy_.pos[0].Y;
+			playerBullet_moveEnemyDis_ = sqrtf(playerBullet_moveEnemyX_ * playerBullet_moveEnemyX_ + playerBullet_moveEnemyY_ * playerBullet_moveEnemyY_);
+
+			if (enemy_->moveEnemy_.isAlive[0] == true) {
+				if (playerBullet_moveEnemyDis_ < 20.0f) {
+					if (player_->bullet_->bullet_.isShot[i] == true) {
+						if (enemy_->moveEnemy_.isAlive[0] == true) {
+							enemy_->moveEnemy_.HP[0] -= player_->bullet_->bullet_.attack;
+							enemy_->moveEnemy_.color[0] = RED;
+						}
+					}
+					player_->bullet_->bullet_.isShot[i] = false;
+				}
+			}
+		}
+	}
 
 	//ボム
 	if (player_->GetterShotBomb() == true) {
 		for (int i = 0; i < 5; i++) {
 			if (isEnemyShot_[i] == true) {
 				isEnemyShot_[i] = false;
-			}
-		}
-	}
-
-	//敵
-	enemy_->Update(scene, text_);
-
-	//自機の弾との当たり判定
-	for (int i = 0; i < 15; i++) {
-		playerBullet_moveEnemyX_ = player_->bullet_->bullet_.pos[i].X - enemy_->moveEnemy_.pos[0].X;
-		playerBullet_moveEnemyY_ = player_->bullet_->bullet_.pos[i].Y - enemy_->moveEnemy_.pos[0].Y;
-		playerBullet_moveEnemyDis_ = sqrtf(playerBullet_moveEnemyX_ * playerBullet_moveEnemyX_ + playerBullet_moveEnemyY_ * playerBullet_moveEnemyY_);
-
-		if (enemy_->moveEnemy_.isAlive[0] == true) {
-			if (playerBullet_moveEnemyDis_ < 20.0f) {
-				if (player_->bullet_->bullet_.isShot[i] == true) {
-					if (enemy_->moveEnemy_.isAlive[0] == true) {
-						enemy_->moveEnemy_.HP[0] -= player_->bullet_->bullet_.attack;
-						enemy_->moveEnemy_.color[0] = RED;
-					}
-				}
-				player_->bullet_->bullet_.isShot[i] = false;
 			}
 		}
 	}
@@ -385,6 +432,9 @@ void Tutorial::Draw(int frameSide, int Plate, bool WASDStile_, bool directionSti
 			Novice::DrawSprite(textX_, textY_, tutorialText14, 1.0f, 1.0f, 0.0f, WHITE);
 		}
 	}
+
+	//幕
+	Novice::DrawBox(curtainX_, curtainY_, 1280.0f, 720.0f, 0.0f, BLACK, kFillModeSolid);
 
 	//クリア演出
 	clear_->Draw(clearPlate);

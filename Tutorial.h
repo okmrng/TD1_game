@@ -88,6 +88,8 @@ public:
 
 	//シーン遷移
 	bool next_;
+	int nextTime_;
+	bool pushEsc_;
 
 	//自機移動フラグ
 	bool onPlayerMove_;
@@ -102,4 +104,13 @@ public:
 	float playerBullet_moveEnemyX_;
 	float playerBullet_moveEnemyY_;
 	float playerBullet_moveEnemyDis_;
+
+	//幕
+	int iCTime_;      ///inCurtainがtrueになるまでの時間
+	bool inCurtain_;  ///幕が下がるフラグ
+	float curtainX_;
+	float curtainY_;  ///初期位置
+	float curtainY1_; ///初期位置
+	float curtainY2_; ///最後の位置
+	float curtainT_;
 };
