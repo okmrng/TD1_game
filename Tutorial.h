@@ -51,7 +51,7 @@ public:
 		int tutorialText3Direction, int tutorialText3WASD, int tutorialText4, int tutorialText5, int tutorialText7, int textBox,
 		int tutorialText9, int tutorialText10Direction, int tutorialText10WASD, int tutorialText11, int tutorialText12, 
 		int tutorialText13, int tutorialText14, int scene, int tutorialBg,int bombBullet, int clearPlate, int playerWASD,
-		int playerDirection, int playerCore);
+		int playerDirection, int playerCore, int playerBullet, int enemyTutorial, int enemyBulletTutorial);
 
 	//メンバ変数
 	//ステージ入場演出

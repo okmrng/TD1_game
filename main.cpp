@@ -117,6 +117,9 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	int playerWASD = Novice::LoadTexture("./Resources/Images/playerWASD.png");
 	int playerDirection = Novice::LoadTexture("./Resources/Images/playerDirection.png");
 	int playerCore = Novice::LoadTexture("./Resources/Images/player_core.png");
+	int playerBullet = Novice::LoadTexture("./Resources/Images/playerBullet.png");
+	int enemyTutorial = Novice::LoadTexture("./Resources/Images/enemy_tutorial.png");
+	int enemyBulletTutorial = Novice::LoadTexture("./Resources/Images/enemyBullet_tutorial.png");
 
 	// ウィンドウの×ボタンが押されるまでループ
 	while (Novice::ProcessMessage() == 0) {
@@ -339,7 +342,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 			tutorial->Draw(frameRight, frameLeft, tutorialPlate, option->GetterWASDStaile(), option->GetterDirectionStaile(), tutorialText1, tutorialText2,
 				tutorialText3Direction, tutorialText3WASD, tutorialText4, tutorialText5, tutorialText7, tutorialTextbox,
 				tutorialText9, tutorialText10Direction, tutorialText10WASD, tutorialText11, tutorialText12, tutorialText13,
-				tutorialText14, scene, tutorialBg, bombBullet, clearPlate, playerWASD, playerDirection, playerCore);
+				tutorialText14, scene, tutorialBg, bombBullet, clearPlate, playerWASD, playerDirection, playerCore, playerBullet,
+				enemyTutorial, enemyBulletTutorial);
 
 			//自機
 			//player->Draw();

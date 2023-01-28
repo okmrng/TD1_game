@@ -29,14 +29,11 @@ void PlayerBullet::Update() {
 }
 
 //•`‰æˆ—
-void PlayerBullet::Draw() {
+void PlayerBullet::Draw(int playerBullet) {
 	for (int i = 0; i < 15; i++) {
 		if (bullet_.isShot[i] == true) {
-			Novice::DrawEllipse(bullet_.pos[i].X, bullet_.pos[i].Y, bullet_.radius[i], bullet_.radius[i], 0.0f, RED, kFillModeSolid);
+			//Novice::DrawEllipse(bullet_.pos[i].X, bullet_.pos[i].Y, bullet_.radius[i], bullet_.radius[i], 0.0f, RED, kFillModeSolid);
+			Novice::DrawSprite(bullet_.pos[i].X - 8, bullet_.pos[i].Y - 8, playerBullet, 1, 1, 0.0f, WHITE);
 		}
 	}
-
-	/*Novice::ScreenPrintf(0, 0, "%d", bullet_.isShot);
-	Novice::ScreenPrintf(0, 20, "%0.0f", bullet_.pos.X);
-	Novice::ScreenPrintf(0, 40, "%0.0f", bullet_.pos.Y);*/
 }

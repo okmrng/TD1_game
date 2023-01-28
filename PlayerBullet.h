@@ -12,7 +12,7 @@ public:
 	void Update();
 
 	//•`‰æˆ—
-	void Draw();
+	void Draw(int playerBullet);
 
 	//ƒƒ“ƒo•Ï”
 	//’e\‘¢‘Ì

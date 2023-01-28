@@ -20,7 +20,7 @@ void Enemy::Initialize() {
 	moveEnemy_.radius[0] = 20.0f;
 	moveEnemy_.speed[0].X = 5.0f;
 	moveEnemy_.speed[0].Y = 3.0f;
-	moveEnemy_.color[0] = BLACK;
+	moveEnemy_.color[0] = WHITE;
 
 	//’P”­’e‚ğŒ‚‚Â“G
 	bulletEnemy_.HP[0] = 100;
@@ -152,7 +152,7 @@ void Enemy::BulletsEnemyOnCollision(int playerBulletAttack) {/*
 }
 
 //•`‰æˆ—
-void Enemy::Draw(int scene) {
+void Enemy::Draw(int scene,int enemyTutorial) {
 	//‰½‚à‚µ‚È‚¢“G
 	/*if (enemy_.isAlive == true) {
 		Novice::DrawEllipse(enemy_.pos.X, enemy_.pos.Y, enemy_.radius, enemy_.radius, 0.0f, WHITE, kFillModeSolid);
@@ -162,7 +162,8 @@ void Enemy::Draw(int scene) {
 	if (scene == 2) {
 		for (int i = 0; i < 1; i++) {
 			if (moveEnemy_.isAlive[0] == true) {
-				Novice::DrawEllipse(moveEnemy_.pos[0].X, moveEnemy_.pos[0].Y, moveEnemy_.radius[0], moveEnemy_.radius[0], 0.0f, moveEnemy_.color[0], kFillModeSolid);
+				//Novice::DrawEllipse(moveEnemy_.pos[0].X, moveEnemy_.pos[0].Y, moveEnemy_.radius[0], moveEnemy_.radius[0], 0.0f, moveEnemy_.color[0], kFillModeSolid);
+				Novice::DrawSprite(moveEnemy_.pos[0].X - 20, moveEnemy_.pos[0].Y - 20, enemyTutorial, 1, 1, 0.0f, moveEnemy_.color[0]);
 			}
 		}
 	}

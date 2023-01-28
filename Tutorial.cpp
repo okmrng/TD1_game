@@ -335,6 +335,7 @@ void Tutorial::Update(char* keys, char* preKeys, bool WASDStile_, bool direction
 							enemy_->moveEnemy_.color[0] = RED;
 						}
 					}
+					else { enemy_->moveEnemy_.color[0] = WHITE; }
 					player_->bullet_->bullet_.isShot[i] = false;
 				}
 			}
@@ -356,22 +357,23 @@ void Tutorial::Draw(int frameRight, int frameLeft, int Plate, bool WASDStile_, b
 	int tutorialText3Direction, int tutorialText3WASD, int tutorialText4, int tutorialText5, int tutorialText7, int textBox,
 	int tutorialText9, int tutorialText10Direction, int tutorialText10WASD, int tutorialText11, int tutorialText12,
 	int tutorialText13, int tutorialText14, int scene, int tutorialBg, int bombBullet, int clearPlate, int playerWASD,
-	int playerDirection, int playerCore) {
+	int playerDirection, int playerCore, int playerBullet, int enemyTutorial, int enemyBulletTutorial) {
 	//”wŒi
 	Novice::DrawSprite(325, 0, tutorialBg, 1.0f, 1.0f, 0.0f, WHITE);
 
 	//“G
-	enemy_->Draw(scene);
+	enemy_->Draw(scene, enemyTutorial);
 
 	//Ž©‹@
 	if (admission_->GetterPlayStart() == true) {
-		player_->Draw(bombBullet, WASDStile_, directionStile_, playerWASD, playerDirection, playerCore);
+		player_->Draw(bombBullet, WASDStile_, directionStile_, playerWASD, playerDirection, playerCore, playerBullet);
 	}
 
 	//’e
 	for (int i = 0; i < 5; i++) {
 		if (isEnemyShot_[i] == true) {
-			Novice::DrawEllipse(enemyBulletX_[i], enemyBulletY_[i], enemyBulletR_[i], enemyBulletR_[i], 0.0f, RED, kFillModeSolid);
+			//Novice::DrawEllipse(enemyBulletX_[i], enemyBulletY_[i], enemyBulletR_[i], enemyBulletR_[i], 0.0f, RED, kFillModeSolid);
+			Novice::DrawSprite(enemyBulletX_[i] - 15, enemyBulletY_[i] - 15, enemyBulletTutorial, 1, 1, 0.0f, WHITE);
 		}
 	}
 

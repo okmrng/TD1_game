@@ -239,9 +239,9 @@ void Player::OnCollision() {
 }
 
 //•`‰æˆ—
-void Player::Draw(int bombBullet, bool WASDStile_, bool directionStile_, int playerWASD, int playerDirection, int playerCore) {
+void Player::Draw(int bombBullet, bool WASDStile_, bool directionStile_, int playerWASD, int playerDirection, int playerCore, int playerBullet) {
 	//’e
-	bullet_->Draw();
+	bullet_->Draw(playerBullet);
 
 	if (player_.isAlive == true) {
 		//Ž©‹@

@@ -36,7 +36,7 @@ public:
 	/// <summary>
 	/// •`‰æˆ—
 	/// </summary>
-	void Draw(int bombBullet, bool WASDStile_, bool directionStile_, int playerWASD, int playerDirection, int playerCore);
+	void Draw(int bombBullet, bool WASDStile_, bool directionStile_, int playerWASD, int playerDirection, int playerCore, int playerBullet);
 
 	//ƒQƒbƒ^[ŠÖ”
 	float GetterPosX() { return player_.pos.X; }
