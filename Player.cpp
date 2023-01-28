@@ -5,10 +5,10 @@
 void Player::Initialize() {
 	//Ž©‹@
 	player_.pos.X = 640.0f;
-	player_.pos.Y = 660.0f;
+	player_.pos.Y = 668.0f;
 	player_.speed.X = 8.0f;
 	player_.speed.Y = 8.0f;
-	player_.radius = 20.0f;
+	player_.radius = 12.0f;
 	player_.isAlive = true;
 	player_.HP = 3;
 	color_ = BLUE;
@@ -136,7 +136,7 @@ void Player::Update(char* keys, char* preKeys, bool WASDStile_, bool directionSt
 						if (bullet_->bullet_.isShot[i] == false) {
 							bullet_->bullet_.isShot[i] = true;
 							bullet_->bullet_.pos[i].X = player_.pos.X;
-							bullet_->bullet_.pos[i].Y = player_.pos.Y;
+							bullet_->bullet_.pos[i].Y = player_.pos.Y - 50.0f;
 
 							break;
 						}
@@ -239,14 +239,25 @@ void Player::OnCollision() {
 }
 
 //•`‰æˆ—
-void Player::Draw(int bombBullet) {
+void Player::Draw(int bombBullet, bool WASDStile_, bool directionStile_, int playerWASD, int playerDirection, int playerCore) {
+	//’e
+	bullet_->Draw();
+
 	if (player_.isAlive == true) {
-		Novice::DrawEllipse(player_.pos.X, player_.pos.Y, player_.radius, player_.radius, 0.0f, color_, kFillModeSolid);
+		//Ž©‹@
+		if (WASDStile_ == true) {
+			Novice::DrawSprite(player_.pos.X - 33, player_.pos.Y - 65, playerWASD, 1, 1, 0.0f, WHITE);
+		}
+		if (directionStile_ == true) {
+			Novice::DrawSprite(player_.pos.X - 33, player_.pos.Y - 65, playerDirection, 1, 1, 0.0f, WHITE);
+		}
+
+		//Ž©‹@“–‚½‚è”»’è
+		//Novice::DrawEllipse(player_.pos.X, player_.pos.Y, player_.radius, player_.radius, 0.0f, color_, kFillModeSolid);
+		Novice::DrawSprite(player_.pos.X - 13, player_.pos.Y - 13, playerCore, 1, 1, 0.0f, WHITE);
 	}
 
 	Novice::DrawBox(325.0f, 0.0f, 630.0f, 720.0f, 0.0f, bombColor_ + bombFade_, kFillModeSolid);
-
-	bullet_->Draw();
 
 	if (shotBomb_ == true) {
 		bombParticle_->Draw(bombBullet);

@@ -89,7 +89,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	//画像読み込み
 	int title = Novice::LoadTexture("./Resources/Images/title.png");
 	int frame = Novice::LoadTexture("./Resources/Images/frame.png");
-	int frameSide = Novice::LoadTexture("./Resources/Images/frame_side.png");
+	int frameRight = Novice::LoadTexture("./Resources/Images/frame_right.png");
+	int frameLeft = Novice::LoadTexture("./Resources/Images/frame_left.png");
 	int wasd = Novice::LoadTexture("./Resources/Images/wasd.png");
 	int wasdYellow = Novice::LoadTexture("./Resources/Images/wasd_yellow.png");
 	int direction = Novice::LoadTexture("./Resources/Images/direction.png");
@@ -113,6 +114,9 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	int tutorialTextbox = Novice::LoadTexture("./Resources/Images/tutorial_textbox.png");
 	int tutorialBg = Novice::LoadTexture("./Resources/Images/bg_tutorial.png");
 	int bombBullet = Novice::LoadTexture("./Resources/Images/bombBullet.png");
+	int playerWASD = Novice::LoadTexture("./Resources/Images/playerWASD.png");
+	int playerDirection = Novice::LoadTexture("./Resources/Images/playerDirection.png");
+	int playerCore = Novice::LoadTexture("./Resources/Images/player_core.png");
 
 	// ウィンドウの×ボタンが押されるまでループ
 	while (Novice::ProcessMessage() == 0) {
@@ -331,10 +335,11 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 		//チュートリアル
 		if (scene == TUTORIAL) {
-			tutorial->Draw(frameSide, tutorialPlate, option->GetterWASDStaile(), option->GetterDirectionStaile(), tutorialText1, tutorialText2,
+
+			tutorial->Draw(frameRight, frameLeft, tutorialPlate, option->GetterWASDStaile(), option->GetterDirectionStaile(), tutorialText1, tutorialText2,
 				tutorialText3Direction, tutorialText3WASD, tutorialText4, tutorialText5, tutorialText7, tutorialTextbox,
 				tutorialText9, tutorialText10Direction, tutorialText10WASD, tutorialText11, tutorialText12, tutorialText13,
-				tutorialText14, scene, tutorialBg, bombBullet, clearPlate);
+				tutorialText14, scene, tutorialBg, bombBullet, clearPlate, playerWASD, playerDirection, playerCore);
 
 			//自機
 			//player->Draw();

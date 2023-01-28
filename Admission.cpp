@@ -31,7 +31,7 @@ void Admission::Initialize() {
 	onSlowly_ = false;
 	playerY_ = 740.0f;
 	playerY1_ = 740.0f;
-	playerY2_ = 660.0f;
+	playerY2_ = 668.0f;
 	plateEaseStartCount_ = 0;
 	playStartCount_ = 0;
 	playStart_ = false;
@@ -155,7 +155,7 @@ void Admission::Update() {
 }
 
 //描画処理
-void Admission::Draw(int frameSide, int Plate) {
+void Admission::Draw(int frameRight, int frameLeft, int Plate, bool WASDStile_, bool directionStile_, int playerWASD, int playerDirection, int playerCore) {
 	//背景
 	if (playStartCountStart_ == false) {
 		Novice::DrawBox(0, 0, 1280, 720, 0.0f, color_ + fade_, kFillModeSolid);
@@ -163,14 +163,21 @@ void Admission::Draw(int frameSide, int Plate) {
 
 	//自機
 	if (playStart_ == false) {
-		Novice::DrawEllipse(640, playerY_, 20, 20, 0.0f, BLUE, kFillModeSolid);
+		if (WASDStile_ == true) {
+			Novice::DrawSprite(607, playerY_ - 65, playerWASD, 1, 1, 0.0f, WHITE);
+		}
+		if (directionStile_ == true) {
+			Novice::DrawSprite(607, playerY_ - 65, playerDirection, 1, 1, 0.0f, WHITE);
+		}
+		//Novice::DrawEllipse(648, playerY_, 12, 12, 0.0f, BLUE, kFillModeSolid);
+		Novice::DrawSprite(627, playerY_ - 13, playerCore, 1, 1, 0.0f, WHITE);
 	}
 
 	//右フレーム
-	Novice::DrawSprite(frameRightX_, frameRightY_, frameSide, 1.0f, 1.0f, 0.0f, WHITE);
+	Novice::DrawSprite(frameRightX_, frameRightY_, frameRight, 1.0f, 1.0f, 0.0f, WHITE);
 
 	//左フレーム
-	Novice::DrawSprite(frameLeftX_, frameLeftY_, frameSide, 1.0f, 1.0f, 0.0f, WHITE);
+	Novice::DrawSprite(frameLeftX_, frameLeftY_, frameLeft, 1.0f, 1.0f, 0.0f, WHITE);
 
 	//プレート
 	if (onPlateEase1_ == true) {

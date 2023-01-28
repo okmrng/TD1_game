@@ -47,10 +47,11 @@ public:
 	/// <param name="tutorialText10WASD"></param>
 	/// <param name="scene"></param>
 	/// <param name="tutorialBg"></param>
-	void Draw(int frameSide, int Plate, bool WASDStile_, bool directionStile_, int tutorialText1, int tutorialText2,
+	void Draw(int frameRight, int frameLeft, int Plate, bool WASDStile_, bool directionStile_, int tutorialText1, int tutorialText2,
 		int tutorialText3Direction, int tutorialText3WASD, int tutorialText4, int tutorialText5, int tutorialText7, int textBox,
 		int tutorialText9, int tutorialText10Direction, int tutorialText10WASD, int tutorialText11, int tutorialText12, 
-		int tutorialText13, int tutorialText14, int scene, int tutorialBg,int bombBullet, int clearPlate);
+		int tutorialText13, int tutorialText14, int scene, int tutorialBg,int bombBullet, int clearPlate, int playerWASD,
+		int playerDirection, int playerCore);
 
 	//メンバ変数
 	//ステージ入場演出

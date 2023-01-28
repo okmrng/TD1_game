@@ -163,7 +163,7 @@ void Tutorial::Update(char* keys, char* preKeys, bool WASDStile_, bool direction
 					if (isEnemyMove_[i] == true) {
 						enemyBulletY_[i] += enmeyBulletSpeed_;
 
-						if (enemyBulletY_[i] >= 600.0f) {
+						if (enemyBulletY_[i] >= 580.0f) {
 							isEnemyMove_[i] = false;
 						}
 					}
@@ -352,15 +352,21 @@ void Tutorial::Update(char* keys, char* preKeys, bool WASDStile_, bool direction
 }
 
 //描画処理
-void Tutorial::Draw(int frameSide, int Plate, bool WASDStile_, bool directionStile_, int tutorialText1, int tutorialText2,
-	int tutorialText3Direction, int tutorialText3WASD, int tutorialText4, int tutorialText5, int tutorialText7, int textbox,
+void Tutorial::Draw(int frameRight, int frameLeft, int Plate, bool WASDStile_, bool directionStile_, int tutorialText1, int tutorialText2,
+	int tutorialText3Direction, int tutorialText3WASD, int tutorialText4, int tutorialText5, int tutorialText7, int textBox,
 	int tutorialText9, int tutorialText10Direction, int tutorialText10WASD, int tutorialText11, int tutorialText12,
-	int tutorialText13, int tutorialText14, int scene, int tutorialBg,int bombBullet, int clearPlate) {
+	int tutorialText13, int tutorialText14, int scene, int tutorialBg, int bombBullet, int clearPlate, int playerWASD,
+	int playerDirection, int playerCore) {
 	//背景
 	Novice::DrawSprite(325, 0, tutorialBg, 1.0f, 1.0f, 0.0f, WHITE);
 
 	//敵
 	enemy_->Draw(scene);
+
+	//自機
+	if (admission_->GetterPlayStart() == true) {
+		player_->Draw(bombBullet, WASDStile_, directionStile_, playerWASD, playerDirection, playerCore);
+	}
 
 	//弾
 	for (int i = 0; i < 5; i++) {
@@ -370,12 +376,7 @@ void Tutorial::Draw(int frameSide, int Plate, bool WASDStile_, bool directionSti
 	}
 
 	//ステージ入場演出
-	admission_->Draw(frameSide, Plate);
-
-	//自機
-	if (admission_->GetterPlayStart() == true) {
-		player_->Draw(bombBullet);
-	}
+	admission_->Draw(frameRight, frameLeft, Plate, WASDStile_, directionStile_, playerWASD, playerDirection, playerCore);
 
 	//テキスト
 	if (textDisplay_ == true) {
@@ -408,13 +409,13 @@ void Tutorial::Draw(int frameSide, int Plate, bool WASDStile_, bool directionSti
 			Novice::DrawSprite(textX_, textY_, tutorialText5, 1.0f, 1.0f, 0.0f, WHITE);
 		}
 		if (text_ == 6) {
-			Novice::DrawSprite(textX_, textY_, textbox, 1.0f, 1.0f, 0.0f, WHITE);
+			Novice::DrawSprite(textX_, textY_, textBox, 1.0f, 1.0f, 0.0f, WHITE);
 		}
 		if (text_ == 7) {
 			Novice::DrawSprite(textX_, textY_, tutorialText7, 1.0f, 1.0f, 0.0f, WHITE);
 		}
 		if (text_ == 8) {
-			Novice::DrawSprite(textX_, textY_, textbox, 1.0f, 1.0f, 0.0f, WHITE);
+			Novice::DrawSprite(textX_, textY_, textBox, 1.0f, 1.0f, 0.0f, WHITE);
 		}
 		if (text_ == 9) {
 			Novice::DrawSprite(textX_, textY_, tutorialText9, 1.0f, 1.0f, 0.0f, WHITE);
