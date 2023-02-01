@@ -5,6 +5,7 @@
 #include "Fade.h"
 #include "Tutorial.h"
 #include "Clear.h"
+#include "Stage1.h"
 #define _USE_MATH_DEFINES
 #include <math.h>
 
@@ -47,6 +48,10 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	Clear* clear = new Clear();
 	clear->Initialize();
 
+	//ステージ1
+	Stage1* stage1 = new Stage1();
+	stage1->Initialize();
+
 	//当たり判定
 	//何もしない敵
 	float playerBullet_enemyX = 0.0f;
@@ -80,7 +85,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		STAGESELECT,
 		STAGE1,
 		GAMEOVER,
-		CLEAR
+		CLEAR,
+		RESET
 	};
 
 	int scene = TITLE;
@@ -167,6 +173,11 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 			if (tutorial->next_ == true) {
 				scene = STAGESELECT;
 			}
+		}
+
+		//ステージ1
+		if (scene == STAGE1) {
+			stage1->Update();
 		}
 
 		//敵
@@ -340,15 +351,16 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 		//チュートリアル
 		if (scene == TUTORIAL) {
-
 			tutorial->Draw(frameRight, frameLeft, tutorialPlate, option->GetterWASDStaile(), option->GetterDirectionStaile(), tutorialText1, tutorialText2,
 				tutorialText3Direction, tutorialText3WASD, tutorialText4, tutorialText5, tutorialText7, tutorialTextbox,
 				tutorialText9, tutorialText10Direction, tutorialText10WASD, tutorialText11, tutorialText12, tutorialText13,
 				tutorialText14, scene, tutorialBg, bombBullet, clearPlate, playerWASD, playerDirection, playerCore, playerBullet,
 				enemyTutorial, enemyBulletTutorial);
+		}
 
-			//自機
-			//player->Draw();
+		//ステージ1
+		if (scene == STAGE1) {
+			stage1->Draw();
 		}
 		
 		///
