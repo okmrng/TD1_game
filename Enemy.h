@@ -47,5 +47,8 @@ public:
 
 	//’e
 	EnemyBullet* enemyBullet_;
+
+    //“G‚ªŒ»‚ê‚é‚Ü‚Å‚ÌƒJƒEƒ“ƒg
+	int enemyCount_;
 };
 

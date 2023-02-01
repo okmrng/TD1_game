@@ -16,12 +16,12 @@ typedef struct Chara {
 };
 
 typedef struct Zako {
-	Vector2 pos[1];
-	Vector2 speed[1];
-	float radius[1];
-	int HP[1];
-	bool isAlive[1];
-	unsigned int color[1];
+	Vector2 pos[3];
+	Vector2 speed[3];
+	float radius[3];
+	int HP[3];
+	bool isAlive[3];
+	unsigned int color[3];
 };
 
 //’e

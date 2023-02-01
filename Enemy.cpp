@@ -22,6 +22,19 @@ void Enemy::Initialize() {
 	moveEnemy_.speed[0].Y = 3.0f;
 	moveEnemy_.color[0] = WHITE;
 
+	for (int i = 1; i < 3; i++) {
+		moveEnemy_.HP[i] = 30;
+		moveEnemy_.isAlive[i] = true;
+		moveEnemy_.pos[i].Y = -20.0f;
+		moveEnemy_.radius[i] = 20.0f;
+		moveEnemy_.speed[i].X = 0.0f;
+		moveEnemy_.speed[i].Y = 5.0f;
+		moveEnemy_.color[i] = WHITE;
+	}
+
+	moveEnemy_.pos[1].X = 610.0f;
+	moveEnemy_.pos[2].X = 670.0f;
+
 	//íPî≠íeÇåÇÇ¬ìG
 	bulletEnemy_.HP[0] = 100;
 	bulletEnemy_.isAlive[0] = true;
@@ -43,6 +56,8 @@ void Enemy::Initialize() {
 	//íe
 	enemyBullet_ = new EnemyBullet();
 	enemyBullet_->Initialize();
+
+	enemyCount_ = 0;
 }
 
 //çXêVèàóù
@@ -78,6 +93,25 @@ void Enemy::Update(int scene, int text_) {
 				//HPÇ™0à»â∫Ç…Ç»Ç¡ÇΩÇÁéÄÇ 
 				if (bulletEnemy_.HP[0] <= 0) {
 					bulletEnemy_.isAlive[0] = false;
+				}
+			}
+		}
+	}
+
+	if (scene == 3) {
+		enemyCount_++;
+
+		for (int i = 1; i < 3; i++) {
+			//à⁄ìÆÇ∑ÇÈìG
+			if (moveEnemy_.isAlive[i] == true) {
+				if (enemyCount_ >= 30) {
+					//à⁄ìÆ
+					moveEnemy_.pos[i].Y += moveEnemy_.speed[i].Y;
+				}
+
+				//é~ÇﬂÇÈ
+				if (moveEnemy_.pos[i].Y >= 150.0f) {
+					moveEnemy_.speed[i].Y = 0.0f;
 				}
 			}
 		}
@@ -164,6 +198,14 @@ void Enemy::Draw(int scene,int enemyTutorial) {
 			if (moveEnemy_.isAlive[0] == true) {
 				//Novice::DrawEllipse(moveEnemy_.pos[0].X, moveEnemy_.pos[0].Y, moveEnemy_.radius[0], moveEnemy_.radius[0], 0.0f, moveEnemy_.color[0], kFillModeSolid);
 				Novice::DrawSprite(moveEnemy_.pos[0].X - 20, moveEnemy_.pos[0].Y - 20, enemyTutorial, 1, 1, 0.0f, moveEnemy_.color[0]);
+			}
+		}
+	}
+
+	if (scene == 3) {
+		for (int i = 1; i < 3; i++) {
+			if (moveEnemy_.isAlive[i] == true) {
+				Novice::DrawSprite(moveEnemy_.pos[i].X - 20, moveEnemy_.pos[i].Y - 20, enemyTutorial, 1, 1, 0.0f, moveEnemy_.color[i]);
 			}
 		}
 	}
