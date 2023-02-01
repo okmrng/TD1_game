@@ -46,5 +46,4 @@ void Fade::SetOnFade(bool onFade) {
 //•`‰æˆ—
 void Fade::Draw() {
 	Novice::DrawBox(0, 0, 1280, 720, 0.0f, color_ + fade_, kFillModeSolid);
-	Novice::ScreenPrintf(0, 160, "%d", nextCount_);
 }

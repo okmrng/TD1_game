@@ -149,10 +149,4 @@ void BombParticle::Draw(int bombBullet) {
 			Novice::DrawBox(particleX_3[i], particleY_3[i], particleW_3[i], particleH_3[i], 0.0f, color_3[i] + fade_3[i], kFillModeSolid);
 		}
 	}
-
-	//Novice::DrawEllipse(collisionX_, collisionY_, collisionR_, collisionR_, 0.0f, BLACK, kFillModeWireFrame);
-	//Novice::SetBlendMode(BlendMode::kBlendModeAdd);
-	//Novice::SetBlendMode(BlendMode::kBlendModeNone);
-
-	Novice::ScreenPrintf(0, 500, "%d", emitterY_);
 }

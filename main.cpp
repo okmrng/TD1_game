@@ -77,7 +77,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		TITLE,
 		OPTION,
 		TUTORIAL,
-		MAP,
+		STAGESELECT,
 		STAGE1,
 		GAMEOVER,
 		CLEAR
@@ -120,6 +120,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	int playerBullet = Novice::LoadTexture("./Resources/Images/playerBullet.png");
 	int enemyTutorial = Novice::LoadTexture("./Resources/Images/enemy_tutorial.png");
 	int enemyBulletTutorial = Novice::LoadTexture("./Resources/Images/enemyBullet_tutorial.png");
+	int mapFrameX = Novice::LoadTexture("./Resources/Images/map_frameX.png");
+	int mapFrameY = Novice::LoadTexture("./Resources/Images/map_frameY.png");
 
 	// ウィンドウの×ボタンが押されるまでループ
 	while (Novice::ProcessMessage() == 0) {
@@ -163,7 +165,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 			tutorial->Update(keys, preKeys, option->GetterWASDStaile(), option->GetterDirectionStaile(), scene);
 
 			if (tutorial->next_ == true) {
-				scene = MAP;
+				scene = STAGESELECT;
 			}
 		}
 
@@ -348,10 +350,6 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 			//自機
 			//player->Draw();
 		}
-
-		if (scene == MAP) {
-			Novice::ScreenPrintf(0, 0, "MAP");
-		}else{ Novice::ScreenPrintf(0, 0, "ooooooooucpin"); }
 		
 		///
 		/// ↑描画処理ここまで

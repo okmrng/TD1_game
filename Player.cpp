@@ -262,7 +262,4 @@ void Player::Draw(int bombBullet, bool WASDStile_, bool directionStile_, int pla
 	if (shotBomb_ == true) {
 		bombParticle_->Draw(bombBullet);
 	}
-
-	Novice::ScreenPrintf(0, 20, "%d", offBombCount_);
-	Novice::ScreenPrintf(0, 40, "%d", bombs_);
 }

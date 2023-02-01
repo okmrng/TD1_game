@@ -82,12 +82,4 @@ void Clear::Draw(int clearPlate) {
 
 	//–‹
 	Novice::DrawBox(curtainX_, curtainY_, 1280.0f, 720.0f, 0.0f, BLACK, kFillModeSolid);
-
-	Novice::ScreenPrintf(0, 700, "%d", nextTime_);
-	if (next_ == false) {
-		Novice::ScreenPrintf(0, 200, "false");
-	}
-	if (next_ == true) {
-		Novice::ScreenPrintf(0, 200, "true");
-	}
 }

@@ -180,9 +180,4 @@ void Enemy::Draw(int scene,int enemyTutorial) {
 
 	//’e
 	enemyBullet_->Draw();
-
-	/*Novice::ScreenPrintf(0, 40, "%0.0f", moveEnemy_.pos.X);
-	Novice::ScreenPrintf(0, 60, "%0.0f", moveEnemy_.pos.Y);*/
-	//Novice::ScreenPrintf(0, 80, "HP:%d", bulletsEnemy_.HP);
-	Novice::ScreenPrintf(0, 100, "time:%d", enemyBullet_->sCoolTime_);
 }

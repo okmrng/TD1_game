@@ -441,10 +441,4 @@ void Tutorial::Draw(int frameRight, int frameLeft, int Plate, bool WASDStile_, b
 
 	//ƒNƒŠƒA‰‰o
 	clear_->Draw(clearPlate);
-	if (next_ == false) {
-		Novice::ScreenPrintf(0, 80, "false");
-	}
-	if (next_ == true) {
-		Novice::ScreenPrintf(0, 80, "true");
-	}
 }
