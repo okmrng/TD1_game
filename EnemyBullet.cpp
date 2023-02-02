@@ -10,6 +10,17 @@ void EnemyBullet::Initialize() {
 	enemyBullet_.speed.Y = 7.0f;
 	coolTime_ = 0;*/
 
+	for (int i = 0; i < 4; i++) {
+		enemyBullet_.isShot[i] = false;
+		enemyBullet_.radius[i] = 10.0f;
+		enemyBullet_.speed[i].Y = 7.0f;
+		enemyBullet_.coolTime[i] = 0;
+	}
+	enemyBullet_.speed[0].X = 5.0f;
+	enemyBullet_.speed[1].X = 3.0f;
+	enemyBullet_.speed[2].X = -5.0f;
+	enemyBullet_.speed[3].X = -3.0f;
+
 	//複数弾
 	/*for (int i = 0; i < 10; i++) {
 		enemyBullets_.isShot[i] = false;
@@ -32,6 +43,18 @@ void EnemyBullet::Update() {
 	//		enemyBullet_.isShot = false;
 	//	}
 	//}
+	for (int i = 0; i < 4; i++) {
+		if (enemyBullet_.isShot[i] == true) {
+			//移動
+			enemyBullet_.pos[i].X += enemyBullet_.speed[i].X;
+			enemyBullet_.pos[i].Y += enemyBullet_.speed[i].Y;
+
+			//画面外に行ったらフラグをfalseにする
+			if (enemyBullet_.pos[i].X <= 317.0f || enemyBullet_.pos[i].X >= 963.0f || enemyBullet_.pos[i].Y <= -8.0f || enemyBullet_.pos[i].Y >= 728.0f) {
+				enemyBullet_.isShot[i] = false;
+			}
+		}
+	}
 
 	////フラグがfalseになったらクールタイムをカウントする
 	//if (enemyBullet_.isShot == false) {
@@ -66,11 +89,16 @@ void EnemyBullet::OnCollition() {
 }
 
 //描画処理
-void EnemyBullet::Draw() {
+void EnemyBullet::Draw(int enemyBulletImage) {
 	//単発弾
 	/*if (enemyBullet_.isShot == true) {
 		Novice::DrawEllipse(enemyBullet_.pos.X, enemyBullet_.pos.Y, enemyBullet_.radius, enemyBullet_.radius, 0.0f, RED, kFillModeSolid);
 	}*/
+	for (int i = 0; i < 4; i++) {
+		if (enemyBullet_.isShot[i] == true) {
+			Novice::DrawSprite(enemyBullet_.pos[i].X - 10.0f, enemyBullet_.pos[i].Y - 10.0f, enemyBulletImage, 1, 1, 0.0f, WHITE);
+		}
+	}
 
 	//複数弾
 	/*for (int i = 0; i < 10; i++) {
@@ -78,4 +106,5 @@ void EnemyBullet::Draw() {
 			Novice::DrawEllipse(enemyBullets_.pos[i].X, enemyBullets_.pos[i].Y, enemyBullets_.radius[i], enemyBullets_.radius[i], 0.0f, RED, kFillModeSolid);
 		}
 	}*/
+	Novice::ScreenPrintf(0, 60, "%d", enemyBullet_.pos[0].X);
 }

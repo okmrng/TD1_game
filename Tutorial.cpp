@@ -357,12 +357,12 @@ void Tutorial::Draw(int frameRight, int frameLeft, int Plate, bool WASDStile_, b
 	int tutorialText3Direction, int tutorialText3WASD, int tutorialText4, int tutorialText5, int tutorialText7, int textBox,
 	int tutorialText9, int tutorialText10Direction, int tutorialText10WASD, int tutorialText11, int tutorialText12,
 	int tutorialText13, int tutorialText14, int scene, int tutorialBg, int bombBullet, int clearPlate, int playerWASD,
-	int playerDirection, int playerCore, int playerBullet, int enemyTutorial, int enemyBulletTutorial) {
+	int playerDirection, int playerCore, int playerBullet, int enemyTutorial, int enemyBulletTutorial,int enemyBulletImage) {
 	//”wŒi
 	Novice::DrawSprite(325, 0, tutorialBg, 1.0f, 1.0f, 0.0f, WHITE);
 
 	//“G
-	enemy_->Draw(scene, enemyTutorial);
+	enemy_->Draw(scene, enemyTutorial, enemyBulletImage);
 
 	//Ž©‹@
 	if (admission_->GetterPlayStart() == true) {

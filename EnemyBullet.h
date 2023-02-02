@@ -15,7 +15,7 @@ public:
 	void OnCollition();
 
 	//•`‰æˆ—
-	void Draw();
+	void Draw(int enemyBulletImage);
 
 	//ƒƒ“ƒo•Ï”
 	//’P”­’e\‘¢‘Ì

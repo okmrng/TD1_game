@@ -90,7 +90,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	};
 
 	int scene = TITLE;
-	//int scene = TUTORIAL;
+	//int scene = STAGE1;
 
 	//画像読み込み
 	int title = Novice::LoadTexture("./Resources/Images/title.png");
@@ -127,6 +127,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	int playerBullet = Novice::LoadTexture("./Resources/Images/playerBullet.png");
 	int enemyTutorial = Novice::LoadTexture("./Resources/Images/enemy_tutorial.png");
 	int enemyBulletTutorial = Novice::LoadTexture("./Resources/Images/enemyBullet_tutorial.png");
+	int enemyBulletImage = Novice::LoadTexture("./Resources/Images/enemyBullet.png");
 	int mapFrameX = Novice::LoadTexture("./Resources/Images/map_frameX.png");
 	int mapFrameY = Novice::LoadTexture("./Resources/Images/map_frameY.png");
 
@@ -358,14 +359,14 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 				tutorialText3Direction, tutorialText3WASD, tutorialText4, tutorialText5, tutorialText7, tutorialTextbox,
 				tutorialText9, tutorialText10Direction, tutorialText10WASD, tutorialText11, tutorialText12, tutorialText13,
 				tutorialText14, scene, tutorialBg, bombBullet, clearPlate, playerWASD, playerDirection, playerCore, playerBullet,
-				enemyTutorial, enemyBulletTutorial);
+				enemyTutorial, enemyBulletTutorial, enemyBulletImage);
 		}
 
 		//ステージ1
 		if (scene == STAGE1) {
 			stage1->Draw(frameRight, frameLeft, stage1Plate, option->GetterWASDStaile(), option->GetterDirectionStaile(),
 				playerWASD, playerDirection, playerCore, bombBullet, option->GetterDirectionStaile(), playerBullet, scene,
-				enemyTutorial);
+				enemyTutorial, enemyBulletImage);
 		}
 		
 		///

@@ -16,12 +16,17 @@ typedef struct Chara {
 };
 
 typedef struct Zako {
-	Vector2 pos[3];
-	Vector2 speed[3];
-	float radius[3];
-	int HP[3];
-	bool isAlive[3];
-	unsigned int color[3];
+	Vector2 pos[4];
+	Vector2 pos1[4]; //初期位置
+	Vector2 pos2[4]; //最終的な位置
+	Vector2 speed[4];
+	float radius[4];
+	int HP[4];
+	bool isAlive[4];
+	unsigned int color[4];
+	float t[4];
+	float easedT[4];
+	bool start[4];   //行動開始フラグ
 };
 
 //弾
@@ -35,10 +40,11 @@ typedef struct Bullet {
 };
 
 typedef struct EBullet {
-	Vector2 pos;
-	Vector2 speed;
-	float radius;
-	bool isShot;
+	Vector2 pos[4];
+	Vector2 speed[4];
+	float radius[4];
+	bool isShot[4];
+	int coolTime[4];
 };
 
 typedef struct EBullets {

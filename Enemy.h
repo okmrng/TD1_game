@@ -29,7 +29,7 @@ public:
 	void BulletsEnemyOnCollision(int playerBulletAttack);
 
 	//•`‰æˆ—
-	void Draw(int scene,int enemyTutorial);
+	void Draw(int scene, int enemyTutorial, int enemyBulletImage);
 
 	//ƒƒ“ƒo•Ï”
 	//“G\‘¢‘Ì

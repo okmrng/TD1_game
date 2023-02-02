@@ -15,7 +15,7 @@ public:
 		bool onBomb_, int scene, int text_);
 
 	void Draw(int frameRight, int frameLeft, int plate, int WASDStile_, int directionStule_, int playerWASD, int playerDirection,
-		int playerCore, int bombBullet, bool directionStile_, int playerBullet, int scene, int enemytutorial);
+		int playerCore, int bombBullet, bool directionStile_, int playerBullet, int scene, int enemytutorial, int enemyBulletImage);
 
 	//ƒƒ“ƒo•Ï”
 	Admission* admission_; //“üê‰‰o

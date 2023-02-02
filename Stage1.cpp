@@ -33,6 +33,7 @@ void Stage1::Update(char* keys, char* prekeys, bool WASDStile_, bool directionSt
 
 
 		//Ž©‹@‚Ì’e‚Æ‚Ì“–‚½‚è”»’è
+		//ˆÚ“®‚·‚é“G
 		for (int i = 0; i < 15; i++) {
 			for (int j = 1; j < 3; j++) {
 				float playerBullet_moveEnemyX_ = player_->bullet_->bullet_.pos[i].X - enemy_->moveEnemy_.pos[j].X;
@@ -45,10 +46,32 @@ void Stage1::Update(char* keys, char* prekeys, bool WASDStile_, bool directionSt
 							if (enemy_->moveEnemy_.isAlive[j] == true) {
 								enemy_->moveEnemy_.HP[j] -= player_->bullet_->bullet_.attack;
 								enemy_->moveEnemy_.color[j] = RED;
+								player_->bullet_->bullet_.isShot[i] = false;
 							}
 						}
 						else { enemy_->moveEnemy_.color[j] = WHITE; }
-						player_->bullet_->bullet_.isShot[i] = false;
+					}
+				}
+			}
+		}
+
+		//’P”­’e‚ðŒ‚‚Â“G
+		for (int i = 0; i < 15; i++) {
+			for (int j = 0; j < 4; j++) {
+				float playerBullet_bulletEnemyX_ = player_->bullet_->bullet_.pos[i].X - enemy_->bulletEnemy_.pos[j].X;
+				float playerBullet_bulletEnemyY_ = player_->bullet_->bullet_.pos[i].Y - enemy_->bulletEnemy_.pos[j].Y;
+				float playerBullet_bulletEnemyDis_ = sqrtf(playerBullet_bulletEnemyX_ * playerBullet_bulletEnemyX_ + playerBullet_bulletEnemyY_ * playerBullet_bulletEnemyY_);
+
+				if (enemy_->bulletEnemy_.isAlive[j] == true) {
+					if (playerBullet_bulletEnemyDis_ < 20.0f) {
+						if (player_->bullet_->bullet_.isShot[i] == true) {
+							if (enemy_->bulletEnemy_.isAlive[j] == true) {
+								enemy_->bulletEnemy_.HP[j] -= player_->bullet_->bullet_.attack;
+								enemy_->bulletEnemy_.color[j] = RED;
+								player_->bullet_->bullet_.isShot[i] = false;
+							}
+						}
+						else { enemy_->bulletEnemy_.color[j] = WHITE; }
 					}
 				}
 			}
@@ -58,14 +81,16 @@ void Stage1::Update(char* keys, char* prekeys, bool WASDStile_, bool directionSt
 
 //•`‰æˆ—
 void Stage1::Draw(int frameRight, int frameLeft, int plate, int WASDStile_, int directionStule_, int playerWASD, int playerDirection,
-	int playerCore, int bombBullet, bool directionStile_, int playerBullet, int scene, int enemytutorial) {
+	int playerCore, int bombBullet, bool directionStile_, int playerBullet, int scene, int enemytutorial, int enemyBulletImage) {
 
 	//Ž©‹@
 	if (admission_->GetterPlayStart() == true) {
 		player_->Draw(bombBullet, WASDStile_, directionStile_, playerWASD, playerDirection, playerCore, playerBullet);
+
+		//“G
+		enemy_->Draw(scene, enemytutorial, enemyBulletImage);
 	}
+
 	admission_->Draw(frameRight, frameLeft, plate, WASDStile_, directionStule_, playerWASD, playerDirection, playerCore);
 
-	//“G
-	enemy_->Draw(scene, enemytutorial);
 }
