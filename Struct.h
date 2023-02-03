@@ -48,8 +48,8 @@ typedef struct EBullet {
 };
 
 typedef struct EBullets {
-	Vector2 pos[10];
-	Vector2 speed;
-	float radius[10];
-	bool isShot[10];
+	Vector2 pos[3];
+	Vector2 speed[3];
+	float radius[3];
+	bool isShot[3];
 };

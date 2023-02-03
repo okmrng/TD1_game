@@ -27,7 +27,7 @@ void Enemy::Initialize() {
 	for (int i = 1; i < 3; i++) {
 		moveEnemy_.HP[i] = 30;
 		moveEnemy_.isAlive[i] = true;
-		moveEnemy_.pos[i].Y = -20.0f;
+		moveEnemy_.pos[i].Y = -40.0f;
 		moveEnemy_.radius[i] = 20.0f;
 		moveEnemy_.speed[i].X = 0.0f;
 		moveEnemy_.speed[i].Y = 5.0f;
@@ -67,14 +67,20 @@ void Enemy::Initialize() {
 	bulletEnemy_.pos2[3].X = 825.0f;
 	bulletEnemy_.pos[3].Y = 250.0f;
 
-	////•¡”’e‚ğŒ‚‚Â“G
-	//bulletsEnemy_.HP = 100;
-	//bulletsEnemy_.isAlive = true;
-	//bulletsEnemy_.pos.X = 640.0f;
-	//bulletsEnemy_.pos.Y = 100.0f;
-	//bulletsEnemy_.radius = 20.0f;
-	//bulletsEnemy_.speed.X = 0.0f;
-	//bulletsEnemy_.speed.Y = 0.0f;
+	//•¡”’e‚ğŒ‚‚Â“G
+	bulletsEnemy_.HP[0] = 70;
+	bulletsEnemy_.isAlive[0] = true;
+	bulletsEnemy_.pos[0].X = 640.0f;
+	bulletsEnemy_.pos[0].Y = -40.0f;
+	bulletsEnemy_.pos1[0].Y = -40.0f;
+	bulletsEnemy_.pos2[0].Y = 300.0f;
+	bulletsEnemy_.radius[0] = 20.0f;
+	bulletsEnemy_.speed[0].X = 0.0f;
+	bulletsEnemy_.speed[0].Y = 0.0f;
+	bulletsEnemy_.color[0] = WHITE;
+	bulletsEnemy_.t[0] = 0.0f;
+	bulletsEnemy_.easedT[0] = 0.0f;
+	bulletEnemy_.start[0] = false;
 
 	//’e
 	enemyBullet_ = new EnemyBullet();
@@ -171,9 +177,43 @@ void Enemy::Update(int scene, int text_) {
 
 		//ƒtƒF[ƒY3
 		if (enemyCount_ >= 2160) {
+			//•¡”’e‚ğŒ‚‚Â“G
+		if (bulletsEnemy_.isAlive[0] == true) {
+			//ƒC[ƒWƒ“ƒO
+			if (bulletsEnemy_.t[0] <= 1.0f) {
+				bulletsEnemy_.t[0] += 1.0f / 30.0f;
+			}
+			if (bulletsEnemy_.t[0] > 1.0f) {
+				bulletsEnemy_.t[0] = 1.0f;
+			}
 
+			bulletsEnemy_.easedT[0] = sqrt(1.0f - pow(bulletsEnemy_.t[0] - 1.0f, 2.0f));
+
+			bulletsEnemy_.pos[0].Y = (1.0f - bulletsEnemy_.easedT[0]) * bulletsEnemy_.pos1[0].Y + bulletsEnemy_.easedT[0] * bulletsEnemy_.pos2[0].Y;
+
+			if (bulletsEnemy_.pos[0].Y == bulletsEnemy_.pos2[0].Y) {
+				bulletsEnemy_.start[0] = true;
+			}
+
+			//s“®ŠJn
+			if (bulletsEnemy_.start[0] == true) {
+				for (int i = 0; i < 3; i++) {
+					if (enemyBullet_->enemyBullets_.isShot[i] == false) {
+						enemyBullet_->enemyBullets_.pos[i].X = bulletsEnemy_.pos[0].X;
+						enemyBullet_->enemyBullets_.pos[i].Y = bulletsEnemy_.pos[0].Y;
+						enemyBullet_->enemyBullets_.isShot[i] = true;
+					}
+				}
+			}
+
+			//HP‚ª0ˆÈ‰º‚É‚È‚Á‚½‚ç€‚Ê
+			if (bulletsEnemy_.HP[0] <= 0) {
+				bulletsEnemy_.isAlive[0] = false;
+			}
 		}
 		
+		}
+
 		enemyBullet_->Update();
 	}
 
@@ -274,6 +314,13 @@ void Enemy::Draw(int scene,int enemyTutorial,int enemyBulletImage) {
 		for (int i = 0; i < 4; i++) {
 			if (bulletEnemy_.isAlive[i] == true) {
 				Novice::DrawSprite(bulletEnemy_.pos[i].X - 20, bulletEnemy_.pos[i].Y - 20, enemyTutorial, 1, 1, 0.0f, bulletEnemy_.color[i]);
+			}
+		}
+
+		//•¡”’e‚ğŒ‚‚Â“G
+		for (int i = 0; i < 1; i++) {
+			if (bulletsEnemy_.isAlive[i] == true) {
+				Novice::DrawSprite(bulletsEnemy_.pos[i].X - 20, bulletsEnemy_.pos[i].Y - 20, enemyTutorial, 1, 1, 0.0f, bulletsEnemy_.color[i]);
 			}
 		}
 	}

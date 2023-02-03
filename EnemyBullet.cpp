@@ -22,27 +22,17 @@ void EnemyBullet::Initialize() {
 	enemyBullet_.speed[3].X = -3.0f;
 
 	//複数弾
-	/*for (int i = 0; i < 10; i++) {
+	for (int i = 0; i < 3; i++) {
 		enemyBullets_.isShot[i] = false;
-		enemyBullets_.radius[i] = 8.0f;
+		enemyBullets_.radius[i] = 10.0f;
+		enemyBullets_.speed[i].X = 1.0f;
+		enemyBullets_.speed[i].Y = 5.0f;
 	}
-	enemyBullets_.speed.X = 7.0f;
-	enemyBullets_.speed.Y = 7.0f;
-	sCoolTime_ = 0;*/
 }
 
 //更新処理
 void EnemyBullet::Update() {
 	//単発弾
-	//移動
-	//if (enemyBullet_.isShot == true) {
-	//	enemyBullet_.pos.Y += enemyBullet_.speed.Y;
-
-	//	//画面外に行ったらフラグをfalseにする
-	//	if (enemyBullet_.pos.X <= 317.0f || enemyBullet_.pos.X >= 963.0f || enemyBullet_.pos.Y <= -8.0f || enemyBullet_.pos.Y >= 728.0f) {
-	//		enemyBullet_.isShot = false;
-	//	}
-	//}
 	for (int i = 0; i < 4; i++) {
 		if (enemyBullet_.isShot[i] == true) {
 			//移動
@@ -56,18 +46,21 @@ void EnemyBullet::Update() {
 		}
 	}
 
-	////フラグがfalseになったらクールタイムをカウントする
-	//if (enemyBullet_.isShot == false) {
-	//	if (coolTime_ <= 30) {
-	//		coolTime_++;
-	//	}
+	for (int i = 0; i < 3; i++) {
+		if (enemyBullets_.isShot[i] == true) {
+			//移動
+			enemyBullets_.pos[i].Y += enemyBullets_.speed[i].Y;
 
-	//	//クールタイムのカウントが終わったらフラグを立てる
-	//	if (coolTime_ >= 30) {
-	//		coolTime_ = 0;
-	//		enemyBullet_.isShot = true;
-	//	}
-	//}
+			enemyBullets_.pos[0].X -= enemyBullets_.speed[0].X;
+
+			enemyBullets_.pos[2].X += enemyBullets_.speed[2].X;
+
+			//画面外に行ったらフラグをfalseにする
+			if (enemyBullets_.pos[i].X <= 317.0f || enemyBullets_.pos[i].X >= 963.0f || enemyBullets_.pos[i].Y <= -8.0f || enemyBullets_.pos[i].Y >= 728.0f) {
+				enemyBullets_.isShot[i] = false;
+			}
+		}
+	}
 
 	//複数弾
 	//for (int i = 0; i < 10; i++) {
@@ -101,10 +94,10 @@ void EnemyBullet::Draw(int enemyBulletImage) {
 	}
 
 	//複数弾
-	/*for (int i = 0; i < 10; i++) {
+	for (int i = 0; i < 3; i++) {
 		if (enemyBullets_.isShot[i] == true) {
-			Novice::DrawEllipse(enemyBullets_.pos[i].X, enemyBullets_.pos[i].Y, enemyBullets_.radius[i], enemyBullets_.radius[i], 0.0f, RED, kFillModeSolid);
+			Novice::DrawSprite(enemyBullets_.pos[i].X - 10.0f, enemyBullets_.pos[i].Y - 10.0f, enemyBulletImage, 1, 1, 0.0f, WHITE);
 		}
-	}*/
+	}
 	Novice::ScreenPrintf(0, 60, "%d", enemyBullet_.pos[0].X);
 }
