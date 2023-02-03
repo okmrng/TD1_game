@@ -31,11 +31,10 @@ void Stage1::Update(char* keys, char* prekeys, bool WASDStile_, bool directionSt
 		//“G
 		enemy_->Update(scene, text_);
 
-
 		//©‹@‚Ì’e‚Æ‚Ì“–‚½‚è”»’è
 		//ˆÚ“®‚·‚é“G
 		for (int i = 0; i < 15; i++) {
-			for (int j = 1; j < 3; j++) {
+			for (int j = 1; j < 5; j++) {
 				float playerBullet_moveEnemyX_ = player_->bullet_->bullet_.pos[i].X - enemy_->moveEnemy_.pos[j].X;
 				float playerBullet_moveEnemyY_ = player_->bullet_->bullet_.pos[i].Y - enemy_->moveEnemy_.pos[j].Y;
 				float playerBullet_moveEnemyDis_ = sqrtf(playerBullet_moveEnemyX_ * playerBullet_moveEnemyX_ + playerBullet_moveEnemyY_ * playerBullet_moveEnemyY_);
@@ -57,7 +56,7 @@ void Stage1::Update(char* keys, char* prekeys, bool WASDStile_, bool directionSt
 
 		//’P”­’e‚ğŒ‚‚Â“G
 		for (int i = 0; i < 15; i++) {
-			for (int j = 0; j < 4; j++) {
+			for (int j = 0; j < 8; j++) {
 				float playerBullet_bulletEnemyX_ = player_->bullet_->bullet_.pos[i].X - enemy_->bulletEnemy_.pos[j].X;
 				float playerBullet_bulletEnemyY_ = player_->bullet_->bullet_.pos[i].Y - enemy_->bulletEnemy_.pos[j].Y;
 				float playerBullet_bulletEnemyDis_ = sqrtf(playerBullet_bulletEnemyX_ * playerBullet_bulletEnemyX_ + playerBullet_bulletEnemyY_ * playerBullet_bulletEnemyY_);
@@ -79,7 +78,7 @@ void Stage1::Update(char* keys, char* prekeys, bool WASDStile_, bool directionSt
 
 		//•¡”’e‚ğŒ‚‚Â“G
 		for (int i = 0; i < 15; i++) {
-			for (int j = 0; j < 1; j++) {
+			for (int j = 0; j < 3; j++) {
 				float playerBullet_bulletsEnemyX_ = player_->bullet_->bullet_.pos[i].X - enemy_->bulletsEnemy_.pos[j].X;
 				float playerBullet_bulletsEnemyY_ = player_->bullet_->bullet_.pos[i].Y - enemy_->bulletsEnemy_.pos[j].Y;
 				float playerBullet_bulletsEnemyDis_ = sqrtf(playerBullet_bulletsEnemyX_ * playerBullet_bulletsEnemyX_ + playerBullet_bulletsEnemyY_ * playerBullet_bulletsEnemyY_);
@@ -94,6 +93,18 @@ void Stage1::Update(char* keys, char* prekeys, bool WASDStile_, bool directionSt
 							}
 						}
 						else { enemy_->bulletsEnemy_.color[j] = WHITE; }
+					}
+				}
+			}
+		}
+
+		//ƒNƒŠƒA
+		for (int i = 3; i < 5; i++) {
+			for (int j = 4; j < 8; j++) {
+				for (int k = 1; k < 3; k++) {
+					if (enemy_->moveEnemy_.isAlive[i] == false && enemy_->bulletEnemy_.isAlive[j] == false &&
+						enemy_->bulletsEnemy_.isAlive[k] == false) {
+
 					}
 				}
 			}

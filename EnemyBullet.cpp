@@ -10,30 +10,51 @@ void EnemyBullet::Initialize() {
 	enemyBullet_.speed.Y = 7.0f;
 	coolTime_ = 0;*/
 
-	for (int i = 0; i < 4; i++) {
+	for (int i = 0; i < 8; i++) {
 		enemyBullet_.isShot[i] = false;
 		enemyBullet_.radius[i] = 10.0f;
-		enemyBullet_.speed[i].Y = 7.0f;
 		enemyBullet_.coolTime[i] = 0;
 	}
+
+	for (int i = 0; i < 6; i++) {
+		enemyBullet_.speed[i].Y = 7.0f;
+	}
+
 	enemyBullet_.speed[0].X = 5.0f;
 	enemyBullet_.speed[1].X = 3.0f;
 	enemyBullet_.speed[2].X = -5.0f;
 	enemyBullet_.speed[3].X = -3.0f;
 
+	for (int i = 4; i < 6; i++) {
+		enemyBullet_.speed[i].X = 0.0f;
+	}
+
+	for (int i = 6; i < 8; i++) {
+		enemyBullet_.speed[i].Y = 0.0f;
+	}
+	enemyBullet_.speed[6].X = 7.0f;
+	enemyBullet_.speed[7].X = -7.0f;
+
 	//•¡”’e
-	for (int i = 0; i < 3; i++) {
+	for (int i = 0; i < 9; i++) {
 		enemyBullets_.isShot[i] = false;
 		enemyBullets_.radius[i] = 10.0f;
-		enemyBullets_.speed[i].X = 1.0f;
 		enemyBullets_.speed[i].Y = 5.0f;
+	}
+
+	for (int i = 0; i < 3; i++) {
+		enemyBullets_.speed[i].X = 1.0f;
+	}
+
+	for (int i = 3; i < 9; i++) {
+		enemyBullets_.speed[i].X = 0.3f;
 	}
 }
 
 //XVˆ—
 void EnemyBullet::Update() {
 	//’P”­’e
-	for (int i = 0; i < 4; i++) {
+	for (int i = 0; i < 8; i++) {
 		if (enemyBullet_.isShot[i] == true) {
 			//ˆÚ“®
 			enemyBullet_.pos[i].X += enemyBullet_.speed[i].X;
@@ -46,7 +67,8 @@ void EnemyBullet::Update() {
 		}
 	}
 
-	for (int i = 0; i < 3; i++) {
+	//•¡”’e
+	for (int i = 0; i < 9; i++) {
 		if (enemyBullets_.isShot[i] == true) {
 			//ˆÚ“®
 			enemyBullets_.pos[i].Y += enemyBullets_.speed[i].Y;
@@ -55,8 +77,19 @@ void EnemyBullet::Update() {
 
 			enemyBullets_.pos[2].X += enemyBullets_.speed[2].X;
 
+			enemyBullets_.pos[3].X -= enemyBullets_.speed[3].X;
+
+			enemyBullets_.pos[5].X += enemyBullets_.speed[5].X;
+
+			enemyBullets_.pos[6].X -= enemyBullets_.speed[6].X;
+
+			enemyBullets_.pos[8].X += enemyBullets_.speed[8].X;
+
 			//‰æ–ÊŠO‚És‚Á‚½‚çƒtƒ‰ƒO‚ðfalse‚É‚·‚é
-			if (enemyBullets_.pos[i].X <= 317.0f || enemyBullets_.pos[i].X >= 963.0f || enemyBullets_.pos[i].Y <= -8.0f || enemyBullets_.pos[i].Y >= 728.0f) {
+			/*if (enemyBullets_.pos[i].X <= 317.0f || enemyBullets_.pos[i].X >= 963.0f || enemyBullets_.pos[i].Y <= -8.0f || enemyBullets_.pos[i].Y >= 728.0f) {
+				enemyBullets_.isShot[i] = false;
+			}*/
+			if (enemyBullets_.pos[i].Y >= 728.0f) {
 				enemyBullets_.isShot[i] = false;
 			}
 		}
@@ -87,14 +120,14 @@ void EnemyBullet::Draw(int enemyBulletImage) {
 	/*if (enemyBullet_.isShot == true) {
 		Novice::DrawEllipse(enemyBullet_.pos.X, enemyBullet_.pos.Y, enemyBullet_.radius, enemyBullet_.radius, 0.0f, RED, kFillModeSolid);
 	}*/
-	for (int i = 0; i < 4; i++) {
+	for (int i = 0; i < 8; i++) {
 		if (enemyBullet_.isShot[i] == true) {
 			Novice::DrawSprite(enemyBullet_.pos[i].X - 10.0f, enemyBullet_.pos[i].Y - 10.0f, enemyBulletImage, 1, 1, 0.0f, WHITE);
 		}
 	}
 
 	//•¡”’e
-	for (int i = 0; i < 3; i++) {
+	for (int i = 0; i < 9; i++) {
 		if (enemyBullets_.isShot[i] == true) {
 			Novice::DrawSprite(enemyBullets_.pos[i].X - 10.0f, enemyBullets_.pos[i].Y - 10.0f, enemyBulletImage, 1, 1, 0.0f, WHITE);
 		}
