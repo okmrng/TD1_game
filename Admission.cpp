@@ -148,6 +148,7 @@ void Admission::Update() {
 		if (playStartCount_ <= 30) {
 			playStartCount_++;
 		}
+		
 		if (playStartCount_ >= 30) {
 			playStart_ = true;
 		}

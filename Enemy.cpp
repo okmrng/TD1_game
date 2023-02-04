@@ -25,11 +25,16 @@ void Enemy::Initialize() {
 	moveEnemy_.speed[0].Y = 3.0f;
 	moveEnemy_.color[0] = WHITE;
 
-	for (int i = 1; i < 5; i++) {
-		moveEnemy_.HP[i] = 30;
+	//共通
+	for (int i = 1; i < 9; i++) {
 		moveEnemy_.isAlive[i] = true;
 		moveEnemy_.radius[i] = 20.0f;
 		moveEnemy_.color[i] = WHITE;
+	}
+
+	//ステージ1
+	for (int i = 1; i < 5; i++) {
+		moveEnemy_.HP[i] = 30;
 	}
 
 	for (int i = 1; i < 3; i++) {
@@ -52,6 +57,34 @@ void Enemy::Initialize() {
 	moveEnemy_.pos[4].X = 975.0f;
 	moveEnemy_.pos[4].Y = 350.0f;
 	moveEnemy_.speed[4].X = -5.0f;
+
+	//ステージ2
+	for (int i = 5; i < 9; i++) {
+		moveEnemy_.HP[i] = 40;
+		moveEnemy_.start[i] = false;
+	}
+
+	for (int i = 5; i < 7; i++) {
+		moveEnemy_.speed[i].X = 0.0f;
+	}
+
+	moveEnemy_.pos[5].X = 355.0f;
+	moveEnemy_.pos[5].Y = -40.0f;
+	moveEnemy_.speed[5].Y = 5.0f;
+	moveEnemy_.pos[6].X = 925.0f;
+	moveEnemy_.pos[6].Y = 760.0f;
+	moveEnemy_.speed[6].Y = -5.0f;
+
+	for (int i = 7; i < 9; i++) {
+		moveEnemy_.speed[i].Y = 0.0f;
+	}
+
+	moveEnemy_.pos[7].X = 305.0f;
+	moveEnemy_.pos[7].Y = 100.0f;
+	moveEnemy_.speed[7].X = 5.0f;
+	moveEnemy_.pos[8].X = 975.0f;
+	moveEnemy_.pos[8].Y = 150.0f;
+	moveEnemy_.speed[8].X = -5.0f;
 
 	//単発弾を撃つ敵
 	for (int i = 0; i < 8; i++) {
@@ -406,91 +439,83 @@ void Enemy::Update(int scene, int text_) {
 			}
 		}
 
-		//ステージ2
-		if (scene == 4) {
-
-		}
-
-		enemyBullet_->Update();
 	}
 
-	//何もしない敵
-	/*if (enemy_.isAlive == true) {
-	//HPが0以下になったら死ぬ
-		if (enemy_.HP <= 0) {
-			enemy_.isAlive = false;
+	//ステージ2
+	if (scene == 4) {
+		enemyCount_++;
+
+		//フェーズ1
+		//移動する敵
+		for (int i = 5; i < 7; i++) {
+			if (moveEnemy_.isAlive[i] == true) {
+				//移動
+				moveEnemy_.pos[i].Y += moveEnemy_.speed[i].Y;
+
+				//行動開始
+				if (moveEnemy_.pos[5].Y >= 21.0f) {
+					moveEnemy_.start[5] = true;
+				}
+				if (moveEnemy_.pos[6].Y <= 699.0f) {
+					moveEnemy_.start[6] = true;
+				}
+
+				//反転
+				if (moveEnemy_.start[i] == true) {
+					if (moveEnemy_.pos[i].Y <= 20.0f || moveEnemy_.pos[i].Y >= 700.0f) {
+						moveEnemy_.speed[i].Y *= -1;
+					}
+				}
+
+				//HPが0以下になったら死ぬ
+				if (moveEnemy_.HP[i] <= 0) {
+					moveEnemy_.isAlive[i] = false;
+				}
+			}
 		}
-	}*/
 
-	//複数弾を撃つ敵
-	//if (bulletsEnemy_.isAlive == true) {
-	//	enemyBullet_->sCoolTime_++;
-	//	if (enemyBullet_->sCoolTime_ > 30) {
-	//		enemyBullet_->sCoolTime_ = 0;
-	//	}
-	//	
-	//	//弾の位置を合わせる
-	//	if (enemyBullet_->sCoolTime_ == 30) {
-	//		for (int i = 0; i < 10; i++) {
-	//			if (enemyBullet_->enemyBullets_.isShot[i] == false) {
-	//				enemyBullet_->enemyBullets_.isShot[i] = true;
-	//				enemyBullet_->enemyBullets_.pos[i].X = bulletsEnemy_.pos.X;
-	//				enemyBullet_->enemyBullets_.pos[i].Y = bulletsEnemy_.pos.Y;
+		for (int i = 7; i < 9; i++) {
+			if (moveEnemy_.isAlive[i] == true) {
+				//移動
+				moveEnemy_.pos[i].X += moveEnemy_.speed[i].X;
 
-	//				break;
-	//			}
-	//		}
-	//	}
-	//	enemyBullet_->Update();
+				//行動開始
+				if (moveEnemy_.pos[7].X >= 346.0f) {
+					moveEnemy_.start[7] = true;
+				}
+				if (moveEnemy_.pos[8].X <= 934.0f) {
+					moveEnemy_.start[8] = true;
+				}
 
-	//	//HPが0以下になったら死ぬ
-	//	if (bulletsEnemy_.HP <= 0) {
-	//		bulletsEnemy_.isAlive = false;
-	//		for (int i = 0; i < 10; i++) {
-	//			enemyBullet_->enemyBullets_.isShot[i] = false;
-	//		}
-	//	}
-	//}
-}
+				//反転
+				if (moveEnemy_.start[i] == true) {
+					if (moveEnemy_.pos[i].X <= 345.0f || moveEnemy_.pos[i].X >= 935.0f) {
+						moveEnemy_.speed[i].X *= -1;
+					}
+				}
 
-//当たり判定
-//何もしない敵
-void Enemy::EnemyOnCollision(int playerBulletAttack) {
-	/*if (enemy_.isAlive == true) {
-		enemy_.HP -= playerBulletAttack;
-	}*/
-}
+				//HPが0以下になったら死ぬ
+				if (moveEnemy_.HP[i] <= 0) {
+					moveEnemy_.isAlive[i] = false;
+				}
+			}
+		}
 
-//移動する敵
-void Enemy::MoveEnemyOnCollision(int playerBulletAttack) {
-	/*if (moveEnemy_.isAlive == true) {
-		moveEnemy_.HP -= playerBulletAttack;
-	}*/
-}
+		//フェーズ2
+		if (enemyCount_ >= 2100) {
 
-//単発弾を撃つ敵
-void Enemy::BulletEnemyOnCollision(int playerBulletAttack) {
-	/*if (bulletEnemy_.isAlive == true) {
-		bulletEnemy_.HP -= playerBulletAttack;
-	}*/
-}
+		}
+	}
 
-//複数弾を撃つ敵
-void Enemy::BulletsEnemyOnCollision(int playerBulletAttack) {/*
-	if (bulletsEnemy_.isAlive == true) {
-		bulletsEnemy_.HP -= playerBulletAttack;
-	}*/
+	enemyBullet_->Update();
 }
 
 //描画処理
 void Enemy::Draw(int scene,int enemyTutorial,int enemyBulletImage) {
-	//何もしない敵
-	/*if (enemy_.isAlive == true) {
-		Novice::DrawEllipse(enemy_.pos.X, enemy_.pos.Y, enemy_.radius, enemy_.radius, 0.0f, WHITE, kFillModeSolid);
-	}*/
 
-	//移動する敵
+	//チュートリアル
 	if (scene == 2) {
+		//移動する敵
 		for (int i = 0; i < 1; i++) {
 			if (moveEnemy_.isAlive[0] == true) {
 				//Novice::DrawEllipse(moveEnemy_.pos[0].X, moveEnemy_.pos[0].Y, moveEnemy_.radius[0], moveEnemy_.radius[0], 0.0f, moveEnemy_.color[0], kFillModeSolid);
@@ -499,6 +524,7 @@ void Enemy::Draw(int scene,int enemyTutorial,int enemyBulletImage) {
 		}
 	}
 
+	//ステージ1
 	if (scene == 3) {
 		//移動する敵
 		for (int i = 1; i < 5; i++) {
@@ -526,25 +552,18 @@ void Enemy::Draw(int scene,int enemyTutorial,int enemyBulletImage) {
 		}
 	}
 
-	//単発弾を撃つ敵
-	/*if (bulletEnemy_.isAlive == true) {
-		Novice::DrawEllipse(bulletEnemy_.pos.X, bulletEnemy_.pos.Y, bulletEnemy_.radius, bulletEnemy_.radius, 0.0f, WHITE, kFillModeSolid);
-	}*/
+	//ステージ2
+	if (scene == 4) {
+		//移動する敵
+		for (int i = 5; i < 9; i++) {
+			if (moveEnemy_.isAlive[i] == true) {
+				Novice::DrawSprite(moveEnemy_.pos[i].X - 20, moveEnemy_.pos[i].Y - 20, enemyTutorial, 1, 1, 0.0f, moveEnemy_.color[i]);
+			}
+		}
 
-	//複数弾を撃つ敵
-	/*if (bulletsEnemy_.isAlive == true) {
-		Novice::DrawEllipse(bulletsEnemy_.pos.X, bulletsEnemy_.pos.Y, bulletsEnemy_.radius, bulletsEnemy_.radius, 0.0f, WHITE, kFillModeSolid);
-	}*/
+		Novice::ScreenPrintf(0, 20, "%0.0f", moveEnemy_.pos[7].X);
+	}
 
 	//弾
 	enemyBullet_->Draw(enemyBulletImage);
-
-	Novice::ScreenPrintf(0, 0, "%0.0f", bulletEnemy_.pos[0].X);
-	Novice::ScreenPrintf(0, 20, "%0.0f", bulletsEnemy_.pos[1].Y);
-	if (bulletEnemy_.start[4] == false) {
-		Novice::ScreenPrintf(0, 40, "false");
-	}
-	if (bulletEnemy_.start[4] == true) {
-		Novice::ScreenPrintf(0, 40, "true");
-	}
 }

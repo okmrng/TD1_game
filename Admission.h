@@ -15,6 +15,7 @@ public:
 
 	//ƒQƒbƒ^[ŠÖ”
 	bool GetterPlayStart() { return playStart_; }
+	int GetterPlayStartCount() { return playStartCount_; }
 
 	//•`‰æˆ—
 	void Draw(int frameRight, int frameLeft, int Plate, bool WASDStile_, bool directionStile_, int playerWASD, int playerDirection, int playerCore);

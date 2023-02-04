@@ -34,7 +34,7 @@ void Stage2::Update(char* keys, char* prekeys, bool WASDStile_, bool directionSt
 		//©‹@‚Ì’e‚Æ‚Ì“–‚½‚è”»’è
 		//ˆÚ“®‚·‚é“G
 		for (int i = 0; i < 15; i++) {
-			for (int j = 1; j < 5; j++) {
+			for (int j = 5; j < 9; j++) {
 				float playerBullet_moveEnemyX_ = player_->bullet_->bullet_.pos[i].X - enemy_->moveEnemy_.pos[j].X;
 				float playerBullet_moveEnemyY_ = player_->bullet_->bullet_.pos[i].Y - enemy_->moveEnemy_.pos[j].Y;
 				float playerBullet_moveEnemyDis_ = sqrtf(playerBullet_moveEnemyX_ * playerBullet_moveEnemyX_ + playerBullet_moveEnemyY_ * playerBullet_moveEnemyY_);
@@ -55,7 +55,7 @@ void Stage2::Update(char* keys, char* prekeys, bool WASDStile_, bool directionSt
 		}
 
 		//’P”­’e‚ğŒ‚‚Â“G
-		for (int i = 0; i < 15; i++) {
+		/*for (int i = 0; i < 15; i++) {
 			for (int j = 0; j < 8; j++) {
 				float playerBullet_bulletEnemyX_ = player_->bullet_->bullet_.pos[i].X - enemy_->bulletEnemy_.pos[j].X;
 				float playerBullet_bulletEnemyY_ = player_->bullet_->bullet_.pos[i].Y - enemy_->bulletEnemy_.pos[j].Y;
@@ -74,10 +74,10 @@ void Stage2::Update(char* keys, char* prekeys, bool WASDStile_, bool directionSt
 					}
 				}
 			}
-		}
+		}*/
 
 		//•¡”’e‚ğŒ‚‚Â“G
-		for (int i = 0; i < 15; i++) {
+		/*for (int i = 0; i < 15; i++) {
 			for (int j = 0; j < 3; j++) {
 				float playerBullet_bulletsEnemyX_ = player_->bullet_->bullet_.pos[i].X - enemy_->bulletsEnemy_.pos[j].X;
 				float playerBullet_bulletsEnemyY_ = player_->bullet_->bullet_.pos[i].Y - enemy_->bulletsEnemy_.pos[j].Y;
@@ -96,10 +96,10 @@ void Stage2::Update(char* keys, char* prekeys, bool WASDStile_, bool directionSt
 					}
 				}
 			}
-		}
+		}*/
 
 
-		for (int i = 0; i < 15; i++) {
+		/*for (int i = 0; i < 15; i++) {
 			float playerBullet_enemyX_ = player_->bullet_->bullet_.pos[i].X - enemy_->enemy_.pos[0].X;
 			float playerBullet_enemyY_ = player_->bullet_->bullet_.pos[i].Y - enemy_->enemy_.pos[0].Y;
 			float playerBullet_enemyDis_ = sqrtf(playerBullet_enemyX_ * playerBullet_enemyX_ + playerBullet_enemyY_ * playerBullet_enemyY_);
@@ -116,12 +116,12 @@ void Stage2::Update(char* keys, char* prekeys, bool WASDStile_, bool directionSt
 					else { enemy_->enemy_.color[0] = WHITE; }
 				}
 			}
-		}
+		}*/
 
 		//ƒNƒŠƒA
-		if (enemy_->enemy_.isAlive[0] == false) {
+		/*if (enemy_->enemy_.isAlive[0] == false) {
 			clear_->Update();
-		}
+		}*/
 	}
 }
 

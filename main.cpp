@@ -195,6 +195,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 			}
 		}
 
+		//ステージ2
 		if (scene == STAGE2) {
 			stage2->Update(keys, preKeys, option->GetterWASDStaile(), option->GetterDirectionStaile(), tutorial->onPlayerMove_,
 				tutorial->onPlayerShot_, tutorial->onBomb_, scene, tutorial->text_);
@@ -395,6 +396,15 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 				playerWASD, playerDirection, playerCore, bombBullet, option->GetterDirectionStaile(), playerBullet, scene,
 				enemyTutorial, enemyBulletImage, clearPlate);
 		}
+
+		Novice::ScreenPrintf(0, 0, "scene:%d", scene);
+		if (stage2->admission_->GetterPlayStart() == true) {
+			Novice::ScreenPrintf(0, 80, "true");
+		}
+		if (stage2->admission_->GetterPlayStart() == false) {
+			Novice::ScreenPrintf(0, 80, "false");
+		}
+		Novice::ScreenPrintf(0, 100, "%d", stage2->admission_->GetterPlayStartCount());
 		
 		///
 		/// ↑描画処理ここまで

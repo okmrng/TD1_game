@@ -16,17 +16,17 @@ typedef struct Chara {
 };
 
 typedef struct Zako {
-	Vector2 pos[8];
-	Vector2 pos1[8]; //初期位置
-	Vector2 pos2[8]; //最終的な位置
-	Vector2 speed[8];
-	float radius[8];
-	int HP[8];
-	bool isAlive[8];
-	unsigned int color[8];
-	float t[8];
-	float easedT[8];
-	bool start[8];   //行動開始フラグ
+	Vector2 pos[9];
+	Vector2 pos1[9]; //初期位置
+	Vector2 pos2[9]; //最終的な位置
+	Vector2 speed[9];
+	float radius[9];
+	int HP[9];
+	bool isAlive[9];
+	unsigned int color[9];
+	float t[9];
+	float easedT[9];
+	bool start[9];   //行動開始フラグ
 };
 
 //弾
