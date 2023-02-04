@@ -16,6 +16,8 @@ void Stage1::Initialize() {
 
 	clear_ = new Clear();
 	clear_->Initialize();
+
+	isClear_ = false;
 }
 
 //更新処理
@@ -98,23 +100,41 @@ void Stage1::Update(char* keys, char* prekeys, bool WASDStile_, bool directionSt
 			}
 		}
 
-		//クリア
-		for (int i = 3; i < 5; i++) {
-			for (int j = 4; j < 8; j++) {
-				for (int k = 1; k < 3; k++) {
-					if (enemy_->moveEnemy_.isAlive[i] == false && enemy_->bulletEnemy_.isAlive[j] == false &&
-						enemy_->bulletsEnemy_.isAlive[k] == false) {
 
+		for (int i = 0; i < 15; i++) {
+			float playerBullet_enemyX_ = player_->bullet_->bullet_.pos[i].X - enemy_->enemy_.pos[0].X;
+			float playerBullet_enemyY_ = player_->bullet_->bullet_.pos[i].Y - enemy_->enemy_.pos[0].Y;
+			float playerBullet_enemyDis_ = sqrtf(playerBullet_enemyX_ * playerBullet_enemyX_ + playerBullet_enemyY_ * playerBullet_enemyY_);
+
+			if (enemy_->enemy_.isAlive[0] == true) {
+				if (playerBullet_enemyDis_ < 20.0f) {
+					if (player_->bullet_->bullet_.isShot[i] == true) {
+						if (enemy_->enemy_.isAlive[0] == true) {
+							enemy_->enemy_.HP[0] -= player_->bullet_->bullet_.attack;
+							enemy_->enemy_.color[0] = RED;
+							player_->bullet_->bullet_.isShot[i] = false;
+						}
 					}
+					else { enemy_->enemy_.color[0] = WHITE; }
 				}
 			}
+		}
+
+		//クリア
+		if (enemy_->enemy_.isAlive[0] == false) {
+			clear_->Update();
+		}
+
+		if (isClear_ == true) {
+			clear_->Update();
 		}
 	}
 }
 
 //描画処理
 void Stage1::Draw(int frameRight, int frameLeft, int plate, int WASDStile_, int directionStule_, int playerWASD, int playerDirection,
-	int playerCore, int bombBullet, bool directionStile_, int playerBullet, int scene, int enemytutorial, int enemyBulletImage) {
+	int playerCore, int bombBullet, bool directionStile_, int playerBullet, int scene, int enemytutorial, int enemyBulletImage,
+	int clearPlate) {
 
 	//自機
 	if (admission_->GetterPlayStart() == true) {
@@ -126,4 +146,5 @@ void Stage1::Draw(int frameRight, int frameLeft, int plate, int WASDStile_, int 
 
 	admission_->Draw(frameRight, frameLeft, plate, WASDStile_, directionStule_, playerWASD, playerDirection, playerCore);
 
+	clear_->Draw(clearPlate);
 }

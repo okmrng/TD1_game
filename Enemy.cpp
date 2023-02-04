@@ -6,13 +6,14 @@
 //‰Šú‰»
 void Enemy::Initialize() {
 	//‰½‚à‚µ‚È‚¢“G
-	/*enemy_.HP = 100;
-	enemy_.isAlive = true;
-	enemy_.pos.X = 640.0f;
-	enemy_.pos.Y = 100.0f;
-	enemy_.radius = 20.0f;
-	enemy_.speed.X = 0.0f;
-	enemy_.speed.Y = 0.0f;*/
+	enemy_.HP[0] = 10;
+	enemy_.isAlive[0] = true;
+	enemy_.pos[0].X = 640.0f;
+	enemy_.pos[0].Y = -40.0f;
+	enemy_.radius[0] = 20.0f;
+	enemy_.speed[0].X = 0.0f;
+	enemy_.speed[0].Y = 10.0f;
+	enemy_.color[0] = WHITE;
 
 	//ˆÚ“®‚·‚é“G
 	moveEnemy_.HP[0] = 20;
@@ -387,6 +388,23 @@ void Enemy::Update(int scene, int text_) {
 			}
 		}
 
+		if (enemyCount_ >= 6480) {
+			if (enemy_.isAlive[0] == true) {
+				//ˆÚ“®
+				enemy_.pos[0].Y += enemy_.speed[0].Y;
+
+				//Ž~‚ß‚é
+				if (enemy_.pos[0].Y >= 100.0f) {
+					enemy_.speed[0].Y = 0.0f;
+				}
+			}
+
+			//HP‚ª0ˆÈ‰º‚É‚È‚Á‚½‚çŽ€‚Ê
+			if (enemy_.HP[0] <= 0) {
+				enemy_.isAlive[0] = false;
+			}
+		}
+
 		enemyBullet_->Update();
 	}
 
@@ -495,6 +513,10 @@ void Enemy::Draw(int scene,int enemyTutorial,int enemyBulletImage) {
 			if (bulletsEnemy_.isAlive[i] == true) {
 				Novice::DrawSprite(bulletsEnemy_.pos[i].X - 20, bulletsEnemy_.pos[i].Y - 20, enemyTutorial, 1, 1, 0.0f, bulletsEnemy_.color[i]);
 			}
+		}
+
+		if (enemy_.isAlive[0] == true) {
+			Novice::DrawSprite(enemy_.pos[0].X - 20, enemy_.pos[0].Y - 20, enemyTutorial, 1, 1, 0.0f, enemy_.color[0]);
 		}
 	}
 

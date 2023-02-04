@@ -182,6 +182,10 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		if (scene == STAGE1) {
 			stage1->Update(keys, preKeys, option->GetterWASDStaile(), option->GetterDirectionStaile(), tutorial->onPlayerMove_,
 				tutorial->onPlayerShot_, tutorial->onBomb_, scene, tutorial->text_);
+
+			if (stage1->clear_->next_ == true) {
+				scene = TITLE;
+			}
 		}
 
 		//敵
@@ -366,7 +370,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		if (scene == STAGE1) {
 			stage1->Draw(frameRight, frameLeft, stage1Plate, option->GetterWASDStaile(), option->GetterDirectionStaile(),
 				playerWASD, playerDirection, playerCore, bombBullet, option->GetterDirectionStaile(), playerBullet, scene,
-				enemyTutorial, enemyBulletImage);
+				enemyTutorial, enemyBulletImage, clearPlate);
 		}
 		
 		///
