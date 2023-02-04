@@ -170,6 +170,7 @@ void Enemy::Update(int scene, int text_) {
 		}
 	}
 
+	//ステージ1
 	if (scene == 3) {
 		enemyCount_++;
 
@@ -403,6 +404,11 @@ void Enemy::Update(int scene, int text_) {
 			if (enemy_.HP[0] <= 0) {
 				enemy_.isAlive[0] = false;
 			}
+		}
+
+		//ステージ2
+		if (scene == 4) {
+
 		}
 
 		enemyBullet_->Update();

@@ -1,10 +1,10 @@
-#include "Stage1.h"
+#include "Stage2.h"
 #include <Novice.h>
 #define _USE_MATH_DEFINES
 #include <math.h>
 
 //初期化
-void Stage1::Initialize() {
+void Stage2::Initialize() {
 	admission_ = new Admission();
 	admission_->Initialize();
 
@@ -19,7 +19,7 @@ void Stage1::Initialize() {
 }
 
 //更新処理
-void Stage1::Update(char* keys, char* prekeys, bool WASDStile_, bool directionStile_, bool onPlayerMove_, bool onPlayerShot_,
+void Stage2::Update(char* keys, char* prekeys, bool WASDStile_, bool directionStile_, bool onPlayerMove_, bool onPlayerShot_,
 	bool onBomb_, int scene, int text_) {
 	//ステージ入場演出
 	admission_->Update();
@@ -126,7 +126,7 @@ void Stage1::Update(char* keys, char* prekeys, bool WASDStile_, bool directionSt
 }
 
 //描画処理
-void Stage1::Draw(int frameRight, int frameLeft, int plate, int WASDStile_, int directionStule_, int playerWASD, int playerDirection,
+void Stage2::Draw(int frameRight, int frameLeft, int plate, int WASDStile_, int directionStule_, int playerWASD, int playerDirection,
 	int playerCore, int bombBullet, bool directionStile_, int playerBullet, int scene, int enemytutorial, int enemyBulletImage,
 	int clearPlate) {
 

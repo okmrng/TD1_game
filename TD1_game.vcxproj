@@ -108,6 +108,7 @@
     <ClCompile Include="PlayerBullet.cpp" />
     <ClCompile Include="Admission.cpp" />
     <ClCompile Include="Stage1.cpp" />
+    <ClCompile Include="Stage2.cpp" />
     <ClCompile Include="StageSelect.cpp" />
     <ClCompile Include="Tutorial.cpp" />
   </ItemGroup>
@@ -147,6 +148,7 @@
     <ClInclude Include="Player.h" />
     <ClInclude Include="PlayerBullet.h" />
     <ClInclude Include="Stage1.h" />
+    <ClInclude Include="Stage2.h" />
     <ClInclude Include="StageSelect.h" />
     <ClInclude Include="Struct.h" />
     <ClInclude Include="Admission.h" />

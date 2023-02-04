@@ -6,6 +6,7 @@
 #include "Tutorial.h"
 #include "Clear.h"
 #include "Stage1.h"
+#include "Stage2.h"
 #define _USE_MATH_DEFINES
 #include <math.h>
 
@@ -52,6 +53,10 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	Stage1* stage1 = new Stage1();
 	stage1->Initialize();
 
+	//ステージ2
+	Stage2* stage2 = new Stage2();
+	stage2->Initialize();
+
 	//当たり判定
 	//何もしない敵
 	float playerBullet_enemyX = 0.0f;
@@ -84,6 +89,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		TUTORIAL,
 		//STAGESELECT,
 		STAGE1,
+		STAGE2,
 		GAMEOVER,
 		CLEAR,
 		RESET
@@ -103,6 +109,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	int directionYellow = Novice::LoadTexture("./Resources/Images/direction_yellow.png");
 	int tutorialPlate = Novice::LoadTexture("./Resources/Images/plate_tutorial.png");
 	int stage1Plate = Novice::LoadTexture("./Resources/Images/plate_stage1.png");
+	int stage2Plate = Novice::LoadTexture("./Resources/Images/plate_stage2.png");
 	int clearPlate = Novice::LoadTexture("./Resources/Images/plate_clear.png");
 	int tutorialText1 = Novice::LoadTexture("./Resources/Images/tutorial_text1.png");
 	int tutorialText2 = Novice::LoadTexture("./Resources/Images/tutorial_text2.png");
@@ -174,7 +181,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 			if (tutorial->next_ == true) {
 				//scene = STAGESELECT;
-				scene = STAGE1;
+				scene = STAGE2;
 			}
 		}
 
@@ -184,7 +191,16 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 				tutorial->onPlayerShot_, tutorial->onBomb_, scene, tutorial->text_);
 
 			if (stage1->clear_->next_ == true) {
-				scene = TITLE;
+				//scene = TITLE;
+			}
+		}
+
+		if (scene == STAGE2) {
+			stage2->Update(keys, preKeys, option->GetterWASDStaile(), option->GetterDirectionStaile(), tutorial->onPlayerMove_,
+				tutorial->onPlayerShot_, tutorial->onBomb_, scene, tutorial->text_);
+
+			if (stage2->clear_->next_ == true) {
+				//scene = TITLE;
 			}
 		}
 
@@ -369,6 +385,13 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		//ステージ1
 		if (scene == STAGE1) {
 			stage1->Draw(frameRight, frameLeft, stage1Plate, option->GetterWASDStaile(), option->GetterDirectionStaile(),
+				playerWASD, playerDirection, playerCore, bombBullet, option->GetterDirectionStaile(), playerBullet, scene,
+				enemyTutorial, enemyBulletImage, clearPlate);
+		}
+
+		//ステージ2
+		if (scene == STAGE2) {
+			stage2->Draw(frameRight, frameLeft, stage2Plate, option->GetterWASDStaile(), option->GetterDirectionStaile(),
 				playerWASD, playerDirection, playerCore, bombBullet, option->GetterDirectionStaile(), playerBullet, scene,
 				enemyTutorial, enemyBulletImage, clearPlate);
 		}

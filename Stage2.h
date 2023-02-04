@@ -4,11 +4,11 @@
 #include "Enemy.h"
 #include "Clear.h"
 
-class Stage1
+class Stage2
 {
 public:
 	//ƒƒ“ƒoŠÖ”
-	
+
 	void Initialize();
 
 	void Update(char* keys, char* prekeys, bool WASDStile_, bool directionStile_, bool onPlayerMove_, bool onPlayerShot_,
