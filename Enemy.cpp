@@ -26,7 +26,7 @@ void Enemy::Initialize() {
 	moveEnemy_.color[0] = WHITE;
 
 	//共通
-	for (int i = 1; i < 10; i++) {
+	for (int i = 1; i < 9; i++) {
 		moveEnemy_.isAlive[i] = true;
 		moveEnemy_.radius[i] = 20.0f;
 		moveEnemy_.color[i] = WHITE;
@@ -85,14 +85,6 @@ void Enemy::Initialize() {
 	moveEnemy_.pos[8].X = 975.0f;
 	moveEnemy_.pos[8].Y = 150.0f;
 	moveEnemy_.speed[8].X = -5.0f;
-
-	moveEnemy_.HP[9] = 70;
-	moveEnemy_.pos[9].X = 640.0f;
-	moveEnemy_.pos[9].Y = -40.0f;
-	moveEnemy_.speed[9].Y = 10.0f;
-	moveEnemy_.theta[9] = 0.0f;
-	moveEnemy_.amplitude[9] = 10.0f;
-	moveEnemy_.start[9] = false;
 
 	//単発弾を撃つ敵
 	//共通
@@ -182,8 +174,8 @@ void Enemy::Initialize() {
 	}
 
 	//複数弾を撃つ敵
-	for (int i = 0; i < 3; i++) {
-		bulletsEnemy_.HP[i] = 70;
+	//共通
+	for (int i = 0; i < 5; i++) {
 		bulletsEnemy_.isAlive[i] = true;
 		bulletsEnemy_.radius[i] = 20.0f;
 		bulletsEnemy_.speed[i].X = 0.0f;
@@ -192,6 +184,11 @@ void Enemy::Initialize() {
 		bulletsEnemy_.t[i] = 0.0f;
 		bulletsEnemy_.easedT[i] = 0.0f;
 		bulletEnemy_.start[i] = false;
+	}
+
+	//ステージ1
+	for (int i = 0; i < 3; i++) {
+		bulletsEnemy_.HP[i] = 70;
 	}
 
 	bulletsEnemy_.pos[0].X = 640.0f;
@@ -207,6 +204,26 @@ void Enemy::Initialize() {
 
 	bulletsEnemy_.pos[1].X = 600.0f;
 	bulletsEnemy_.pos[2].X = 680.0f;
+
+	//ステージ2
+	for (int i = 3; i < 5; i++) {
+		bulletsEnemy_.HP[i] = 80;
+		bulletsEnemy_.pos[i].Y = -40.0f;
+		bulletsEnemy_.pos1[i].Y = -40.0f;
+		bulletsEnemy_.pos2[i].Y = 150.0f;
+	}
+
+	bulletsEnemy_.pos[3].X = 600.0f;
+	bulletsEnemy_.pos[4].X = 680.0f;
+
+	//ボムゲットできる敵
+	bombEnemy_.HP[9] = 70;
+	bombEnemy_.pos[9].X = 640.0f;
+	bombEnemy_.pos[9].Y = -40.0f;
+	bombEnemy_.speed[9].Y = 10.0f;
+	bombEnemy_.theta[9] = 0.0f;
+	bombEnemy_.amplitude[9] = 10.0f;
+	bombEnemy_.start[9] = false;
 
 	//弾
 	enemyBullet_ = new EnemyBullet();
@@ -536,63 +553,111 @@ void Enemy::Update(int scene, int text_) {
 		//}
 
 		//フェーズ2
-		if (enemyCount_ >= 2100) {
-			//移動する敵
-			if (moveEnemy_.isAlive[9] == true) {
-				//画面内まで移動
-				if (moveEnemy_.start[9] == false) {
-					moveEnemy_.pos[9].Y += moveEnemy_.speed[9].Y;
+		//if (enemyCount_ >= 2100) {
+		//	//移動する敵
+		//	if (moveEnemy_.isAlive[9] == true) {
+		//		//画面内まで移動
+		//		if (moveEnemy_.start[9] == false) {
+		//			moveEnemy_.pos[9].Y += moveEnemy_.speed[9].Y;
 
-					if (moveEnemy_.pos[9].Y >= 100.0f) {
-						moveEnemy_.speed[9].Y = 0.0f;
-						moveEnemy_.start[9] = true;
-					}
+		//			if (moveEnemy_.pos[9].Y >= 100.0f) {
+		//				moveEnemy_.speed[9].Y = 0.0f;
+		//				moveEnemy_.start[9] = true;
+		//			}
+		//		}
+
+		//		//波
+		//		if (moveEnemy_.start[9] == true) {
+		//			moveEnemy_.pos[9].Y = sinf(moveEnemy_.theta[9]) * moveEnemy_.amplitude[9] + 100.0f;
+		//			moveEnemy_.theta[9] += M_PI / 60.0f;
+		//		}
+		//	}
+
+		//	//単発弾を撃つ敵
+		//	for (int i = 8; i < 12; i++) {
+		//		if (bulletEnemy_.isAlive[i] == true) {
+		//			//移動
+		//			bulletEnemy_.pos[i].X += bulletEnemy_.speed[i].X;
+
+		//			if (bulletEnemy_.pos[9].X >= 346.0f) {
+		//				bulletEnemy_.start[i] = true;
+		//			}
+
+		//			//反転
+		//			if (bulletEnemy_.start[i] == true) {
+		//				if (bulletEnemy_.pos[i].X <= 345.0f || bulletEnemy_.pos[i].X >= 935.0f) {
+		//					bulletEnemy_.speed[i].X *= -1;
+		//				}
+		//			}
+
+		//			//行動開始
+		//			if (bulletEnemy_.start[i] == true) {
+		//				//弾の位置を合わせる
+		//				if (enemyBullet_->enemyBullet_.isShot[i] == false) {
+		//					enemyBullet_->enemyBullet_.pos[i].X = bulletEnemy_.pos[i].X;
+		//					enemyBullet_->enemyBullet_.pos[i].Y = bulletEnemy_.pos[i].Y;
+		//					enemyBullet_->enemyBullet_.isShot[i] = true;
+		//				}
+		//			}
+
+		//			//HPが0以下になったら死ぬ
+		//			if (bulletEnemy_.HP[i] <= 0) {
+		//				bulletEnemy_.isAlive[i] = false;
+		//			}
+		//		}
+		//	}
+		//}
+
+		//フェーズ3
+		if (enemyCount_ >= 4500) {
+			for (int i = 3; i < 5; i++) {
+				//イージング
+				if (bulletsEnemy_.t[i] <= 1.0f) {
+					bulletsEnemy_.t[i] += 1.0f / 30.0f;
+				}
+				if (bulletsEnemy_.t[i] > 1.0f) {
+					bulletsEnemy_.t[i] = 1.0f;
 				}
 
-				//波
-				if (moveEnemy_.start[9] == true) {
-					moveEnemy_.pos[9].Y = sinf(moveEnemy_.theta[9]) * moveEnemy_.amplitude[9] + 100.0f;
-					moveEnemy_.theta[9] += M_PI / 60.0f;
+				bulletsEnemy_.easedT[i] = sqrt(1.0f - pow(bulletsEnemy_.t[i] - 1.0f, 2.0f));
+
+				bulletsEnemy_.pos[i].Y = (1.0f - bulletsEnemy_.easedT[i]) * bulletsEnemy_.pos1[i].Y + bulletsEnemy_.easedT[i] * bulletsEnemy_.pos2[i].Y;
+
+				if (bulletsEnemy_.pos[3].Y == bulletsEnemy_.pos2[3].Y) {
+					bulletsEnemy_.start[i] = true;
 				}
-			}
 
-			//単発弾を撃つ敵
-			for (int i = 8; i < 12; i++) {
-				if (bulletEnemy_.isAlive[i] == true) {
-					//移動
-					bulletEnemy_.pos[i].X += bulletEnemy_.speed[i].X;
-
-					if (bulletEnemy_.pos[9].X >= 346.0f) {
-						bulletEnemy_.start[i] = true;
-					}
-
-					//反転
-					if (bulletEnemy_.start[i] == true) {
-						if (bulletEnemy_.pos[i].X <= 345.0f || bulletEnemy_.pos[i].X >= 935.0f) {
-							bulletEnemy_.speed[i].X *= -1;
+				//行動開始
+				if (bulletsEnemy_.start[i] == true) {
+					if (bulletsEnemy_.isAlive[3] == true) {
+						for (int j = 9; j < 12; j++) {
+							if (enemyBullet_->enemyBullets_.isShot[j] == false) {
+								enemyBullet_->enemyBullets_.pos[j].X = bulletsEnemy_.pos[3].X;
+								enemyBullet_->enemyBullets_.pos[j].Y = bulletsEnemy_.pos[3].Y;
+								enemyBullet_->enemyBullets_.isShot[j] = true;
+							}
 						}
 					}
 
-					//行動開始
-					if (bulletEnemy_.start[i] == true) {
-						//弾の位置を合わせる
-						if (enemyBullet_->enemyBullet_.isShot[i] == false) {
-							enemyBullet_->enemyBullet_.pos[i].X = bulletEnemy_.pos[i].X;
-							enemyBullet_->enemyBullet_.pos[i].Y = bulletEnemy_.pos[i].Y;
-							enemyBullet_->enemyBullet_.isShot[i] = true;
+					if (bulletsEnemy_.isAlive[4] == true) {
+						for (int j = 12; j < 15; j++) {
+							if (enemyBullet_->enemyBullets_.isShot[j] == false) {
+								enemyBullet_->enemyBullets_.pos[j].X = bulletsEnemy_.pos[4].X;
+								enemyBullet_->enemyBullets_.pos[j].Y = bulletsEnemy_.pos[4].Y;
+								enemyBullet_->enemyBullets_.isShot[j] = true;
+							}
 						}
 					}
+				}
 
-					//HPが0以下になったら死ぬ
-					if (bulletEnemy_.HP[i] <= 0) {
-						bulletEnemy_.isAlive[i] = false;
-					}
+				//HPが0以下になったら死ぬ
+				if (bulletsEnemy_.HP[i] <= 0) {
+					bulletsEnemy_.isAlive[i] = false;
 				}
 			}
 		}
 
-		//フェーズ3
-		if (enemyCount_ >= 4500) {
+		if (enemyCount_ >= 5700) {
 
 		}
 	}
@@ -651,14 +716,24 @@ void Enemy::Draw(int scene,int enemyTutorial,int enemyBulletImage) {
 			}
 		}
 
-		if (moveEnemy_.isAlive[9] == true) {
-			Novice::DrawSprite(moveEnemy_.pos[9].X - 20, moveEnemy_.pos[9].Y - 20, enemyTutorial, 1, 1, 0.0f, moveEnemy_.color[9]);
-		}
-
 		//単発弾を撃つ敵
 		for (int i = 8; i < 12; i++) {
 			if (bulletEnemy_.isAlive[i] == true) {
 				Novice::DrawSprite(bulletEnemy_.pos[i].X - 20, bulletEnemy_.pos[i].Y - 20, enemyTutorial, 1, 1, 0.0f, bulletEnemy_.color[i]);
+			}
+		}
+
+		//複数弾を撃つ敵
+		for (int i = 3; i < 5; i++) {
+			if (bulletsEnemy_.isAlive[i] == true) {
+				Novice::DrawSprite(bulletsEnemy_.pos[i].X - 20, bulletsEnemy_.pos[i].Y - 20, enemyTutorial, 1, 1, 0.0f, bulletsEnemy_.color[i]);
+			}
+		}
+
+		//ボムゲットできる敵
+		for (int i = 0; i < 1; i++) {
+			if (bombEnemy_.isAlive[i] == true) {
+				Novice::DrawSprite(bombEnemy_.pos[i].X - 20, bombEnemy_.pos[i].Y - 20, enemyTutorial, 1, 1, 0.0f, bombEnemy_.color[i]);
 			}
 		}
 	}

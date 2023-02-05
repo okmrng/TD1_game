@@ -34,7 +34,7 @@ void Stage2::Update(char* keys, char* prekeys, bool WASDStile_, bool directionSt
 		//©‹@‚Ì’e‚Æ‚Ì“–‚½‚è”»’è
 		//ˆÚ“®‚·‚é“G
 		for (int i = 0; i < 15; i++) {
-			for (int j = 5; j < 10; j++) {
+			for (int j = 5; j < 9; j++) {
 				float playerBullet_moveEnemyX_ = player_->bullet_->bullet_.pos[i].X - enemy_->moveEnemy_.pos[j].X;
 				float playerBullet_moveEnemyY_ = player_->bullet_->bullet_.pos[i].Y - enemy_->moveEnemy_.pos[j].Y;
 				float playerBullet_moveEnemyDis_ = sqrtf(playerBullet_moveEnemyX_ * playerBullet_moveEnemyX_ + playerBullet_moveEnemyY_ * playerBullet_moveEnemyY_);
@@ -77,8 +77,8 @@ void Stage2::Update(char* keys, char* prekeys, bool WASDStile_, bool directionSt
 		}
 
 		//•¡”’e‚ğŒ‚‚Â“G
-		/*for (int i = 0; i < 15; i++) {
-			for (int j = 0; j < 3; j++) {
+		for (int i = 0; i < 15; i++) {
+			for (int j = 3; j < 5; j++) {
 				float playerBullet_bulletsEnemyX_ = player_->bullet_->bullet_.pos[i].X - enemy_->bulletsEnemy_.pos[j].X;
 				float playerBullet_bulletsEnemyY_ = player_->bullet_->bullet_.pos[i].Y - enemy_->bulletsEnemy_.pos[j].Y;
 				float playerBullet_bulletsEnemyDis_ = sqrtf(playerBullet_bulletsEnemyX_ * playerBullet_bulletsEnemyX_ + playerBullet_bulletsEnemyY_ * playerBullet_bulletsEnemyY_);
@@ -96,27 +96,29 @@ void Stage2::Update(char* keys, char* prekeys, bool WASDStile_, bool directionSt
 					}
 				}
 			}
-		}*/
+		}
 
+		//ƒ{ƒ€ƒQƒbƒg‚Å‚«‚é“G
+		for (int i = 0; i < 15; i++) {
+			for (int j = 0; j < 1; j++) {
+				float playerBullet_bombEnemyX_ = player_->bullet_->bullet_.pos[i].X - enemy_->bombEnemy_.pos[j].X;
+				float playerBullet_bombEnemyY_ = player_->bullet_->bullet_.pos[i].Y - enemy_->bombEnemy_.pos[j].Y;
+				float playerBullet_bombEnemyDis_ = sqrtf(playerBullet_bombEnemyX_ * playerBullet_bombEnemyX_ + playerBullet_bombEnemyY_ * playerBullet_bombEnemyY_);
 
-		/*for (int i = 0; i < 15; i++) {
-			float playerBullet_enemyX_ = player_->bullet_->bullet_.pos[i].X - enemy_->enemy_.pos[0].X;
-			float playerBullet_enemyY_ = player_->bullet_->bullet_.pos[i].Y - enemy_->enemy_.pos[0].Y;
-			float playerBullet_enemyDis_ = sqrtf(playerBullet_enemyX_ * playerBullet_enemyX_ + playerBullet_enemyY_ * playerBullet_enemyY_);
-
-			if (enemy_->enemy_.isAlive[0] == true) {
-				if (playerBullet_enemyDis_ < 20.0f) {
-					if (player_->bullet_->bullet_.isShot[i] == true) {
-						if (enemy_->enemy_.isAlive[0] == true) {
-							enemy_->enemy_.HP[0] -= player_->bullet_->bullet_.attack;
-							enemy_->enemy_.color[0] = RED;
-							player_->bullet_->bullet_.isShot[i] = false;
+				if (enemy_->bombEnemy_.isAlive[j] == true) {
+					if (playerBullet_bombEnemyDis_ < 20.0f) {
+						if (player_->bullet_->bullet_.isShot[i] == true) {
+							if (enemy_->bombEnemy_.isAlive[j] == true) {
+								enemy_->bombEnemy_.HP[j] -= player_->bullet_->bullet_.attack;
+								enemy_->bombEnemy_.color[j] = RED;
+								player_->bullet_->bullet_.isShot[i] = false;
+							}
 						}
+						else { enemy_->bombEnemy_.color[j] = WHITE; }
 					}
-					else { enemy_->enemy_.color[0] = WHITE; }
 				}
 			}
-		}*/
+		}
 
 		//ƒNƒŠƒA
 		/*if (enemy_->enemy_.isAlive[0] == false) {

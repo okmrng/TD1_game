@@ -35,7 +35,7 @@ void EnemyBullet::Initialize() {
 	}
 
 	//ï°êîíe
-	for (int i = 0; i < 9; i++) {
+	for (int i = 0; i < 15; i++) {
 		enemyBullets_.isShot[i] = false;
 		enemyBullets_.radius[i] = 10.0f;
 		enemyBullets_.speed[i].Y = 5.0f;
@@ -46,6 +46,10 @@ void EnemyBullet::Initialize() {
 	}
 
 	for (int i = 3; i < 9; i++) {
+		enemyBullets_.speed[i].X = 0.3f;
+	}
+
+	for (int i = 9; i < 15; i++) {
 		enemyBullets_.speed[i].X = 0.3f;
 	}
 }
@@ -67,7 +71,7 @@ void EnemyBullet::Update() {
 	}
 
 	//ï°êîíe
-	for (int i = 0; i < 9; i++) {
+	for (int i = 0; i < 15; i++) {
 		if (enemyBullets_.isShot[i] == true) {
 			//à⁄ìÆ
 			enemyBullets_.pos[i].Y += enemyBullets_.speed[i].Y;
@@ -83,6 +87,14 @@ void EnemyBullet::Update() {
 			enemyBullets_.pos[6].X -= enemyBullets_.speed[6].X;
 
 			enemyBullets_.pos[8].X += enemyBullets_.speed[8].X;
+
+			enemyBullets_.pos[9].X -= enemyBullets_.speed[9].X;
+
+			enemyBullets_.pos[11].X += enemyBullets_.speed[11].X;
+
+			enemyBullets_.pos[12].X -= enemyBullets_.speed[12].X;
+
+			enemyBullets_.pos[14].X += enemyBullets_.speed[14].X;
 
 			//âÊñ äOÇ…çsÇ¡ÇΩÇÁÉtÉâÉOÇfalseÇ…Ç∑ÇÈ
 			/*if (enemyBullets_.pos[i].X <= 317.0f || enemyBullets_.pos[i].X >= 963.0f || enemyBullets_.pos[i].Y <= -8.0f || enemyBullets_.pos[i].Y >= 728.0f) {
@@ -104,7 +116,7 @@ void EnemyBullet::Draw(int enemyBulletImage) {
 	}
 
 	//ï°êîíe
-	for (int i = 0; i < 9; i++) {
+	for (int i = 0; i < 15; i++) {
 		if (enemyBullets_.isShot[i] == true) {
 			Novice::DrawSprite(enemyBullets_.pos[i].X - 10.0f, enemyBullets_.pos[i].Y - 10.0f, enemyBulletImage, 1, 1, 0.0f, WHITE);
 		}

@@ -45,6 +45,9 @@ public:
 	//•¡”’e‚ğŒ‚‚Â“G
 	Zako bulletsEnemy_;
 
+	//ƒ{ƒ€ƒQƒbƒg‚Å‚«‚é“G
+	Zako bombEnemy_;
+
 	//’e
 	EnemyBullet* enemyBullet_;
 
