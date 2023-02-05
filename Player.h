@@ -46,6 +46,7 @@ public:
 	int GetterHP() { return player_.HP; }
 	bool GetterOnCollision() { return onCollision_; }
 	bool GetterShotBomb() { return shotBomb_; }
+	int GetterBombs() { return bombs_; }
 
 	//セッター関数
 	void SetterBombs(int bombs);

@@ -74,11 +74,47 @@ void Stage1::Update(char* keys, char* prekeys, bool WASDStile_, bool directionSt
 					}
 				}
 			}
+
+			for (int j = 12; j < 14; j++) {
+				float playerBullet_bulletEnemyX_ = player_->bullet_->bullet_.pos[i].X - enemy_->bulletEnemy_.pos[j].X;
+				float playerBullet_bulletEnemyY_ = player_->bullet_->bullet_.pos[i].Y - enemy_->bulletEnemy_.pos[j].Y;
+				float playerBullet_bulletEnemyDis_ = sqrtf(playerBullet_bulletEnemyX_ * playerBullet_bulletEnemyX_ + playerBullet_bulletEnemyY_ * playerBullet_bulletEnemyY_);
+
+				if (enemy_->bulletEnemy_.isAlive[j] == true) {
+					if (playerBullet_bulletEnemyDis_ < 20.0f) {
+						if (player_->bullet_->bullet_.isShot[i] == true) {
+							if (enemy_->bulletEnemy_.isAlive[j] == true) {
+								enemy_->bulletEnemy_.HP[j] -= player_->bullet_->bullet_.attack;
+								enemy_->bulletEnemy_.color[j] = RED;
+								player_->bullet_->bullet_.isShot[i] = false;
+							}
+						}
+						else { enemy_->bulletEnemy_.color[j] = WHITE; }
+					}
+				}
+			}
 		}
 
 		//ï°êîíeÇåÇÇ¬ìG
 		for (int i = 0; i < 15; i++) {
-			for (int j = 0; j < 3; j++) {
+			float playerBullet_bulletsEnemyX_ = player_->bullet_->bullet_.pos[i].X - enemy_->bulletsEnemy_.pos[0].X;
+			float playerBullet_bulletsEnemyY_ = player_->bullet_->bullet_.pos[i].Y - enemy_->bulletsEnemy_.pos[0].Y;
+			float playerBullet_bulletsEnemyDis_ = sqrtf(playerBullet_bulletsEnemyX_ * playerBullet_bulletsEnemyX_ + playerBullet_bulletsEnemyY_ * playerBullet_bulletsEnemyY_);
+
+			if (enemy_->bulletsEnemy_.isAlive[0] == true) {
+				if (playerBullet_bulletsEnemyDis_ < 20.0f) {
+					if (player_->bullet_->bullet_.isShot[i] == true) {
+						if (enemy_->bulletsEnemy_.isAlive[0] == true) {
+							enemy_->bulletsEnemy_.HP[0] -= player_->bullet_->bullet_.attack;
+							enemy_->bulletsEnemy_.color[0] = RED;
+							player_->bullet_->bullet_.isShot[i] = false;
+						}
+					}
+					else { enemy_->bulletsEnemy_.color[0] = WHITE; }
+				}
+			}
+
+			for (int j = 5; j < 8; j++) {
 				float playerBullet_bulletsEnemyX_ = player_->bullet_->bullet_.pos[i].X - enemy_->bulletsEnemy_.pos[j].X;
 				float playerBullet_bulletsEnemyY_ = player_->bullet_->bullet_.pos[i].Y - enemy_->bulletsEnemy_.pos[j].Y;
 				float playerBullet_bulletsEnemyDis_ = sqrtf(playerBullet_bulletsEnemyX_ * playerBullet_bulletsEnemyX_ + playerBullet_bulletsEnemyY_ * playerBullet_bulletsEnemyY_);
