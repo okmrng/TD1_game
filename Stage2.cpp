@@ -34,7 +34,7 @@ void Stage2::Update(char* keys, char* prekeys, bool WASDStile_, bool directionSt
 		//©‹@‚Ì’e‚Æ‚Ì“–‚½‚è”»’è
 		//ˆÚ“®‚·‚é“G
 		for (int i = 0; i < 15; i++) {
-			for (int j = 5; j < 9; j++) {
+			for (int j = 5; j < 10; j++) {
 				float playerBullet_moveEnemyX_ = player_->bullet_->bullet_.pos[i].X - enemy_->moveEnemy_.pos[j].X;
 				float playerBullet_moveEnemyY_ = player_->bullet_->bullet_.pos[i].Y - enemy_->moveEnemy_.pos[j].Y;
 				float playerBullet_moveEnemyDis_ = sqrtf(playerBullet_moveEnemyX_ * playerBullet_moveEnemyX_ + playerBullet_moveEnemyY_ * playerBullet_moveEnemyY_);
@@ -55,8 +55,8 @@ void Stage2::Update(char* keys, char* prekeys, bool WASDStile_, bool directionSt
 		}
 
 		//’P”­’e‚ğŒ‚‚Â“G
-		/*for (int i = 0; i < 15; i++) {
-			for (int j = 0; j < 8; j++) {
+		for (int i = 0; i < 15; i++) {
+			for (int j = 8; j < 12; j++) {
 				float playerBullet_bulletEnemyX_ = player_->bullet_->bullet_.pos[i].X - enemy_->bulletEnemy_.pos[j].X;
 				float playerBullet_bulletEnemyY_ = player_->bullet_->bullet_.pos[i].Y - enemy_->bulletEnemy_.pos[j].Y;
 				float playerBullet_bulletEnemyDis_ = sqrtf(playerBullet_bulletEnemyX_ * playerBullet_bulletEnemyX_ + playerBullet_bulletEnemyY_ * playerBullet_bulletEnemyY_);
@@ -74,7 +74,7 @@ void Stage2::Update(char* keys, char* prekeys, bool WASDStile_, bool directionSt
 					}
 				}
 			}
-		}*/
+		}
 
 		//•¡”’e‚ğŒ‚‚Â“G
 		/*for (int i = 0; i < 15; i++) {
