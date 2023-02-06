@@ -11,9 +11,6 @@ public:
 	//更新処理
 	void Update();
 
-	//当たり判定
-	void OnCollition();
-
 	//描画処理
 	void Draw(int enemyBulletImage);
 
@@ -29,5 +26,8 @@ public:
 
 	//クールタイム
 	int sCoolTime_;
+
+	//中ボス弾構造体
+	EBullets miniBossBullet_;
 };
 

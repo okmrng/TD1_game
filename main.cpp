@@ -133,6 +133,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	int playerCore = Novice::LoadTexture("./Resources/Images/player_core.png");
 	int playerBullet = Novice::LoadTexture("./Resources/Images/playerBullet.png");
 	int enemyTutorial = Novice::LoadTexture("./Resources/Images/enemy_tutorial.png");
+	int miniBoss = Novice::LoadTexture("./Resources/Images/enemy_miniboss.png");
 	int enemyBulletTutorial = Novice::LoadTexture("./Resources/Images/enemyBullet_tutorial.png");
 	int enemyBulletImage = Novice::LoadTexture("./Resources/Images/enemyBullet.png");
 	int mapFrameX = Novice::LoadTexture("./Resources/Images/map_frameX.png");
@@ -181,7 +182,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 			if (tutorial->next_ == true) {
 				//scene = STAGESELECT;
-				scene = STAGE2;
+				scene = STAGE1;
 			}
 		}
 
@@ -380,21 +381,21 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 				tutorialText3Direction, tutorialText3WASD, tutorialText4, tutorialText5, tutorialText7, tutorialTextbox,
 				tutorialText9, tutorialText10Direction, tutorialText10WASD, tutorialText11, tutorialText12, tutorialText13,
 				tutorialText14, scene, tutorialBg, bombBullet, clearPlate, playerWASD, playerDirection, playerCore, playerBullet,
-				enemyTutorial, enemyBulletTutorial, enemyBulletImage);
+				enemyTutorial, enemyBulletTutorial, enemyBulletImage, miniBoss);
 		}
 
 		//ステージ1
 		if (scene == STAGE1) {
 			stage1->Draw(frameRight, frameLeft, stage1Plate, option->GetterWASDStaile(), option->GetterDirectionStaile(),
 				playerWASD, playerDirection, playerCore, bombBullet, option->GetterDirectionStaile(), playerBullet, scene,
-				enemyTutorial, enemyBulletImage, clearPlate);
+				enemyTutorial, enemyBulletImage, clearPlate, miniBoss);
 		}
 
 		//ステージ2
 		if (scene == STAGE2) {
 			stage2->Draw(frameRight, frameLeft, stage2Plate, option->GetterWASDStaile(), option->GetterDirectionStaile(),
 				playerWASD, playerDirection, playerCore, bombBullet, option->GetterDirectionStaile(), playerBullet, scene,
-				enemyTutorial, enemyBulletImage, clearPlate);
+				enemyTutorial, enemyBulletImage, clearPlate, miniBoss);
 		}
 
 		Novice::ScreenPrintf(0, 0, "scene:%d", scene);

@@ -15,21 +15,8 @@ public:
 	//XVˆ—
 	void Update(int scene, int text_);
 
-	//“–‚½‚è”»’è
-	//‰½‚à‚µ‚È‚¢“G
-	void EnemyOnCollision(int playerBulletAttack);
-
-	//ˆÚ“®‚·‚é“G
-	void MoveEnemyOnCollision(int playerBulletAttack);
-
-	//’P”­’e‚ğŒ‚‚Â“G
-	void BulletEnemyOnCollision(int playerBulletAttack);
-
-	//•¡”’e‚ğŒ‚‚Â“G
-	void BulletsEnemyOnCollision(int playerBulletAttack);
-
 	//•`‰æˆ—
-	void Draw(int scene, int enemyTutorial, int enemyBulletImage);
+	void Draw(int scene, int enemyTutorial, int enemyBulletImage, int miniBoss);
 
 	//ƒƒ“ƒo•Ï”
 	//“G\‘¢‘Ì
@@ -45,8 +32,8 @@ public:
 	//•¡”’e‚ğŒ‚‚Â“G
 	Zako bulletsEnemy_;
 
-	//ƒ{ƒ€ƒQƒbƒg‚Å‚«‚é“G
-	Zako bombEnemy_;
+	//’†ƒ{ƒX
+	Zako miniBoss_;
 
 	//’e
 	EnemyBullet* enemyBullet_;

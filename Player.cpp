@@ -156,6 +156,13 @@ void Player::Update(char* keys, char* preKeys, bool WASDStile_, bool directionSt
 			//ƒ{ƒ€”­“®
 			if (bombs_ > 0) {
 				if (shotBomb_ == false) {
+					bombParticle_->collisionX_ = player_.pos.X;
+					bombParticle_->collisionY_ = player_.pos.Y;
+					bombParticle_->collisionY1_ = player_.pos.Y;
+					bombParticle_->emitterX_ = player_.pos.X - 80.0f;
+					bombParticle_->emitterY_ = player_.pos.Y - 20.0f;
+					bombParticle_->emitterY1_ = player_.pos.Y - 20.0f;
+
 					if (bombPushCount_ >= 5) {
 						//WASD
 						if (WASDStile_ == true) {
@@ -177,8 +184,8 @@ void Player::Update(char* keys, char* preKeys, bool WASDStile_, bool directionSt
 					}
 
 					//offBombCount_ = 0; 
-					bombParticle_->collisionY_ = 690.0f;
-					bombParticle_->emitterY_ = 600.0f;
+					/*bombParticle_->collisionY_ = 690.0f;
+					bombParticle_->emitterY_ = 600.0f;*/
 					bombParticle_->t_ = 0.0f;
 				}
 			}

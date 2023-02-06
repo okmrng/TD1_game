@@ -83,6 +83,31 @@ void EnemyBullet::Initialize() {
 	enemyBullets_.speed[21].X = 0.0f;
 	enemyBullets_.speed[22].X = 2.0f;
 	enemyBullets_.speed[23].X = -2.0f;
+
+	//中ボス
+	for (int i = 0; i < 9; i++) {
+		miniBossBullet_.isShot[i] = false;
+		miniBossBullet_.radius[i] = 10.0f;
+	}
+
+	miniBossBullet_.speed[0].X = 0.0f;
+	miniBossBullet_.speed[0].Y = 7.5f;
+	miniBossBullet_.speed[1].X = 1.0f;
+	miniBossBullet_.speed[1].Y = 7.5f;
+	miniBossBullet_.speed[2].X = -1.0f;
+	miniBossBullet_.speed[2].Y = 7.5f;
+	miniBossBullet_.speed[3].X = 2.0f;
+	miniBossBullet_.speed[3].Y = 7.5f;
+	miniBossBullet_.speed[4].X = -2.0f;
+	miniBossBullet_.speed[4].Y = 7.5f;
+	miniBossBullet_.speed[5].X = 3.0f;
+	miniBossBullet_.speed[5].Y = 7.5f;
+	miniBossBullet_.speed[6].X = -3.0f;
+	miniBossBullet_.speed[6].Y = 7.5f;
+	miniBossBullet_.speed[7].X = 4.0f;
+	miniBossBullet_.speed[7].Y = 7.5f;
+	miniBossBullet_.speed[8].X = -4.0f;
+	miniBossBullet_.speed[8].Y = 7.5f;
 }
 
 //更新処理
@@ -160,10 +185,24 @@ void EnemyBullet::Update() {
 		if (enemyBullets_.pos[21].Y >= 728.0f) {
 			enemyBullets_.isShot[i] = false;
 		}
-	}}
+	}
+
+	//中ボス
+	for (int i = 0; i < 8; i++) {
+		if (miniBossBullet_.isShot[i] == true) {
+			miniBossBullet_.pos[i].X += miniBossBullet_.speed[i].X;
+			miniBossBullet_.pos[i].Y += miniBossBullet_.speed[i].Y;
+
+			if (miniBossBullet_.pos[0].Y >= 728.0f) {
+				miniBossBullet_.isShot[i] = false;
+			}
+		}
+	}
+}
 
 //描画処理
 void EnemyBullet::Draw(int enemyBulletImage) {
+	//単発弾
 	for (int i = 0; i < 14; i++) {
 		if (enemyBullet_.isShot[i] == true) {
 			Novice::DrawSprite(enemyBullet_.pos[i].X - 10.0f, enemyBullet_.pos[i].Y - 10.0f, enemyBulletImage, 1, 1, 0.0f, WHITE);
@@ -176,6 +215,14 @@ void EnemyBullet::Draw(int enemyBulletImage) {
 			Novice::DrawSprite(enemyBullets_.pos[i].X - 10.0f, enemyBullets_.pos[i].Y - 10.0f, enemyBulletImage, 1, 1, 0.0f, WHITE);
 		}
 	}
+
+	//中ボス
+	for (int i = 0; i < 8; i++) {
+		if (miniBossBullet_.isShot[i] == true) {
+			Novice::DrawSprite(miniBossBullet_.pos[i].X - 10.0f, miniBossBullet_.pos[i].Y - 10.0f, enemyBulletImage, 1, 1, 0.0f, WHITE);
+		}
+	}
+
 	Novice::ScreenPrintf(0, 60, "%d", enemyBullets_.pos[18].X);
 	if (enemyBullets_.isShot[18] == true) {
 		Novice::ScreenPrintf(0, 120, "true");

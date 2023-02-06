@@ -91,4 +91,3 @@ private:
 
 	bool offBombCount_;
 };
-

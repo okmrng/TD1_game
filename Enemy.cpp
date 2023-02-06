@@ -38,7 +38,7 @@ void Enemy::Initialize() {
 	}
 
 	for (int i = 1; i < 3; i++) {
-		moveEnemy_.pos[i].Y = -40.0f;
+		moveEnemy_.pos[i].Y = -500.0f;
 		moveEnemy_.speed[i].X = 0.0f;
 		moveEnemy_.speed[i].Y = 5.0f;
 	}
@@ -104,13 +104,13 @@ void Enemy::Initialize() {
 		bulletEnemy_.speed[i].Y = 0.0f;
 	}
 	
-	bulletEnemy_.pos[0].X = -20.0f;
-	bulletEnemy_.pos1[0].X = -20.0f;
+	bulletEnemy_.pos[0].X = -40.0f;
+	bulletEnemy_.pos1[0].X = -40.0f;
 	bulletEnemy_.pos2[0].X = 355.0f;
 	bulletEnemy_.pos[0].Y = 150.0f;
 
-	bulletEnemy_.pos[1].X = -20.0f;
-	bulletEnemy_.pos1[1].X = -20.0f;
+	bulletEnemy_.pos[1].X = -40.0f;
+	bulletEnemy_.pos1[1].X = -40.0f;
 	bulletEnemy_.pos2[1].X = 455.0f;
 	bulletEnemy_.pos[1].Y = 250.0f;
 
@@ -125,7 +125,7 @@ void Enemy::Initialize() {
 	bulletEnemy_.pos[3].Y = 250.0f;
 
 	for (int i = 4; i < 6; i++) {
-		bulletEnemy_.pos[i].Y = -20.0f;
+		bulletEnemy_.pos[i].Y = -500.0f;
 		bulletEnemy_.pos1[i].Y = -20.0f;
 		bulletEnemy_.pos2[i].Y = 250.0f;
 	}
@@ -177,8 +177,8 @@ void Enemy::Initialize() {
 	}
 
 	bulletEnemy_.pos[12].X = 345.0f;
-	bulletEnemy_.pos[12].Y = -40.0f;
-	bulletEnemy_.pos1[12].Y = -40.0f;
+	bulletEnemy_.pos[12].Y = -500.0f;
+	bulletEnemy_.pos1[12].Y = -500.0f;
 	bulletEnemy_.pos2[12].Y = 340.0f;
 	bulletEnemy_.pos[13].X = 935.0f;
 	bulletEnemy_.pos[13].Y = 760.0f;
@@ -204,13 +204,13 @@ void Enemy::Initialize() {
 	}
 
 	bulletsEnemy_.pos[0].X = 640.0f;
-	bulletsEnemy_.pos[0].Y = -40.0f;
-	bulletsEnemy_.pos1[0].Y = -40.0f;
+	bulletsEnemy_.pos[0].Y = -500.0f;
+	bulletsEnemy_.pos1[0].Y = -500.0f;
 	bulletsEnemy_.pos2[0].Y = 300.0f;
 
 	for (int i = 1; i < 3; i++) {
-		bulletsEnemy_.pos[i].Y = -40.0f;
-		bulletsEnemy_.pos1[i].Y = -40.0f;
+		bulletsEnemy_.pos[i].Y = -500.0f;
+		bulletsEnemy_.pos1[i].Y = -500.0f;
 		bulletsEnemy_.pos2[i].Y = 150.0f;
 	}
 
@@ -220,8 +220,8 @@ void Enemy::Initialize() {
 	//ステージ2
 	for (int i = 3; i < 8; i++) {
 		bulletsEnemy_.HP[i] = 80;
-		bulletsEnemy_.pos[i].Y = -40.0f;
-		bulletsEnemy_.pos1[i].Y = -40.0f;
+		bulletsEnemy_.pos[i].Y = -500.0f;
+		bulletsEnemy_.pos1[i].Y = -500.0f;
 		bulletsEnemy_.pos2[i].Y = 350.0f;
 	}
 
@@ -245,19 +245,28 @@ void Enemy::Initialize() {
 	bulletsEnemy_.pos[7].X = 640.0f;
 	bulletsEnemy_.pos1[7].X = 640.0f;
 	bulletsEnemy_.pos2[7].X = 640.0f;
-	bulletsEnemy_.pos[7].Y = -40.0f;
-	bulletsEnemy_.pos1[7].Y = -40.0f;
+	bulletsEnemy_.pos[7].Y = -500.0f;
+	bulletsEnemy_.pos1[7].Y = -500.0f;
 	bulletsEnemy_.pos2[7].Y = 150.0f;
 
-	//ボムゲットできる敵
-	bombEnemy_.HP[0] = 70;
-	bombEnemy_.pos[0].X = 640.0f;
-	bombEnemy_.pos[0].Y = -40.0f;
-	bombEnemy_.speed[0].Y = 10.0f;
-	bombEnemy_.theta[0] = 0.0f;
-	bombEnemy_.amplitude[0] = 10.0f;
-	bombEnemy_.start[0] = false;
-	bombEnemy_.isAlive[0] = true;
+	//中ボス
+	//共通
+	for (int i = 0; i < 2; i++) {
+		miniBoss_.amplitude[i] = 20.0f;
+		miniBoss_.color[i] = WHITE;
+		miniBoss_.easedT[i] = 0.0f;
+		miniBoss_.isAlive[i] = true;
+		miniBoss_.pos[i].X = 640.0f;
+		miniBoss_.pos[i].Y = -500.0f;
+		miniBoss_.pos1[i].Y = -500.0f;
+		miniBoss_.pos2[i].Y = 200.0f;
+		miniBoss_.radius[i] = 20.0f;
+		miniBoss_.start[i] = false;
+		miniBoss_.t[i] = 0.0f;
+		miniBoss_.theta[i] = 0.0f;
+	}
+
+	miniBoss_.HP[0] = 110;
 
 	//弾
 	enemyBullet_ = new EnemyBullet();
@@ -570,29 +579,6 @@ void Enemy::Update(int scene, int text_) {
 
 		//フェーズ2
 		if (enemyCount_ >= 2100) {
-			//ボムゲットできる敵
-			if (bombEnemy_.isAlive[0] == true) {
-				//画面内まで移動
-				if (bombEnemy_.start[0] == false) {
-					bombEnemy_.pos[0].Y += bombEnemy_.speed[0].Y;
-
-					if (bombEnemy_.pos[0].Y >= 100.0f) {
-						bombEnemy_.speed[0].Y = 0.0f;
-						bombEnemy_.start[0] = true;
-					}
-				}
-
-				//波
-				if (bombEnemy_.start[0] == true) {
-					bombEnemy_.pos[0].Y = sinf(bombEnemy_.theta[0]) * bombEnemy_.amplitude[0] + 100.0f;
-					bombEnemy_.theta[0] += M_PI / 60.0f;
-				}
-
-				if (bombEnemy_.HP[0] <= 0) {
-					bombEnemy_.isAlive[0] = false;
-				}
-			}
-
 			//単発弾を撃つ敵
 			for (int i = 8; i < 12; i++) {
 				if (bulletEnemy_.isAlive[i] == true) {
@@ -796,7 +782,44 @@ void Enemy::Update(int scene, int text_) {
 
 		//フェーズ5
 		if (enemyCount_ >= 9300) {
+			//イージング
+			if (miniBoss_.t[0] <= 1.0f) {
+				miniBoss_.t[0] += 1.0f / 30.0f;
+			}
+			if (miniBoss_.t[0] > 1.0f) {
+				miniBoss_.t[0] = 1.0f;
+			}
 
+			miniBoss_.easedT[0] = sqrt(1.0f - pow(miniBoss_.t[0] - 1.0f, 2.0f));
+
+			miniBoss_.pos[0].Y = (1.0f - miniBoss_.easedT[0]) * miniBoss_.pos1[0].Y + miniBoss_.easedT[0] * miniBoss_.pos2[0].Y;
+
+			//行動開始
+			if (miniBoss_.pos[0].Y >= miniBoss_.pos2[0].Y) {
+				miniBoss_.start[0] = true;
+			}
+
+			if (miniBoss_.isAlive[0] == true) {
+				if (miniBoss_.start[0] == true) {
+					//波
+					miniBoss_.pos[0].Y = sinf(miniBoss_.theta[0]) * miniBoss_.amplitude[0] + 200.0f;
+					miniBoss_.theta[0] += M_PI / 60.0f;
+
+					//弾
+					for (int i = 0; i < 8; i++) {
+						if (enemyBullet_->miniBossBullet_.isShot[i] == false) {
+							enemyBullet_->miniBossBullet_.pos[i].X = miniBoss_.pos[0].X;
+							enemyBullet_->miniBossBullet_.pos[i].Y = miniBoss_.pos[0].Y;
+							enemyBullet_->miniBossBullet_.isShot[i] = true;
+						}
+					}
+				}
+			}
+
+			//HPが0以下になったら死ぬ
+			if (miniBoss_.HP[0] <= 0) {
+				miniBoss_.isAlive[0] = false;
+			}
 		}
 	}
 
@@ -804,7 +827,7 @@ void Enemy::Update(int scene, int text_) {
 }
 
 //描画処理
-void Enemy::Draw(int scene,int enemyTutorial,int enemyBulletImage) {
+void Enemy::Draw(int scene,int enemyTutorial,int enemyBulletImage, int miniBoss) {
 
 	//チュートリアル
 	if (scene == 2) {
@@ -876,22 +899,12 @@ void Enemy::Draw(int scene,int enemyTutorial,int enemyBulletImage) {
 			}
 		}
 
-		//ボムゲットできる敵
-		for (int i = 0; i < 1; i++) {
-			if (bombEnemy_.isAlive[i] == true) {
-				Novice::DrawSprite(bombEnemy_.pos[i].X - 20, bombEnemy_.pos[i].Y - 20, enemyTutorial, 1, 1, 0.0f, bombEnemy_.color[i]);
-			}
+		//中ボス
+		if (miniBoss_.isAlive[0] == true) {
+			Novice::DrawSprite(miniBoss_.pos[0].X - 20, miniBoss_.pos[0].Y - 20, miniBoss, 1, 1, 0.0f, miniBoss_.color[0]);
 		}
 	}
 
 	//弾
 	enemyBullet_->Draw(enemyBulletImage);
-
-	/*if (bulletsEnemy_.start[6] == true) {
-		Novice::ScreenPrintf(0, 20, "true");
-	}
-	if (bulletsEnemy_.start[6] == false) {
-		Novice::ScreenPrintf(0, 20, "false");
-	}*/
-	
 }

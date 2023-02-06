@@ -22,6 +22,11 @@ public:
 	/// </summary>
 	void Draw(int bombBullet);
 
+	//ゲッター関数
+	float GetterCollisionX() { return collisionX_; }
+	float GetterCollisionY() { return collisionY_; }
+	float GetterCollisionR() { return collisionR_; }
+
 	//メンバ変数
 	//パーティクル
 	int particleMax_; ///パーティクル最大値

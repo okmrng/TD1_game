@@ -16,6 +16,9 @@ void Stage1::Initialize() {
 
 	clear_ = new Clear();
 	clear_->Initialize();
+
+	//ƒ{ƒ€
+	player_->SetterBombs(3);
 }
 
 //XVˆ—
@@ -154,6 +157,102 @@ void Stage1::Update(char* keys, char* prekeys, bool WASDStile_, bool directionSt
 			}
 		}
 
+		//ƒ{ƒ€‚Æ“®‚­“G‚Æ‚Ì“–‚½‚è”»’è
+		for (int i = 1; i < 5; i++) {
+			float playerBomb_moveEnemyX_ = player_->bombParticle_->GetterCollisionX() - enemy_->moveEnemy_.pos[i].X;
+			float playerBomb_moveEnemyY_ = player_->bombParticle_->GetterCollisionY() - enemy_->moveEnemy_.pos[i].Y;
+			float playerBomb_moveEnemyDis_ = sqrtf(playerBomb_moveEnemyX_ * playerBomb_moveEnemyX_ + playerBomb_moveEnemyY_ * playerBomb_moveEnemyY_);
+
+			if (enemy_->moveEnemy_.isAlive[i] == true) {
+				if (playerBomb_moveEnemyDis_ < 60.0f) {
+					if (player_->GetterShotBomb() == true) {
+						if (enemy_->moveEnemy_.isAlive[i] == true) {
+							enemy_->moveEnemy_.isAlive[i] = false;
+						}
+					}
+				}
+			}
+		}
+
+		//ƒ{ƒ€‚Æ’P”­’e‚ğŒ‚‚Â“G
+		for (int i = 0; i < 8; i++) {
+			float playerBomb_bulletEnemyX_ = player_->bombParticle_->GetterCollisionX() - enemy_->bulletEnemy_.pos[i].X;
+			float playerBomb_bulletEnemyY_ = player_->bombParticle_->GetterCollisionY() - enemy_->bulletEnemy_.pos[i].Y;
+			float playerBomb_bulletEnemyDis_ = sqrtf(playerBomb_bulletEnemyX_ * playerBomb_bulletEnemyX_ + playerBomb_bulletEnemyY_ * playerBomb_bulletEnemyY_);
+
+			if (enemy_->bulletEnemy_.isAlive[i] == true) {
+				if (playerBomb_bulletEnemyDis_ < 60.0f) {
+					if (player_->GetterShotBomb() == true) {
+						if (enemy_->bulletEnemy_.isAlive[i] == true) {
+							enemy_->bulletEnemy_.isAlive[i] = false;
+						}
+					}
+				}
+			}
+		}
+
+		for (int i = 12; i < 14; i++) {
+			float playerBomb_bulletEnemyX_ = player_->bombParticle_->GetterCollisionX() - enemy_->bulletEnemy_.pos[i].X;
+			float playerBomb_bulletEnemyY_ = player_->bombParticle_->GetterCollisionY() - enemy_->bulletEnemy_.pos[i].Y;
+			float playerBomb_bulletEnemyDis_ = sqrtf(playerBomb_bulletEnemyX_ * playerBomb_bulletEnemyX_ + playerBomb_bulletEnemyY_ * playerBomb_bulletEnemyY_);
+
+			if (enemy_->bulletEnemy_.isAlive[i] == true) {
+				if (playerBomb_bulletEnemyDis_ < 60.0f) {
+					if (player_->GetterShotBomb() == true) {
+						if (enemy_->bulletEnemy_.isAlive[i] == true) {
+							enemy_->bulletEnemy_.isAlive[i] = false;
+						}
+					}
+				}
+			}
+		}
+
+		//ƒ{ƒ€‚Æ•¡”’e‚ğŒ‚‚Â“G
+		for (int i = 1; i < 5; i++) {
+			float playerBomb_bulletsEnemyX_ = player_->bombParticle_->GetterCollisionX() - enemy_->bulletsEnemy_.pos[i].X;
+			float playerBomb_bulletsEnemyY_ = player_->bombParticle_->GetterCollisionY() - enemy_->bulletsEnemy_.pos[i].Y;
+			float playerBomb_bulletsEnemyDis_ = sqrtf(playerBomb_bulletsEnemyX_ * playerBomb_bulletsEnemyX_ + playerBomb_bulletsEnemyY_ * playerBomb_bulletsEnemyY_);
+
+			if (enemy_->bulletsEnemy_.isAlive[i] == true) {
+				if (playerBomb_bulletsEnemyDis_ < 60.0f) {
+					if (player_->GetterShotBomb() == true) {
+						if (enemy_->bulletsEnemy_.isAlive[i] == true) {
+							enemy_->bulletsEnemy_.isAlive[i] = false;
+						}
+					}
+				}
+			}
+		}
+		float playerBomb_bulletsEnemyX_ = player_->bombParticle_->GetterCollisionX() - enemy_->bulletsEnemy_.pos[0].X;
+		float playerBomb_bulletsEnemyY_ = player_->bombParticle_->GetterCollisionY() - enemy_->bulletsEnemy_.pos[0].Y;
+		float playerBomb_bulletsEnemyDis_ = sqrtf(playerBomb_bulletsEnemyX_ * playerBomb_bulletsEnemyX_ + playerBomb_bulletsEnemyY_ * playerBomb_bulletsEnemyY_);
+
+		if (enemy_->bulletsEnemy_.isAlive[0] == true) {
+			if (playerBomb_bulletsEnemyDis_ < 60.0f) {
+				if (player_->GetterShotBomb() == true) {
+					if (enemy_->bulletsEnemy_.isAlive[0] == true) {
+						enemy_->bulletsEnemy_.isAlive[0] = false;
+					}
+				}
+			}
+		}
+
+		for (int j = 5; j < 8; j++) {
+			float playerBomb_bulletsEnemyX_ = player_->bombParticle_->GetterCollisionX() - enemy_->bulletsEnemy_.pos[j].X;
+			float playerBomb_bulletsEnemyY_ = player_->bombParticle_->GetterCollisionY() - enemy_->bulletsEnemy_.pos[j].Y;
+			float playerBomb_bulletsEnemyDis_ = sqrtf(playerBomb_bulletsEnemyX_ * playerBomb_bulletsEnemyX_ + playerBomb_bulletsEnemyY_ * playerBomb_bulletsEnemyY_);
+
+			if (enemy_->bulletsEnemy_.isAlive[j] == true) {
+				if (playerBomb_bulletsEnemyDis_ < 60.0f) {
+					if (player_->GetterShotBomb() == true) {
+						if (enemy_->bulletsEnemy_.isAlive[j] == true) {
+							enemy_->bulletsEnemy_.isAlive[j] = false;
+						}
+					}
+				}
+			}
+		}
+
 		//ƒNƒŠƒA
 		if (enemy_->enemy_.isAlive[0] == false) {
 			clear_->Update();
@@ -164,14 +263,14 @@ void Stage1::Update(char* keys, char* prekeys, bool WASDStile_, bool directionSt
 //•`‰æˆ—
 void Stage1::Draw(int frameRight, int frameLeft, int plate, int WASDStile_, int directionStule_, int playerWASD, int playerDirection,
 	int playerCore, int bombBullet, bool directionStile_, int playerBullet, int scene, int enemytutorial, int enemyBulletImage,
-	int clearPlate) {
+	int clearPlate, int miniBoss) {
 
 	//©‹@
 	if (admission_->GetterPlayStart() == true) {
 		player_->Draw(bombBullet, WASDStile_, directionStile_, playerWASD, playerDirection, playerCore, playerBullet);
 
 		//“G
-		enemy_->Draw(scene, enemytutorial, enemyBulletImage);
+		enemy_->Draw(scene, enemytutorial, enemyBulletImage, miniBoss);
 	}
 
 	admission_->Draw(frameRight, frameLeft, plate, WASDStile_, directionStule_, playerWASD, playerDirection, playerCore);
