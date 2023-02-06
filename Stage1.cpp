@@ -3,7 +3,7 @@
 #define _USE_MATH_DEFINES
 #include <math.h>
 
-//‰Šú‰»
+//‰Šú‰»d
 void Stage1::Initialize() {
 	admission_ = new Admission();
 	admission_->Initialize();
