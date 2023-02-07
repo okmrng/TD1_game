@@ -63,18 +63,27 @@ void Stage3::Update(char* keys, char* prekeys, bool WASDStile_, bool directionSt
 
 	//当たり判定
 	//自機の弾とボスの当たり判定
-	if (boss_->boss_.isAlive == true) {
-		for (int i = 0; i < 15; i++) {
-			float playerBullet_bossX_ = (player_->bullet_->bullet_.pos[i].X - boss_->boss_.pos.X) * (player_->bullet_->bullet_.pos[i].X - boss_->boss_.pos.X);
-			float playerBullet_bossY_ = (player_->bullet_->bullet_.pos[i].Y - boss_->boss_.pos.Y) * (player_->bullet_->bullet_.pos[i].Y - boss_->boss_.pos.Y);
-			float playerBullet_bossR_ = (player_->bullet_->bullet_.radius[i] + boss_->boss_.radius) * (player_->bullet_->bullet_.radius[i] + boss_->boss_.radius);
+	for (int i = 0; i < 15; i++) {
+		float playerBullet_bossX_ = (player_->bullet_->bullet_.pos[i].X - boss_->boss_.pos.X) * (player_->bullet_->bullet_.pos[i].X - boss_->boss_.pos.X);
+		float playerBullet_bossY_ = (player_->bullet_->bullet_.pos[i].Y - boss_->boss_.pos.Y) * (player_->bullet_->bullet_.pos[i].Y - boss_->boss_.pos.Y);
+		float playerBullet_bossR_ = (player_->bullet_->bullet_.radius[i] + boss_->boss_.radius) * (player_->bullet_->bullet_.radius[i] + boss_->boss_.radius);
 
-			if (playerBullet_bossX_ + playerBullet_bossY_ < playerBullet_bossR_) {
-				if (player_->bullet_->bullet_.isShot[i] == true) {
-					boss_->boss_.HP -= player_->bullet_->bullet_.attack;
-					player_->bullet_->bullet_.isShot[i] = false;
-				}
+		if (playerBullet_bossX_ + playerBullet_bossY_ < playerBullet_bossR_) {
+			if (player_->bullet_->bullet_.isShot[i] == true) {
+				boss_->boss_.HP -= 5;
+				player_->bullet_->bullet_.isShot[i] = false;
 			}
+		}
+	}
+
+	//ボムとボスの当たり判定
+	float playerBomb_bossX_ = (player_->bombParticle_->collisionX_ - boss_->boss_.pos.X) * (player_->bombParticle_->collisionX_ - boss_->boss_.pos.X);
+	float playerBomb_bossY_ = (player_->bombParticle_->collisionY_ - boss_->boss_.pos.Y) * (player_->bombParticle_->collisionY_ - boss_->boss_.pos.Y);
+	float playerBomb_bossR_ = (player_->bombParticle_->collisionR_ + boss_->boss_.radius) * (player_->bombParticle_->collisionR_ + boss_->boss_.radius);
+
+	if (playerBomb_bossX_ + playerBomb_bossY_ < playerBomb_bossR_) {
+		if (player_->GetterShotBomb() == true) {
+			boss_->boss_.HP -= 10;
 		}
 	}
 }
@@ -118,7 +127,9 @@ void Stage3::Draw(int frameRight, int frameLeft, int plate, int WASDStile_, int 
 
 	//ボスHPバー
 	Novice::DrawBox(20, 20, 200, 30, 0.0f, RED, kFillModeSolid);
-	Novice::DrawBox(20, 20, 200 * boss_->boss_.HP / boss_->boss_.maxHP, 30, 0.0f, GREEN, kFillModeSolid);
+	if (boss_->boss_.HP > 0) {
+		Novice::DrawBox(20, 20, 200 * boss_->boss_.HP / boss_->boss_.maxHP, 30, 0.0f, GREEN, kFillModeSolid);
+	}	
 
 	Novice::ScreenPrintf(0, 220, "%d", boss_->boss_.HP);
 }

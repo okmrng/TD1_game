@@ -60,6 +60,23 @@ void Stage1::Update(char* keys, char* prekeys, bool WASDStile_, bool directionSt
 		//“G
 		enemy_->Update(scene, text_);
 
+		//ƒ{ƒ€’†’e‚ðÁ‚·
+		if (player_->GetterShotBomb() == true) {
+			for (int i = 0; i < 8; i++) {
+				enemy_->enemyBullet_->enemyBullet_.isShot[i] = false;
+			}
+			for (int i = 12; i < 14; i++) {
+				enemy_->enemyBullet_->enemyBullet_.isShot[i] = false;
+			}
+			for (int i = 0; i < 3; i++) {
+				enemy_->enemyBullet_->enemyBullets_.isShot[i] = false;
+			}
+			for (int i = 15; i < 24; i++) {
+				enemy_->enemyBullet_->enemyBullets_.isShot[i] = false;
+			}
+			
+		}
+
 		//Ž©‹@‚Ì’e‚Æ‚Ì“–‚½‚è”»’è
 		//ˆÚ“®‚·‚é“G
 		for (int i = 0; i < 15; i++) {

@@ -57,6 +57,16 @@ void Stage2::Update(char* keys, char* prekeys, bool WASDStile_, bool directionSt
 		//Ž©‹@‘€ì
 		player_->Update(keys, prekeys, WASDStile_, directionStile_, onPlayerMove_, onPlayerShot_, onBomb_);
 
+		//ƒ{ƒ€’†’e‚ðÁ‚·
+		if (player_->GetterShotBomb() == true) {
+			for (int i = 4; i < 12; i++) {
+				enemy_->enemyBullet_->enemyBullet_.isShot[i] = false;
+			}
+			for (int i = 3; i < 15; i++) {
+				enemy_->enemyBullet_->enemyBullets_.isShot[i] = false;
+			}
+		}
+
 		//“G
 		enemy_->Update(scene, text_);
 
@@ -203,12 +213,13 @@ void Stage2::Update(char* keys, char* prekeys, bool WASDStile_, bool directionSt
 		float playerBomb_miniBossY_ = player_->bombParticle_->GetterCollisionY() - enemy_->miniBoss_.pos[0].Y;
 		float playerBomb_miniBossDis_ = sqrtf(playerBomb_miniBossX_ * playerBomb_miniBossX_ + playerBomb_miniBossY_ * playerBomb_miniBossY_);
 
-		if (enemy_->miniBoss_.isAlive[0] == true) {
-			if (playerBomb_miniBossDis_ < 60.0f) {
-				if (player_->GetterShotBomb() == true) {
-					if (enemy_->miniBoss_.isAlive[0] == true) {
-						enemy_->miniBoss_.HP[0] -= 2;
-						enemy_->miniBoss_.isAlive[0] = false;
+		if (enemy_->enemyCount_ >= 9300) {
+			if (enemy_->miniBoss_.isAlive[0] == true) {
+				if (playerBomb_miniBossDis_ < 60.0f) {
+					if (player_->GetterShotBomb() == true) {
+						if (enemy_->miniBoss_.isAlive[0] == true) {
+							enemy_->miniBoss_.HP[0] -= 2;
+						}
 					}
 				}
 			}
