@@ -88,6 +88,9 @@
     <ClCompile Include="BossBullet.cpp">
       <Filter>ソース</Filter>
     </ClCompile>
+    <ClCompile Include="Gameover.cpp">
+      <Filter>ソース</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="C:\KamataEngine\DirectXGame\audio\Audio.h">
@@ -217,6 +220,9 @@
       <Filter>ヘッダー</Filter>
     </ClInclude>
     <ClInclude Include="BossBullet.h">
+      <Filter>ヘッダー</Filter>
+    </ClInclude>
+    <ClInclude Include="Gameover.h">
       <Filter>ヘッダー</Filter>
     </ClInclude>
   </ItemGroup>

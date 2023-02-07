@@ -9,6 +9,7 @@
 #include "Stage2.h"
 #include "Stage3.h"
 #include "StageSelect.h"
+#include "Gameover.h"
 #include "Boss.h"
 #define _USE_MATH_DEFINES
 #include <math.h>
@@ -67,6 +68,10 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	//ステージセレクト
 	StageSelect* stageSelect = new StageSelect();
 	stageSelect->Initialize();
+
+	//ゲームオーバー
+	Gameover* gameover = new Gameover();
+	gameover->Initialize();
 
 	//当たり判定
 	//何もしない敵
@@ -202,8 +207,12 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 			stage1->Update(keys, preKeys, option->GetterWASDStaile(), option->GetterDirectionStaile(), tutorial->onPlayerMove_,
 				tutorial->onPlayerShot_, tutorial->onBomb_, scene, tutorial->text_);
 
-			if (stage1->clear_->next_ == true) {
+			if (stage1->clear_->next_ == true || stage1->player_->GetterHP() <= 0) {
 				scene = RESET;
+			}
+
+			if (stage1->player_->GetterHP() <= 0) {
+				scene = GAMEOVER;
 			}
 		}
 
@@ -215,6 +224,10 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 			if (stage2->clear_->next_ == true) {
 				scene = RESET;
 			}
+
+			if (stage2->player_->GetterHP() <= 0) {
+				scene = GAMEOVER;
+			}
 		}
 
 		//ステージ3
@@ -223,6 +236,19 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 				tutorial->onPlayerShot_, tutorial->onBomb_, scene, tutorial->text_);
 
 			if (stage3->clear_->next_ == true) {
+				scene = RESET;
+			}
+
+			if (stage3->player_->GetterHP() <= 0) {
+				scene = GAMEOVER;
+			}
+		}
+
+		//ゲームオーバー
+		if (scene == GAMEOVER) {
+			gameover->Update(keys);
+
+			if (gameover->t_ == 1.0f) {
 				scene = RESET;
 			}
 		}
@@ -258,6 +284,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 			stage3->Initialize();
 			//ステージセレクト
 			stageSelect->Initialize();
+			//ゲームオーバー
+			gameover->Initialize();
 
 			scene = STAGESELECT;
 		}
@@ -317,6 +345,11 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 			stage3->Draw(frameRight, frameLeft, stage3Plate, option->GetterWASDStaile(), option->GetterDirectionStaile(),
 				playerWASD, playerDirection, playerCore, bombBullet, option->GetterDirectionStaile(), playerBullet, scene,
 				enemyTutorial, enemyBulletImage, clearPlate, miniBoss, bossImage, bossCore);
+		}
+
+		//ゲームオーバー
+		if (scene == GAMEOVER) {
+			gameover->Draw();
 		}
 
 		//ステージセレクト
