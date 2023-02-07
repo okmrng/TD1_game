@@ -94,6 +94,7 @@
   <ItemGroup>
     <ClCompile Include="BombParticle.cpp" />
     <ClCompile Include="Boss.cpp" />
+    <ClCompile Include="BossBullet.cpp" />
     <ClCompile Include="C:\KamataEngine\DirectXGame\base\DirectXCommon.cpp" />
     <ClCompile Include="C:\KamataEngine\DirectXGame\base\TextureManager.cpp" />
     <ClCompile Include="C:\KamataEngine\DirectXGame\base\WinApp.cpp" />
@@ -110,6 +111,7 @@
     <ClCompile Include="Admission.cpp" />
     <ClCompile Include="Stage1.cpp" />
     <ClCompile Include="Stage2.cpp" />
+    <ClCompile Include="Stage3.cpp" />
     <ClCompile Include="StageSelect.cpp" />
     <ClCompile Include="Tutorial.cpp" />
   </ItemGroup>
@@ -121,6 +123,7 @@
     <ClInclude Include="..\DirectXGame\math\Vector4.h" />
     <ClInclude Include="BombParticle.h" />
     <ClInclude Include="Boss.h" />
+    <ClInclude Include="BossBullet.h" />
     <ClInclude Include="C:\KamataEngine\DirectXGame\3d\CircleShadow.h" />
     <ClInclude Include="C:\KamataEngine\DirectXGame\3d\DebugCamera.h" />
     <ClInclude Include="C:\KamataEngine\DirectXGame\3d\DirectionalLight.h" />
@@ -151,6 +154,7 @@
     <ClInclude Include="PlayerBullet.h" />
     <ClInclude Include="Stage1.h" />
     <ClInclude Include="Stage2.h" />
+    <ClInclude Include="Stage3.h" />
     <ClInclude Include="StageSelect.h" />
     <ClInclude Include="Struct.h" />
     <ClInclude Include="Admission.h" />

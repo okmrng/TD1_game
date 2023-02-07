@@ -7,6 +7,8 @@
 #include "Clear.h"
 #include "Stage1.h"
 #include "Stage2.h"
+#include "Stage3.h"
+#include "Boss.h"
 #define _USE_MATH_DEFINES
 #include <math.h>
 
@@ -57,6 +59,13 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	Stage2* stage2 = new Stage2();
 	stage2->Initialize();
 
+	//ステージ3
+	Stage3* stage3 = new Stage3();
+	stage3->Initialize();
+
+	Boss* boss = new Boss();
+	boss->Initialeze();
+
 	//当たり判定
 	//何もしない敵
 	float playerBullet_enemyX = 0.0f;
@@ -90,6 +99,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		//STAGESELECT,
 		STAGE1,
 		STAGE2,
+		STAGE3,
 		GAMEOVER,
 		CLEAR,
 		RESET
@@ -110,6 +120,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	int tutorialPlate = Novice::LoadTexture("./Resources/Images/plate_tutorial.png");
 	int stage1Plate = Novice::LoadTexture("./Resources/Images/plate_stage1.png");
 	int stage2Plate = Novice::LoadTexture("./Resources/Images/plate_stage2.png");
+	int stage3Plate = Novice::LoadTexture("./Resources/Images/plate_stage3.png");
 	int clearPlate = Novice::LoadTexture("./Resources/Images/plate_clear.png");
 	int tutorialText1 = Novice::LoadTexture("./Resources/Images/tutorial_text1.png");
 	int tutorialText2 = Novice::LoadTexture("./Resources/Images/tutorial_text2.png");
@@ -134,6 +145,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	int playerBullet = Novice::LoadTexture("./Resources/Images/playerBullet.png");
 	int enemyTutorial = Novice::LoadTexture("./Resources/Images/enemy_tutorial.png");
 	int miniBoss = Novice::LoadTexture("./Resources/Images/enemy_miniboss.png");
+	int bossImage = Novice::LoadTexture("./Resources/Images/boss.png");
+	int bossCore = Novice::LoadTexture("./Resources/Images/boss_core.png");
 	int enemyBulletTutorial = Novice::LoadTexture("./Resources/Images/enemyBullet_tutorial.png");
 	int enemyBulletImage = Novice::LoadTexture("./Resources/Images/enemyBullet.png");
 	int mapFrameX = Novice::LoadTexture("./Resources/Images/map_frameX.png");
@@ -182,7 +195,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 			if (tutorial->next_ == true) {
 				//scene = STAGESELECT;
-				scene = STAGE1;
+				scene = STAGE3;
 			}
 		}
 
@@ -205,6 +218,18 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 				//scene = TITLE;
 			}
 		}
+
+		//ステージ3
+		if (scene == STAGE3) {
+			stage3->Update(keys, preKeys, option->GetterWASDStaile(), option->GetterDirectionStaile(), tutorial->onPlayerMove_,
+				tutorial->onPlayerShot_, tutorial->onBomb_, scene, tutorial->text_);
+
+			if (stage3->clear_->next_ == true) {
+				//scene = TITLE;
+			}
+		}
+
+		boss->Update();
 
 		//敵
 		//enemy->Update(scene);
@@ -397,6 +422,15 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 				playerWASD, playerDirection, playerCore, bombBullet, option->GetterDirectionStaile(), playerBullet, scene,
 				enemyTutorial, enemyBulletImage, clearPlate, miniBoss);
 		}
+
+		//ステージ3
+		if (scene == STAGE3) {
+			stage3->Draw(frameRight, frameLeft, stage3Plate, option->GetterWASDStaile(), option->GetterDirectionStaile(),
+				playerWASD, playerDirection, playerCore, bombBullet, option->GetterDirectionStaile(), playerBullet, scene,
+				enemyTutorial, enemyBulletImage, clearPlate, miniBoss);
+		}
+
+		boss->Draw(bossImage, bossCore);
 
 		Novice::ScreenPrintf(0, 0, "scene:%d", scene);
 		if (stage2->admission_->GetterPlayStart() == true) {

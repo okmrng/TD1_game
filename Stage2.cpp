@@ -200,8 +200,8 @@ void Stage2::Draw(int frameRight, int frameLeft, int plate, int WASDStile_, int 
 	int playerCore, int bombBullet, bool directionStile_, int playerBullet, int scene, int enemytutorial, int enemyBulletImage,
 	int clearPlate, int miniBoss) {
 
-	//Ž©‹@
 	if (admission_->GetterPlayStart() == true) {
+		//Ž©‹@
 		player_->Draw(bombBullet, WASDStile_, directionStile_, playerWASD, playerDirection, playerCore, playerBullet);
 
 		//“G
