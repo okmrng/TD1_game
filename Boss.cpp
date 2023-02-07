@@ -107,7 +107,7 @@ void Boss::Update() {
 //ï`âÊèàóù
 void Boss::Draw(int bossImage, int bossCore) {
 	//ñ{ëÃ
-	Novice::DrawSprite(boss_.pos.X - 33, boss_.pos.Y - 70, bossImage, 1, 1, 0.0f, boss_.collor + boss_.alpha);
+	//Novice::DrawSprite(boss_.pos.X - 33, boss_.pos.Y - 70, bossImage, 1, 1, 0.0f, boss_.collor + boss_.alpha);
 
 	//ìñÇΩÇËîªíË
 	//Novice::DrawEllipse(boss1_.pos.X, boss1_.pos.Y, boss1_.radius, boss1_.radius, 0.0f, WHITE,kFillModeSolid);

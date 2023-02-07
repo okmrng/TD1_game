@@ -12,27 +12,71 @@ public:
 	/// <summary>
 	/// 更新処理
 	/// </summary>
-	void Update();
+	void Update(char *keys, char* preKeys);
 
 	/// <summary>
 	/// 描画処理
 	/// </summary>
-	void Draw(int mapFrameX, int mapFrameY);
+	void Draw();
+
+	//ゲッター関数
+	bool GetterInStage1() { return inStage1_; }
+	bool GetterInStage2() { return inStage2_; }
+	bool GetterInStage3() { return inStage3_; }
+	float GetterBlackT() { return black_.t; }
 
 private:
 	//メンバ変数
+	int mapFrameX;
+	int mapFrameY;
+
+	int stage1;
+	int stage2;
+	int stage3;
+
+	int stageSelect;
+
+	//構造体
+	struct Vector2 {
+		float X;
+		float Y;
+	};
+	struct object {
+		Vector2 pos;
+		Vector2 pos1; //初期位置
+		Vector2 pos2; //最終的な位置
+		float radius;
+		float t;
+		float easedT;
+	};
 
 	//フレーム
-	float frameXX_;  
-	float frameXY_;  
-	float frameXY1_; ///初期位置
-	float frameXY2_; ///最後の位置
-	float frameXT_;
+	object frameX_;
+	object frameY_;
 
-	float frameYX_;
-	float frameYX1_; ///初期位置
-	float frameYX2_; ///最後の位置
-	float frameYY_;
-	float frameYT_;
+	//プレート
+	object stage1_;
+	object stage2_;
+	object stage3_;
+
+	//文字
+	object stageSelect_;
+
+	//カーソル
+	object cursor_;
+
+	object black_;
+	int startEaseCount_;
+	bool onEase_;
+
+	//選択
+	bool onSelect_;
+	bool selectStage1_;
+	bool selectStage2_;
+	bool selectStage3_;
+	int pushCount_;
+	bool inStage1_;
+	bool inStage2_;
+	bool inStage3_;
 };
 

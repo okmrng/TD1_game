@@ -8,6 +8,7 @@
 #include "Stage1.h"
 #include "Stage2.h"
 #include "Stage3.h"
+#include "StageSelect.h"
 #include "Boss.h"
 #define _USE_MATH_DEFINES
 #include <math.h>
@@ -63,6 +64,10 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	Stage3* stage3 = new Stage3();
 	stage3->Initialize();
 
+	//ステージセレクト
+	StageSelect* stageSelect = new StageSelect();
+	stageSelect->Initialize();
+
 	//当たり判定
 	//何もしない敵
 	float playerBullet_enemyX = 0.0f;
@@ -93,17 +98,17 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		TITLE,
 		OPTION,
 		TUTORIAL,
-		//STAGESELECT,
 		STAGE1,
 		STAGE2,
 		STAGE3,
+		STAGESELECT,
 		GAMEOVER,
 		CLEAR,
 		RESET
 	};
 
-	int scene = TITLE;
-	//int scene = STAGE1;
+	//int scene = TITLE;
+	int scene = TUTORIAL;
 
 	//画像読み込み
 	int title = Novice::LoadTexture("./Resources/Images/title.png");
@@ -146,9 +151,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	int bossCore = Novice::LoadTexture("./Resources/Images/boss_core.png");
 	int enemyBulletTutorial = Novice::LoadTexture("./Resources/Images/enemyBullet_tutorial.png");
 	int enemyBulletImage = Novice::LoadTexture("./Resources/Images/enemyBullet.png");
-	int mapFrameX = Novice::LoadTexture("./Resources/Images/map_frameX.png");
-	int mapFrameY = Novice::LoadTexture("./Resources/Images/map_frameY.png");
-
+	
 	// ウィンドウの×ボタンが押されるまでループ
 	while (Novice::ProcessMessage() == 0) {
 		// フレームの開始
@@ -191,8 +194,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 			tutorial->Update(keys, preKeys, option->GetterWASDStaile(), option->GetterDirectionStaile(), scene);
 
 			if (tutorial->next_ == true) {
-				//scene = STAGESELECT;
-				scene = STAGE3;
+				scene = STAGESELECT;
+				//scene = STAGE3;
 			}
 		}
 
@@ -226,8 +229,20 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 			}
 		}
 
-		//敵
-		//enemy->Update(scene);
+		//ステージセレクト
+		if (scene == STAGESELECT) {
+			stageSelect->Update(keys, preKeys);
+
+			if (stageSelect->GetterBlackT() == 1.0f && stageSelect->GetterInStage1() == true) {
+				scene = STAGE1;
+			}
+			if (stageSelect->GetterBlackT() == 1.0f && stageSelect->GetterInStage2() == true) {
+				scene = STAGE2;
+			}
+			if (stageSelect->GetterBlackT() == 1.0f && stageSelect->GetterInStage3() == true) {
+				scene = STAGE3;
+			}
+		}
 
 		//当たり判定
 		//何もしない敵
@@ -423,6 +438,11 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 			stage3->Draw(frameRight, frameLeft, stage3Plate, option->GetterWASDStaile(), option->GetterDirectionStaile(),
 				playerWASD, playerDirection, playerCore, bombBullet, option->GetterDirectionStaile(), playerBullet, scene,
 				enemyTutorial, enemyBulletImage, clearPlate, miniBoss, bossImage, bossCore);
+		}
+
+		//ステージセレクト
+		if (scene == STAGESELECT) {
+			stageSelect->Draw();
 		}
 
 		Novice::ScreenPrintf(0, 0, "scene:%d", scene);
