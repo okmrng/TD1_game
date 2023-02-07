@@ -270,6 +270,10 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 		//リセット
 		if (scene == RESET) {
+			//フェード
+			fade->Initialize();
+			//チュートリアル
+			tutorial->Initialize();
 			//自機
 			player->Initialize();
 			//敵
@@ -287,12 +291,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 			//ゲームオーバー
 			gameover->Initialize();
 
-			scene = STAGESELECT;
-		}
-
-		//当たり判定
-		//敵の弾と自機の当たり判定
-		
+			scene = TITLE;
+		}		
 
 		///
 		/// ↑更新処理ここまで

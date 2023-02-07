@@ -7,6 +7,7 @@
 void Enemy::Initialize() {
 	//何もしない敵
 	enemy_.HP[0] = 10;
+	enemy_.maxHP[0] = 10;
 	enemy_.isAlive[0] = true;
 	enemy_.pos[0].X = 640.0f;
 	enemy_.pos[0].Y = -40.0f;
@@ -17,6 +18,7 @@ void Enemy::Initialize() {
 
 	//移動する敵
 	moveEnemy_.HP[0] = 20;
+	moveEnemy_.maxHP[0] = 20;
 	moveEnemy_.isAlive[0] = true;
 	moveEnemy_.pos[0].X = -30.0f;
 	moveEnemy_.pos[0].Y = 358.0f;
@@ -35,6 +37,7 @@ void Enemy::Initialize() {
 	//ステージ1
 	for (int i = 1; i < 5; i++) {
 		moveEnemy_.HP[i] = 30;
+		moveEnemy_.maxHP[i] = 30;
 	}
 
 	for (int i = 1; i < 3; i++) {
@@ -61,6 +64,7 @@ void Enemy::Initialize() {
 	//ステージ2
 	for (int i = 5; i < 9; i++) {
 		moveEnemy_.HP[i] = 40;
+		moveEnemy_.maxHP[i] = 40;
 		moveEnemy_.start[i] = false;
 	}
 
@@ -100,6 +104,7 @@ void Enemy::Initialize() {
 	//ステージ1
 	for (int i = 0; i < 8; i++) {
 		bulletEnemy_.HP[i] = 50;
+		bulletEnemy_.maxHP[i] = 50;
 		bulletEnemy_.speed[i].X = 0.0f;
 		bulletEnemy_.speed[i].Y = 0.0f;
 	}
@@ -155,6 +160,7 @@ void Enemy::Initialize() {
 	//ステージ2
 	for (int i = 8; i < 14; i++) {
 		bulletEnemy_.HP[i] = 60;
+		bulletEnemy_.maxHP[i] = 60;
 		bulletEnemy_.start[i] = false;
 	}
 
@@ -181,8 +187,8 @@ void Enemy::Initialize() {
 	bulletEnemy_.pos1[12].Y = -500.0f;
 	bulletEnemy_.pos2[12].Y = 340.0f;
 	bulletEnemy_.pos[13].X = 935.0f;
-	bulletEnemy_.pos[13].Y = 760.0f;
-	bulletEnemy_.pos1[13].Y = 760.0f;
+	bulletEnemy_.pos[13].Y = 800.0f;
+	bulletEnemy_.pos1[13].Y = 800.0f;
 	bulletEnemy_.pos2[13].Y = 560.0f;
 
 	//複数弾を撃つ敵
@@ -201,6 +207,7 @@ void Enemy::Initialize() {
 	//ステージ1
 	for (int i = 0; i < 3; i++) {
 		bulletsEnemy_.HP[i] = 70;
+		bulletsEnemy_.maxHP[i] = 70;
 	}
 
 	bulletsEnemy_.pos[0].X = 640.0f;
@@ -220,6 +227,7 @@ void Enemy::Initialize() {
 	//ステージ2
 	for (int i = 3; i < 8; i++) {
 		bulletsEnemy_.HP[i] = 80;
+		bulletsEnemy_.maxHP[i] = 80;
 		bulletsEnemy_.pos[i].Y = -500.0f;
 		bulletsEnemy_.pos1[i].Y = -500.0f;
 		bulletsEnemy_.pos2[i].Y = 350.0f;
@@ -267,6 +275,7 @@ void Enemy::Initialize() {
 	}
 
 	miniBoss_.HP[0] = 110;
+	miniBoss_.maxHP[0] = 110;
 
 	//弾
 	enemyBullet_ = new EnemyBullet();
@@ -834,7 +843,7 @@ void Enemy::Draw(int scene,int enemyTutorial,int enemyBulletImage, int miniBoss)
 		//移動する敵
 		for (int i = 0; i < 1; i++) {
 			if (moveEnemy_.isAlive[0] == true) {
-				//Novice::DrawEllipse(moveEnemy_.pos[0].X, moveEnemy_.pos[0].Y, moveEnemy_.radius[0], moveEnemy_.radius[0], 0.0f, moveEnemy_.color[0], kFillModeSolid);
+				Novice::DrawBox(moveEnemy_.pos[0].X - 20, moveEnemy_.pos[0].Y - 50, 40 * moveEnemy_.HP[0] / moveEnemy_.maxHP[0], 10, 0.0f, GREEN, kFillModeSolid);
 				Novice::DrawSprite(moveEnemy_.pos[0].X - 20, moveEnemy_.pos[0].Y - 20, enemyTutorial, 1, 1, 0.0f, moveEnemy_.color[0]);
 			}
 		}
@@ -845,6 +854,7 @@ void Enemy::Draw(int scene,int enemyTutorial,int enemyBulletImage, int miniBoss)
 		//移動する敵
 		for (int i = 1; i < 5; i++) {
 			if (moveEnemy_.isAlive[i] == true) {
+				Novice::DrawBox(moveEnemy_.pos[i].X - 20, moveEnemy_.pos[i].Y - 50, 40 * moveEnemy_.HP[i] / moveEnemy_.maxHP[i], 10, 0.0f, GREEN, kFillModeSolid);
 				Novice::DrawSprite(moveEnemy_.pos[i].X - 20, moveEnemy_.pos[i].Y - 20, enemyTutorial, 1, 1, 0.0f, moveEnemy_.color[i]);
 			}
 		}
@@ -852,26 +862,31 @@ void Enemy::Draw(int scene,int enemyTutorial,int enemyBulletImage, int miniBoss)
 		//単発弾を撃つ敵
 		for (int i = 0; i < 4; i++) {
 			if (bulletEnemy_.isAlive[i] == true) {
+				Novice::DrawBox(bulletEnemy_.pos[i].X - 20, bulletEnemy_.pos[i].Y - 50, 40 * bulletEnemy_.HP[i] / bulletEnemy_.maxHP[i], 10, 0.0f, GREEN, kFillModeSolid);
 				Novice::DrawSprite(bulletEnemy_.pos[i].X - 20, bulletEnemy_.pos[i].Y - 20, enemyTutorial, 1, 1, 0.0f, bulletEnemy_.color[i]);
 			}
 		}
 		for (int i = 12; i < 14; i++) {
 			if (bulletEnemy_.isAlive[i] == true) {
+				Novice::DrawBox(bulletEnemy_.pos[i].X - 20, bulletEnemy_.pos[i].Y - 50, 40 * bulletEnemy_.HP[i] / bulletEnemy_.maxHP[i], 10, 0.0f, GREEN, kFillModeSolid);
 				Novice::DrawSprite(bulletEnemy_.pos[i].X - 20, bulletEnemy_.pos[i].Y - 20, enemyTutorial, 1, 1, 0.0f, bulletEnemy_.color[i]);
 			}
 		}
 
 		//複数弾を撃つ敵
 		if (bulletsEnemy_.isAlive[0] == true) {
+			Novice::DrawBox(bulletsEnemy_.pos[0].X - 20, bulletsEnemy_.pos[0].Y - 50, 40 * bulletsEnemy_.HP[0] / bulletsEnemy_.maxHP[0], 10, 0.0f, GREEN, kFillModeSolid);
 			Novice::DrawSprite(bulletsEnemy_.pos[0].X - 20, bulletsEnemy_.pos[0].Y - 20, enemyTutorial, 1, 1, 0.0f, bulletsEnemy_.color[0]);
 		}
 		for (int i = 5; i < 8; i++) {
 			if (bulletsEnemy_.isAlive[i] == true) {
+				Novice::DrawBox(bulletsEnemy_.pos[i].X - 20, bulletsEnemy_.pos[i].Y - 50, 40 * bulletsEnemy_.HP[i] / bulletsEnemy_.maxHP[i], 10, 0.0f, GREEN, kFillModeSolid);
 				Novice::DrawSprite(bulletsEnemy_.pos[i].X - 20, bulletsEnemy_.pos[i].Y - 20, enemyTutorial, 1, 1, 0.0f, bulletsEnemy_.color[i]);
 			}
 		}
 
 		if (enemy_.isAlive[0] == true) {
+			Novice::DrawBox(enemy_.pos[0].X - 20, enemy_.pos[0].Y - 50, 40 * enemy_.HP[0] / enemy_.maxHP[0], 10, 0.0f, GREEN, kFillModeSolid);
 			Novice::DrawSprite(enemy_.pos[0].X - 20, enemy_.pos[0].Y - 20, enemyTutorial, 1, 1, 0.0f, enemy_.color[0]);
 		}
 	}
@@ -881,6 +896,7 @@ void Enemy::Draw(int scene,int enemyTutorial,int enemyBulletImage, int miniBoss)
 		//移動する敵
 		for (int i = 3; i < 9; i++) {
 			if (moveEnemy_.isAlive[i] == true) {
+				Novice::DrawBox(moveEnemy_.pos[i].X - 20, moveEnemy_.pos[i].Y - 50, 40 * moveEnemy_.HP[i] / moveEnemy_.maxHP[i], 10, 0.0f, GREEN, kFillModeSolid);
 				Novice::DrawSprite(moveEnemy_.pos[i].X - 20, moveEnemy_.pos[i].Y - 20, enemyTutorial, 1, 1, 0.0f, moveEnemy_.color[i]);
 			}
 		}
@@ -888,6 +904,7 @@ void Enemy::Draw(int scene,int enemyTutorial,int enemyBulletImage, int miniBoss)
 		//単発弾を撃つ敵
 		for (int i = 4; i < 12; i++) {
 			if (bulletEnemy_.isAlive[i] == true) {
+				Novice::DrawBox(bulletEnemy_.pos[i].X - 20, bulletEnemy_.pos[i].Y - 50, 40 * bulletEnemy_.HP[i] / bulletEnemy_.maxHP[i], 10, 0.0f, GREEN, kFillModeSolid);
 				Novice::DrawSprite(bulletEnemy_.pos[i].X - 20, bulletEnemy_.pos[i].Y - 20, enemyTutorial, 1, 1, 0.0f, bulletEnemy_.color[i]);
 			}
 		}
@@ -895,12 +912,14 @@ void Enemy::Draw(int scene,int enemyTutorial,int enemyBulletImage, int miniBoss)
 		//複数弾を撃つ敵
 		for (int i = 1; i < 5; i++) {
 			if (bulletsEnemy_.isAlive[i] == true) {
+				Novice::DrawBox(bulletsEnemy_.pos[i].X - 20, bulletsEnemy_.pos[i].Y - 50, 40 * bulletsEnemy_.HP[i] / bulletsEnemy_.maxHP[i], 10, 0.0f, GREEN, kFillModeSolid);
 				Novice::DrawSprite(bulletsEnemy_.pos[i].X - 20, bulletsEnemy_.pos[i].Y - 20, enemyTutorial, 1, 1, 0.0f, bulletsEnemy_.color[i]);
 			}
 		}
 
 		//中ボス
 		if (miniBoss_.isAlive[0] == true) {
+			Novice::DrawBox(miniBoss_.pos[0].X - 20, miniBoss_.pos[0].Y - 50, 40 * miniBoss_.HP[0] / miniBoss_.maxHP[0], 10, 0.0f, GREEN, kFillModeSolid);
 			Novice::DrawSprite(miniBoss_.pos[0].X - 20, miniBoss_.pos[0].Y - 20, miniBoss, 1, 1, 0.0f, miniBoss_.color[0]);
 		}
 	}

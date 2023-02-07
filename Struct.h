@@ -22,6 +22,7 @@ typedef struct Zako {
 	Vector2 speed[14];
 	float radius[14];
 	int HP[14];
+	int maxHP[14];
 	bool isAlive[14];
 	unsigned int color[14];
 	float t[14];
