@@ -427,6 +427,7 @@ void Stage1::Update(char* keys, char* prekeys, bool WASDStile_, bool directionSt
 void Stage1::Draw(int frameRight, int frameLeft, int plate, int WASDStile_, int directionStule_, int playerWASD, int playerDirection,
 	int playerCore, int bombBullet, bool directionStile_, int playerBullet, int scene, int enemytutorial, int enemyBulletImage,
 	int clearPlate, int miniBoss) {
+	Novice::DrawBox(0, 0, 1280, 720, 0.0f, 0x191970ff, kFillModeSolid);
 
 	//Ž©‹@
 	if (admission_->GetterPlayStart() == true) {

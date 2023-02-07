@@ -6,7 +6,7 @@ public:
 	//ƒƒ“ƒoŠÖ”
 	void Initialize();
 
-	void Update(char* keys);
+	void Update(char* keys, char* preKeys);
 
 	void Draw();
 

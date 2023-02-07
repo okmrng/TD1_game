@@ -39,4 +39,6 @@ public:
 
 	int HP_;
 	int bomb_;
+	
+	int bg_;
 };

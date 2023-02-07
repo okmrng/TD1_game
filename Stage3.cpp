@@ -33,6 +33,7 @@ void Stage3::Initialize() {
 
 	HP_ = Novice::LoadTexture("./Resources/Images/HP.png");
 	bomb_ = Novice::LoadTexture("./Resources/Images/bomb.png");
+	bg_ = Novice::LoadTexture("./Resources/Images/bossBg.png");
 }
 
 //更新処理
@@ -136,6 +137,8 @@ void Stage3::Update(char* keys, char* prekeys, bool WASDStile_, bool directionSt
 void Stage3::Draw(int frameRight, int frameLeft, int plate, int WASDStile_, int directionStule_, int playerWASD, int playerDirection,
 	int playerCore, int bombBullet, bool directionStile_, int playerBullet, int scene, int enemytutorial, int enemyBulletImage,
 	int clearPlate, int miniBoss, int bossImage, int bossCore) {
+	Novice::DrawSprite(0, 0, bg_, 1, 1, 0.0f, WHITE);
+
 	if (admission_->GetterPlayStart() == true) {
 		//ボス
 		Novice::DrawSprite(boss_->boss_.pos.X - 33, boss_->boss_.pos.Y - 70, bossImage, 1, 1, 0.0f, boss_->boss_.collor + boss_->boss_.alpha);

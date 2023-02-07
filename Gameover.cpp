@@ -18,8 +18,8 @@ void Gameover::Initialize() {
 }
 
 //çXêVèàóù
-void Gameover::Update(char* keys) {
-	if (keys[DIK_RETURN] || keys[DIK_SPACE]) {
+void Gameover::Update(char* keys, char* preKeys) {
+	if ((keys[DIK_RETURN] && preKeys[DIK_RETURN] == 0) || (keys[DIK_SPACE] && preKeys[DIK_SPACE] == 0)) {
 		onEase_ = true;
 	}
 

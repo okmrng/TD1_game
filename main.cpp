@@ -236,7 +236,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 				tutorial->onPlayerShot_, tutorial->onBomb_, scene, tutorial->text_);
 
 			if (stage3->clear_->next_ == true) {
-				scene = RESET;
+				scene = TITLE;
 			}
 
 			if (stage3->player_->GetterHP() <= 0) {
@@ -246,7 +246,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 		//ゲームオーバー
 		if (scene == GAMEOVER) {
-			gameover->Update(keys);
+			gameover->Update(keys, preKeys);
 
 			if (gameover->t_ == 1.0f) {
 				scene = RESET;
@@ -313,9 +313,6 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		if (scene == OPTION) {
 			option->Draw(wasd, wasdYellow, direction, directionYellow);
 		}
-
-		//敵
-		//enemy->Draw();
 
 		//チュートリアル
 		if (scene == TUTORIAL) {
