@@ -131,6 +131,10 @@ void Stage3::Update(char* keys, char* prekeys, bool WASDStile_, bool directionSt
 			}
 		}
 	}
+
+	if (boss_->boss_.isAlive == false) {
+		clear_->Update();
+	}
 }
 
 //描画処理
@@ -140,9 +144,11 @@ void Stage3::Draw(int frameRight, int frameLeft, int plate, int WASDStile_, int 
 	Novice::DrawSprite(0, 0, bg_, 1, 1, 0.0f, WHITE);
 
 	if (admission_->GetterPlayStart() == true) {
-		//ボス
-		Novice::DrawSprite(boss_->boss_.pos.X - 33, boss_->boss_.pos.Y - 70, bossImage, 1, 1, 0.0f, boss_->boss_.collor + boss_->boss_.alpha);
-
+		if (boss_->boss_.isAlive == true) {
+			//ボス
+			Novice::DrawSprite(boss_->boss_.pos.X - 33, boss_->boss_.pos.Y - 70, bossImage, 1, 1, 0.0f, boss_->boss_.collor + boss_->boss_.alpha);
+		}
+		
 		//自機
 		player_->Draw(bombBullet, WASDStile_, directionStile_, playerWASD, playerDirection, playerCore, playerBullet);
 
@@ -171,6 +177,8 @@ void Stage3::Draw(int frameRight, int frameLeft, int plate, int WASDStile_, int 
 	if (player_->GetterBombs() >= 3) {
 		Novice::DrawSprite(1049, bombY_, bomb_, 1, 1, 0.0f, WHITE);
 	}
+
+	clear_->Draw(clearPlate);
 
 	//ボスHPバー
 	Novice::DrawBox(20, 20, 200, 30, 0.0f, RED, kFillModeSolid);

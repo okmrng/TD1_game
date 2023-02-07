@@ -236,7 +236,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 				tutorial->onPlayerShot_, tutorial->onBomb_, scene, tutorial->text_);
 
 			if (stage3->clear_->next_ == true) {
-				scene = TITLE;
+				scene = RESET;
 			}
 
 			if (stage3->player_->GetterHP() <= 0) {
@@ -353,15 +353,6 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		if (scene == STAGESELECT) {
 			stageSelect->Draw();
 		}
-
-		Novice::ScreenPrintf(0, 0, "scene:%d", scene);
-		if (stage2->admission_->GetterPlayStart() == true) {
-			Novice::ScreenPrintf(0, 80, "true");
-		}
-		if (stage2->admission_->GetterPlayStart() == false) {
-			Novice::ScreenPrintf(0, 80, "false");
-		}
-		Novice::ScreenPrintf(0, 100, "%d", stage2->admission_->GetterPlayStartCount());
 		
 		///
 		/// ↑描画処理ここまで

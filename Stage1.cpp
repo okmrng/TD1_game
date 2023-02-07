@@ -90,11 +90,9 @@ void Stage1::Update(char* keys, char* prekeys, bool WASDStile_, bool directionSt
 						if (player_->bullet_->bullet_.isShot[i] == true) {
 							if (enemy_->moveEnemy_.isAlive[j] == true) {
 								enemy_->moveEnemy_.HP[j] -= player_->bullet_->bullet_.attack;
-								enemy_->moveEnemy_.color[j] = RED;
 								player_->bullet_->bullet_.isShot[i] = false;
 							}
 						}
-						else { enemy_->moveEnemy_.color[j] = WHITE; }
 					}
 				}
 			}
@@ -112,11 +110,9 @@ void Stage1::Update(char* keys, char* prekeys, bool WASDStile_, bool directionSt
 						if (player_->bullet_->bullet_.isShot[i] == true) {
 							if (enemy_->bulletEnemy_.isAlive[j] == true) {
 								enemy_->bulletEnemy_.HP[j] -= player_->bullet_->bullet_.attack;
-								enemy_->bulletEnemy_.color[j] = RED;
 								player_->bullet_->bullet_.isShot[i] = false;
 							}
 						}
-						else { enemy_->bulletEnemy_.color[j] = WHITE; }
 					}
 				}
 			}
@@ -131,11 +127,9 @@ void Stage1::Update(char* keys, char* prekeys, bool WASDStile_, bool directionSt
 						if (player_->bullet_->bullet_.isShot[i] == true) {
 							if (enemy_->bulletEnemy_.isAlive[j] == true) {
 								enemy_->bulletEnemy_.HP[j] -= player_->bullet_->bullet_.attack;
-								enemy_->bulletEnemy_.color[j] = RED;
 								player_->bullet_->bullet_.isShot[i] = false;
 							}
 						}
-						else { enemy_->bulletEnemy_.color[j] = WHITE; }
 					}
 				}
 			}
@@ -152,11 +146,9 @@ void Stage1::Update(char* keys, char* prekeys, bool WASDStile_, bool directionSt
 					if (player_->bullet_->bullet_.isShot[i] == true) {
 						if (enemy_->bulletsEnemy_.isAlive[0] == true) {
 							enemy_->bulletsEnemy_.HP[0] -= player_->bullet_->bullet_.attack;
-							enemy_->bulletsEnemy_.color[0] = RED;
 							player_->bullet_->bullet_.isShot[i] = false;
 						}
 					}
-					else { enemy_->bulletsEnemy_.color[0] = WHITE; }
 				}
 			}
 
@@ -170,11 +162,9 @@ void Stage1::Update(char* keys, char* prekeys, bool WASDStile_, bool directionSt
 						if (player_->bullet_->bullet_.isShot[i] == true) {
 							if (enemy_->bulletsEnemy_.isAlive[j] == true) {
 								enemy_->bulletsEnemy_.HP[j] -= player_->bullet_->bullet_.attack;
-								enemy_->bulletsEnemy_.color[j] = RED;
 								player_->bullet_->bullet_.isShot[i] = false;
 							}
 						}
-						else { enemy_->bulletsEnemy_.color[j] = WHITE; }
 					}
 				}
 			}
@@ -191,11 +181,9 @@ void Stage1::Update(char* keys, char* prekeys, bool WASDStile_, bool directionSt
 					if (player_->bullet_->bullet_.isShot[i] == true) {
 						if (enemy_->enemy_.isAlive[0] == true) {
 							enemy_->enemy_.HP[0] -= player_->bullet_->bullet_.attack;
-							enemy_->enemy_.color[0] = RED;
 							player_->bullet_->bullet_.isShot[i] = false;
 						}
 					}
-					else { enemy_->enemy_.color[0] = WHITE; }
 				}
 			}
 		}
