@@ -63,9 +63,6 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	Stage3* stage3 = new Stage3();
 	stage3->Initialize();
 
-	Boss* boss = new Boss();
-	boss->Initialeze();
-
 	//当たり判定
 	//何もしない敵
 	float playerBullet_enemyX = 0.0f;
@@ -228,8 +225,6 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 				//scene = TITLE;
 			}
 		}
-
-		boss->Update();
 
 		//敵
 		//enemy->Update(scene);
@@ -427,10 +422,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		if (scene == STAGE3) {
 			stage3->Draw(frameRight, frameLeft, stage3Plate, option->GetterWASDStaile(), option->GetterDirectionStaile(),
 				playerWASD, playerDirection, playerCore, bombBullet, option->GetterDirectionStaile(), playerBullet, scene,
-				enemyTutorial, enemyBulletImage, clearPlate, miniBoss);
+				enemyTutorial, enemyBulletImage, clearPlate, miniBoss, bossImage, bossCore);
 		}
-
-		boss->Draw(bossImage, bossCore);
 
 		Novice::ScreenPrintf(0, 0, "scene:%d", scene);
 		if (stage2->admission_->GetterPlayStart() == true) {

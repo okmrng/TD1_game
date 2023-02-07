@@ -16,7 +16,7 @@ public:
 
 	void Draw(int frameRight, int frameLeft, int plate, int WASDStile_, int directionStule_, int playerWASD, int playerDirection,
 		int playerCore, int bombBullet, bool directionStile_, int playerBullet, int scene, int enemytutorial, int enemyBulletImage,
-		int clearPlate, int miniBoss);
+		int clearPlate, int miniBoss, int bossImage, int bossCore);
 
 	//ƒƒ“ƒo•Ï”
 	Admission* admission_; //“üê‰‰o

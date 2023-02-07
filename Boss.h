@@ -1,4 +1,5 @@
 #pragma once
+#include "BossBullet.h"
 
 class Boss
 {
@@ -17,7 +18,8 @@ public:
 	};
 
 	struct boss {
-		Vector2 pos;  
+		Vector2 pos;
+		Vector2 speed;
 		float radius; 
 		int maxHP;          //最大HP
 		int HP;             //現在のHP
@@ -27,6 +29,7 @@ public:
 		unsigned int alpha; //透明度
 		float theta;
 		float amplitude;    //振幅
+		int attackCount;    //攻撃パターンが変わるまでのカウント
 	};
 	boss boss_;
 
@@ -34,4 +37,7 @@ public:
 	bool onStartCount_;
 	int startCount_;
 	bool start_;
+
+	//ボス弾
+	BossBullet* bossBullet_;
 };
