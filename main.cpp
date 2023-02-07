@@ -107,8 +107,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		RESET
 	};
 
-	//int scene = TITLE;
-	int scene = TUTORIAL;
+	int scene = TITLE;
+	//int scene = TUTORIAL;
 
 	//画像読み込み
 	int title = Novice::LoadTexture("./Resources/Images/title.png");
@@ -195,7 +195,6 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 			if (tutorial->next_ == true) {
 				scene = STAGESELECT;
-				//scene = STAGE3;
 			}
 		}
 
@@ -205,7 +204,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 				tutorial->onPlayerShot_, tutorial->onBomb_, scene, tutorial->text_);
 
 			if (stage1->clear_->next_ == true) {
-				//scene = TITLE;
+				scene = RESET;
 			}
 		}
 
@@ -215,7 +214,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 				tutorial->onPlayerShot_, tutorial->onBomb_, scene, tutorial->text_);
 
 			if (stage2->clear_->next_ == true) {
-				//scene = TITLE;
+				scene = RESET;
 			}
 		}
 
@@ -225,7 +224,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 				tutorial->onPlayerShot_, tutorial->onBomb_, scene, tutorial->text_);
 
 			if (stage3->clear_->next_ == true) {
-				//scene = TITLE;
+				scene = RESET;
 			}
 		}
 
@@ -242,6 +241,26 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 			if (stageSelect->GetterBlackT() == 1.0f && stageSelect->GetterInStage3() == true) {
 				scene = STAGE3;
 			}
+		}
+
+		//リセット
+		if (scene == RESET) {
+			//自機
+			player->Initialize();
+			//敵
+			enemy->Initialize();
+			//クリア演出
+			clear->Initialize();
+			//ステージ1
+			stage1->Initialize();
+			//ステージ2
+			stage2->Initialize();
+			//ステージ3
+			stage3->Initialize();
+			//ステージセレクト
+			stageSelect->Initialize();
+
+			scene = STAGESELECT;
 		}
 
 		//当たり判定
