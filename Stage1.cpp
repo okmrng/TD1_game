@@ -296,6 +296,126 @@ void Stage1::Update(char* keys, char* prekeys, bool WASDStile_, bool directionSt
 			}
 		}
 
+		//©‹@‚Æ“G‚Æ‚Ì“–‚½‚è”»’è
+		//“®‚­“G
+		for (int i = 1; i < 5; i++) {
+			float player_moveEnemyX = player_->GetterPosX() - enemy_->moveEnemy_.pos[i].X;
+			float player_moveEnemyY = player_->GetterPosY() - enemy_->moveEnemy_.pos[i].Y;
+			float player_moveEnemyDis = sqrtf(player_moveEnemyX * player_moveEnemyX + player_moveEnemyY * player_moveEnemyY);
+
+			if (enemy_->moveEnemy_.isAlive[i] == true) {
+				if (player_moveEnemyDis < player_->GetterRadius() + enemy_->moveEnemy_.radius[i]) {
+					player_->OnCollision();
+				}
+			}
+		}
+
+		//’P”­’e‚ğŒ‚‚Â“G
+		for (int i = 0; i < 8; i++) {
+			float player_bulletEnemyX = player_->GetterPosX() - enemy_->bulletEnemy_.pos[i].X;
+			float player_bulletEnemyY = player_->GetterPosY() - enemy_->bulletEnemy_.pos[i].Y;
+			float player_bulletEnemyDis = sqrtf(player_bulletEnemyX * player_bulletEnemyX + player_bulletEnemyY * player_bulletEnemyY);
+
+			if (enemy_->bulletEnemy_.isAlive[i] == true) {
+				if (player_bulletEnemyDis < player_->GetterRadius() + enemy_->bulletEnemy_.radius[i]) {
+					player_->OnCollision();
+				}
+			}
+		}
+		for (int i = 12; i < 14; i++) {
+			float player_bulletEnemyX = player_->GetterPosX() - enemy_->bulletEnemy_.pos[i].X;
+			float player_bulletEnemyY = player_->GetterPosY() - enemy_->bulletEnemy_.pos[i].Y;
+			float player_bulletEnemyDis = sqrtf(player_bulletEnemyX * player_bulletEnemyX + player_bulletEnemyY * player_bulletEnemyY);
+
+			if (enemy_->bulletEnemy_.isAlive[i] == true) {
+				if (player_bulletEnemyDis < player_->GetterRadius() + enemy_->bulletEnemy_.radius[i]) {
+					player_->OnCollision();
+				}
+			}
+		}
+
+		//“G‚Ì’e
+		for (int i = 0; i < 8; i++) {
+			float enemyBullet_playerX = enemy_->enemyBullet_->enemyBullet_.pos[i].X - player_->GetterPosX();
+			float enemyBullet_playerY = enemy_->enemyBullet_->enemyBullet_.pos[i].Y - player_->GetterPosY();
+			float enemyBullet_playerDis = sqrtf(enemyBullet_playerX * enemyBullet_playerX + enemyBullet_playerY * enemyBullet_playerY);
+
+			if (enemyBullet_playerDis < player_->GetterRadius() + enemy_->enemyBullet_->enemyBullet_.radius[i]) {
+				if (enemy_->enemyBullet_->enemyBullet_.isShot[i] == true) {
+					player_->OnCollision();
+				}
+			}
+		}
+		for (int i = 12; i < 14; i++) {
+			float enemyBullet_playerX = enemy_->enemyBullet_->enemyBullet_.pos[i].X - player_->GetterPosX();
+			float enemyBullet_playerY = enemy_->enemyBullet_->enemyBullet_.pos[i].Y - player_->GetterPosY();
+			float enemyBullet_playerDis = sqrtf(enemyBullet_playerX * enemyBullet_playerX + enemyBullet_playerY * enemyBullet_playerY);
+
+			if (enemyBullet_playerDis < player_->GetterRadius() + enemy_->enemyBullet_->enemyBullet_.radius[i]) {
+				if (enemy_->enemyBullet_->enemyBullet_.isShot[i] == true) {
+					player_->OnCollision();
+				}
+			}
+		}
+
+		//•¡”’e‚ğŒ‚‚Â“G
+		for (int i = 0; i < 5; i++) {
+			float player_bulletsEnemyX = player_->GetterPosX() - enemy_->bulletsEnemy_.pos[i].X;
+			float player_bulletsEnemyY = player_->GetterPosY() - enemy_->bulletsEnemy_.pos[i].Y;
+			float player_bulletsEnemyDis = sqrtf(player_bulletsEnemyX * player_bulletsEnemyX + player_bulletsEnemyY * player_bulletsEnemyY);
+
+			if (enemy_->bulletsEnemy_.isAlive[i] == true) {
+				if (player_bulletsEnemyDis < player_->GetterRadius() + enemy_->bulletsEnemy_.radius[i]) {
+					player_->OnCollision();
+				}
+			}
+		}
+		for (int i = 5; i < 8; i++) {
+			float player_bulletsEnemyX = player_->GetterPosX() - enemy_->bulletsEnemy_.pos[i].X;
+			float player_bulletsEnemyY = player_->GetterPosY() - enemy_->bulletsEnemy_.pos[i].Y;
+			float player_bulletsEnemyDis = sqrtf(player_bulletsEnemyX * player_bulletsEnemyX + player_bulletsEnemyY * player_bulletsEnemyY);
+
+			if (enemy_->bulletsEnemy_.isAlive[i] == true) {
+				if (player_bulletsEnemyDis < player_->GetterRadius() + enemy_->bulletsEnemy_.radius[i]) {
+					player_->OnCollision();
+				}
+			}
+		}
+
+		//•¡”’e
+		for (int i = 0; i < 3; i++) {
+			float enemyBullets_playerX = enemy_->enemyBullet_->enemyBullets_.pos[i].X - player_->GetterPosX();
+			float enemyBullets_playerY = enemy_->enemyBullet_->enemyBullets_.pos[i].Y - player_->GetterPosY();
+			float enemyBullets_playerDis = sqrtf(enemyBullets_playerX * enemyBullets_playerX + enemyBullets_playerY * enemyBullets_playerY);
+
+			if (enemyBullets_playerDis < player_->GetterRadius() + enemy_->enemyBullet_->enemyBullets_.radius[i]) {
+				if (enemy_->enemyBullet_->enemyBullets_.isShot[i] == true) {
+					player_->OnCollision();
+				}
+			}
+		}
+		for (int i = 15; i < 24; i++) {
+			float enemyBullets_playerX = enemy_->enemyBullet_->enemyBullets_.pos[i].X - player_->GetterPosX();
+			float enemyBullets_playerY = enemy_->enemyBullet_->enemyBullets_.pos[i].Y - player_->GetterPosY();
+			float enemyBullets_playerDis = sqrtf(enemyBullets_playerX * enemyBullets_playerX + enemyBullets_playerY * enemyBullets_playerY);
+
+			if (enemyBullets_playerDis < player_->GetterRadius() + enemy_->enemyBullet_->enemyBullets_.radius[i]) {
+				if (enemy_->enemyBullet_->enemyBullets_.isShot[i] == true) {
+					player_->OnCollision();
+				}
+			}
+		}
+
+		float player_enemyX = player_->GetterPosX() - enemy_->enemy_.pos[0].X;
+		float player_enemyY = player_->GetterPosY() - enemy_->enemy_.pos[0].Y;
+		float player_enemyDis = sqrtf(player_enemyX * player_enemyX + player_enemyY * player_enemyY);
+
+		if (enemy_->enemy_.isAlive[0] == true) {
+			if (player_enemyDis < player_->GetterRadius() + enemy_->enemy_.radius[0]) {
+				player_->OnCollision();
+			}
+		}
+
 		//ƒNƒŠƒA
 		if (enemy_->enemy_.isAlive[0] == false) {
 			clear_->Update();

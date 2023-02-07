@@ -11,7 +11,7 @@ void Player::Initialize() {
 	player_.radius = 12.0f;
 	player_.isAlive = true;
 	player_.HP = 3;
-	color_ = BLUE;
+	color_ = WHITE;
 	collisionCount_ = 0;
 	onCollision_ = false;
 
@@ -225,7 +225,7 @@ void Player::Update(char* keys, char* preKeys, bool WASDStile_, bool directionSt
 
 		//無敵時間以外は通常の色にする
 		if (onCollision_ == false) {
-			color_ = BLUE;
+			color_ = WHITE;
 		}
 	}
 }
@@ -253,10 +253,10 @@ void Player::Draw(int bombBullet, bool WASDStile_, bool directionStile_, int pla
 	if (player_.isAlive == true) {
 		//自機
 		if (WASDStile_ == true) {
-			Novice::DrawSprite(player_.pos.X - 33, player_.pos.Y - 65, playerWASD, 1, 1, 0.0f, WHITE);
+			Novice::DrawSprite(player_.pos.X - 33, player_.pos.Y - 65, playerWASD, 1, 1, 0.0f, color_);
 		}
 		if (directionStile_ == true) {
-			Novice::DrawSprite(player_.pos.X - 33, player_.pos.Y - 65, playerDirection, 1, 1, 0.0f, WHITE);
+			Novice::DrawSprite(player_.pos.X - 33, player_.pos.Y - 65, playerDirection, 1, 1, 0.0f, color_);
 		}
 
 		//自機当たり判定

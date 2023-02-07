@@ -86,6 +86,50 @@ void Stage3::Update(char* keys, char* prekeys, bool WASDStile_, bool directionSt
 			boss_->boss_.HP -= 10;
 		}
 	}
+
+	//自機とボスの当たり判定
+	float player_bossX_ = player_->GetterPosX() - boss_->boss_.pos.X;
+	float player_bossY_ = player_->GetterPosY() - boss_->boss_.pos.Y;
+	float player_bossDis_ = sqrtf(player_bossX_ * player_bossX_ + player_bossY_ * player_bossY_);
+
+	if (player_bossDis_ < player_->GetterRadius() + boss_->boss_.radius) {
+		player_->OnCollision();
+	}
+
+	//自機とボスの弾の当たり判定
+	for (int i = 0; i < 9; i++) {
+		float player_bossBullet0X_ = player_->GetterPosX() - boss_->bossBullet_->pattern0_.pos[i].X;
+		float player_bossBullet0Y_ = player_->GetterPosY() - boss_->bossBullet_->pattern0_.pos[i].Y;
+		float player_bossBullet0Dis_ = sqrtf(player_bossBullet0X_ * player_bossBullet0X_ + player_bossBullet0Y_ * player_bossBullet0Y_);
+
+		if (player_bossBullet0Dis_ < (player_->GetterRadius() + boss_->bossBullet_->pattern0_.radius[i])) {
+			if (boss_->bossBullet_->pattern0_.isShot[i] == true) {
+				player_->OnCollision();
+			}
+		}
+	}
+	for (int i = 0; i < 5; i++) {
+		float player_bossBullet1X_ = player_->GetterPosX() - boss_->bossBullet_->pattern1_.pos[i].X;
+		float player_bossBullet1Y_ = player_->GetterPosY() - boss_->bossBullet_->pattern1_.pos[i].Y;
+		float player_bossBullet1Dis_ = sqrtf(player_bossBullet1X_ * player_bossBullet1X_ + player_bossBullet1Y_ * player_bossBullet1Y_);
+
+		if (player_bossBullet1Dis_ < (player_->GetterRadius() + boss_->bossBullet_->pattern0_.radius[i])) {
+			if (boss_->bossBullet_->pattern1_.isShot[i] == true) {
+				player_->OnCollision();
+			}
+		}
+	}
+	for (int i = 0; i < 13; i++) {
+		float player_bossBullet2X_ = player_->GetterPosX() - boss_->bossBullet_->pattern2_.pos[i].X;
+		float player_bossBullet2Y_ = player_->GetterPosY() - boss_->bossBullet_->pattern2_.pos[i].Y;
+		float player_bossBullet2Dis_ = sqrtf(player_bossBullet2X_ * player_bossBullet2X_ + player_bossBullet2Y_ * player_bossBullet2Y_);
+
+		if (player_bossBullet2Dis_ < (player_->GetterRadius() + boss_->bossBullet_->pattern0_.radius[i])) {
+			if (boss_->bossBullet_->pattern2_.isShot[i] == true) {
+				player_->OnCollision();
+			}
+		}
+	}
 }
 
 //描画処理

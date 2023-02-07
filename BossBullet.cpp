@@ -9,7 +9,7 @@ void BossBullet::Initialize() {
 
 	for (int i = 0; i < 9; i++) {
 		pattern0_.speed[i].Y = 7.0f;
-		pattern0_.radius[i] = 30.0f;
+		pattern0_.radius[i] = 25.0f;
 		pattern0_.isShot[i] = false;
 	}
 	pattern0_.speed[0].X = 0.0f;
@@ -24,7 +24,7 @@ void BossBullet::Initialize() {
 
 	for (int i = 0; i < 5; i++) {
 		pattern1_.speed[i].Y = 7.0f;
-		pattern1_.radius[i] = 30.0f;
+		pattern1_.radius[i] = 25.0f;
 		pattern1_.isShot[i] = false;
 	}
 
@@ -37,7 +37,7 @@ void BossBullet::Initialize() {
 	pattern1_.speed[4].X = -5.0f;
 
 	for (int i = 0; i < 13; i++) {
-		pattern2_.radius[i] = 30.0f;
+		pattern2_.radius[i] = 25.0f;
 		pattern2_.speed[i].X = 7.0f;
 		pattern2_.speed[i].Y = 7.0f;
 		pattern2_.theta[i] = (rand() % 720 - 360) / 100.0f;
@@ -94,19 +94,22 @@ void BossBullet::Update() {
 void BossBullet::Draw() {
 	for (int i = 0; i < 9; i++) {
 		if (pattern0_.isShot[i] == true) {
-			Novice::DrawSprite(pattern0_.pos[i].X, pattern0_.pos[i].Y, bossBullet0, 1, 1, 0.0f, WHITE);
+			//Novice::DrawEllipse(pattern0_.pos[i].X, pattern0_.pos[i].Y, pattern0_.radius[i], pattern0_.radius[i], 0.0f, WHITE, kFillModeSolid);
+			Novice::DrawSprite(pattern0_.pos[i].X - 30, pattern0_.pos[i].Y - 30, bossBullet0, 1, 1, 0.0f, WHITE);
 		}
 	}
 
 	for (int i = 0; i < 5; i++) {
 		if (pattern1_.isShot[i] == true) {
-			Novice::DrawSprite(pattern1_.pos[i].X, pattern1_.pos[i].Y, bossBullet0, 1, 1, 0.0f, WHITE);
+			Novice::DrawSprite(pattern1_.pos[i].X - 30, pattern1_.pos[i].Y - 30, bossBullet0, 1, 1, 0.0f, WHITE);
+			//Novice::DrawEllipse(pattern1_.pos[i].X, pattern1_.pos[i].Y, pattern1_.radius[i], pattern1_.radius[i], 0.0f, WHITE, kFillModeSolid);
 		}
 	}
 
 	for (int i = 0; i < 13; i++) {
 		if (pattern2_.isShot[i] == true) {
-			Novice::DrawSprite(pattern2_.pos[i].X, pattern2_.pos[i].Y, bossBullet0, 1, 1, 0.0f, WHITE);
+			Novice::DrawSprite(pattern2_.pos[i].X - 30, pattern2_.pos[i].Y - 30, bossBullet0, 1, 1, 0.0f, WHITE);
+			//Novice::DrawEllipse(pattern2_.pos[i].X, pattern2_.pos[i].Y, pattern2_.radius[i], pattern2_.radius[i], 0.0f, WHITE, kFillModeSolid);
 		}
 	}
 }
