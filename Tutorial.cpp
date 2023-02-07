@@ -72,12 +72,38 @@ void Tutorial::Initialize() {
 	curtainY1_ = -1280.0f;
 	curtainY2_ = 0.0f;
 	curtainT_ = 0.0f;
+
+	//アイコン
+	HPY_ = -1377.0f;
+	HPY1_ = -1377.0f;
+	HPY2_ = 97.0f;
+
+	bombY_ = -1491.0f;
+	bombY1_ = -1491.0f;
+	bombY2_ = 211.0f;
+
+	t_ = 0.0f;
+
+	HP_ = Novice::LoadTexture("./Resources/Images/HP.png");
+	bomb_ = Novice::LoadTexture("./Resources/Images/bomb.png");
 }
 
 //更新処理
 void Tutorial::Update(char* keys, char* preKeys, bool WASDStile_, bool directionStile_, int scene) {
 	//ステージ入場演出
 	admission_->Update();
+
+	if (t_ < 1.0f) {
+		t_ += 1.0f / 30.0f;
+	}
+	if (t_ >= 1.0f) {
+		t_ = 1.0f;
+	}
+
+	float easedT_ = sqrt(1.0f - pow(t_ - 1.0f, 2.0f));
+
+	HPY_ = (1.0f - easedT_) * HPY1_ + easedT_ * HPY2_;
+	bombY_ = (1.0f - easedT_) * bombY1_ + easedT_ * bombY2_;
 
 	if (admission_->GetterPlayStart() == true) {
 		textDisplay_ = true;
@@ -435,6 +461,26 @@ void Tutorial::Draw(int frameRight, int frameLeft, int Plate, bool WASDStile_, b
 		if (text_ == 14) {
 			Novice::DrawSprite(textX_, textY_, tutorialText14, 1.0f, 1.0f, 0.0f, WHITE);
 		}
+	}
+
+	if (player_->GetterHP() >= 1) {
+		Novice::DrawSprite(1209, HPY_, HP_, 1, 1, 0.0f, WHITE);
+	}
+	if (player_->GetterHP() >= 2) {
+		Novice::DrawSprite(1129, HPY_, HP_, 1, 1, 0.0f, WHITE);
+	}
+	if (player_->GetterHP() >= 3) {
+		Novice::DrawSprite(1049, HPY_, HP_, 1, 1, 0.0f, WHITE);
+	}
+
+	if (player_->GetterBombs() >= 1) {
+		Novice::DrawSprite(1209, bombY_, bomb_, 1, 1, 0.0f, WHITE);
+	}
+	if (player_->GetterBombs() >= 2) {
+		Novice::DrawSprite(1129, bombY_, bomb_, 1, 1, 0.0f, WHITE);
+	}
+	if (player_->GetterBombs() >= 3) {
+		Novice::DrawSprite(1049, bombY_, bomb_, 1, 1, 0.0f, WHITE);
 	}
 
 	//幕

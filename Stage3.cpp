@@ -19,6 +19,20 @@ void Stage3::Initialize() {
 
 	//ボム
 	player_->SetterBombs(3);
+
+	//アイコン
+	HPY_ = -1377.0f;
+	HPY1_ = -1377.0f;
+	HPY2_ = 97.0f;
+
+	bombY_ = -1491.0f;
+	bombY1_ = -1491.0f;
+	bombY2_ = 211.0f;
+
+	t_ = 0.0f;
+
+	HP_ = Novice::LoadTexture("./Resources/Images/HP.png");
+	bomb_ = Novice::LoadTexture("./Resources/Images/bomb.png");
 }
 
 //更新処理
@@ -26,6 +40,18 @@ void Stage3::Update(char* keys, char* prekeys, bool WASDStile_, bool directionSt
 	bool onBomb_, int scene, int text_) {
 	//ステージ入場演出
 	admission_->Update();
+
+	if (t_ < 1.0f) {
+		t_ += 1.0f / 30.0f;
+	}
+	if (t_ >= 1.0f) {
+		t_ = 1.0f;
+	}
+
+	float easedT_ = sqrt(1.0f - pow(t_ - 1.0f, 2.0f));
+
+	HPY_ = (1.0f - easedT_) * HPY1_ + easedT_ * HPY2_;
+	bombY_ = (1.0f - easedT_) * bombY1_ + easedT_ * bombY2_;
 
 	if (admission_->GetterPlayStart() == true) {
 		boss_->Update();
@@ -69,6 +95,26 @@ void Stage3::Draw(int frameRight, int frameLeft, int plate, int WASDStile_, int 
 	}
 
 	admission_->Draw(frameRight, frameLeft, plate, WASDStile_, directionStule_, playerWASD, playerDirection, playerCore);
+
+	if (player_->GetterHP() >= 1) {
+		Novice::DrawSprite(1209, HPY_, HP_, 1, 1, 0.0f, WHITE);
+	}
+	if (player_->GetterHP() >= 2) {
+		Novice::DrawSprite(1129, HPY_, HP_, 1, 1, 0.0f, WHITE);
+	}
+	if (player_->GetterHP() >= 3) {
+		Novice::DrawSprite(1049, HPY_, HP_, 1, 1, 0.0f, WHITE);
+	}
+
+	if (player_->GetterBombs() >= 1) {
+		Novice::DrawSprite(1209, bombY_, bomb_, 1, 1, 0.0f, WHITE);
+	}
+	if (player_->GetterBombs() >= 2) {
+		Novice::DrawSprite(1129, bombY_, bomb_, 1, 1, 0.0f, WHITE);
+	}
+	if (player_->GetterBombs() >= 3) {
+		Novice::DrawSprite(1049, bombY_, bomb_, 1, 1, 0.0f, WHITE);
+	}
 
 	//ボスHPバー
 	Novice::DrawBox(20, 20, 200, 30, 0.0f, RED, kFillModeSolid);

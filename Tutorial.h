@@ -115,4 +115,17 @@ public:
 	float curtainY1_; ///‰ŠúˆÊ’u
 	float curtainY2_; ///ÅŒã‚ÌˆÊ’u
 	float curtainT_;
+
+	float HPY_;
+	float HPY1_;
+	float HPY2_;
+
+	float bombY_;
+	float bombY1_;
+	float bombY2_;
+
+	float t_;
+
+	int HP_;
+	int bomb_;
 };

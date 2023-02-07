@@ -26,5 +26,18 @@ public:
 	Enemy* enemy_;
 
 	Clear* clear_;         //ƒNƒŠƒA‰‰o
+
+	float HPY_;
+	float HPY1_;
+	float HPY2_;
+
+	float bombY_;
+	float bombY1_;
+	float bombY2_;
+
+	float t_;
+
+	int HP_;
+	int bomb_;
 };
 

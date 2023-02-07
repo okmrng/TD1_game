@@ -112,7 +112,6 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 	//画像読み込み
 	int title = Novice::LoadTexture("./Resources/Images/title.png");
-	int frame = Novice::LoadTexture("./Resources/Images/frame.png");
 	int frameRight = Novice::LoadTexture("./Resources/Images/frame_right.png");
 	int frameLeft = Novice::LoadTexture("./Resources/Images/frame_left.png");
 	int wasd = Novice::LoadTexture("./Resources/Images/wasd.png");
